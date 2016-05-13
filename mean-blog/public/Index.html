@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" ngapp="MeanBlogApp">
+<head>
+    <meta charset="UTF-8">
+    <title>MEAN BLOG</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js"></script>
+</head>
+<body>
+    <div ng-controller="BlogController">
+        <h1>{{hello}}</h1>
+    </div>
+    <script>
+        angular
+                .module("MeanBlogApp" , [])
+                .controller("BlogController" , BlogController ); <!-- Parent module , for the whole html , but you can have small children module   --> <!-- andBlogC is the function that will actually control the snippet -->
+
+        function  BlogController($scope) {
+            console.log("Hi reached controller");
+            $scope.hello = "Hello from blog c"; <!-- bind variable to data -->
+        }
+    </script>
+</body>
+</html>
