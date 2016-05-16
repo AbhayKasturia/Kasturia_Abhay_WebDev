@@ -9,3 +9,7 @@ body {
 .img-circle {
   border-radius: 50%;
 }
+
+.img-responsive {
+  margin: 0 auto;
+}
