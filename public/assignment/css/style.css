@@ -1,0 +1,16 @@
+input.form-control {
+    margin-bottom: 5px;
+}
+
+body {
+    padding-top: 60px;
+}
+
+.pad-rt
+{
+    padding-right: 15px;
+}
+
+.navbar-text.pull-right {
+    padding-right: 15px;
+}
