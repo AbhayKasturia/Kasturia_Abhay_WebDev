@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name = "viewport" content = "initial-scale = 1.5, user-scalable = no">
+    <title>Title</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
+    <link href="../css/style.css" rel="stylesheet"/>
+</head>
+<body>
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#" class="navbar-link">
+                    <a href="website-list.html" class="glyphicon glyphicon-menu-left pull-left"></a>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">
+                Edit Website
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#" class="navbar-link">
+                    <a href="website-list.html" class="glyphicon glyphicon-ok pull-right"></a>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+    <form>
+        <div class="form-group">
+            <label for="name">Website Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Google">
+        </div>
+        <div class="form-group">
+            <label for="descr">Website Description</label>
+            <textarea class="form-control" id="descr" placeholder="Google is a search engine ..." rows="4"></textarea>
+            <!--<input type="textarea" class="form-control" id="descr" placeholder="Google is a search engine ..." />-->
+        </div>
+    </form>
+    <a class="btn btn-danger btn-block" href="website-list.html">Delete</a>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>
