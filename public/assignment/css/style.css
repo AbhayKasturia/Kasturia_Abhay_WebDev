@@ -16,6 +16,10 @@ body {
     padding-right: 15px;
 }
 
+.navbar-link.pull-right {
+    padding-right: 15px;
+}
+
 .navbar-text.pull-left {
     padding-left: 15px;
 }
@@ -34,4 +38,8 @@ li.list-group-item {
     padding-bottom: 5px;
     border-bottom-left-radius: 8px;
     opacity: 0.7;
+}
+
+a:hover {
+    text-decoration: none;
 }
