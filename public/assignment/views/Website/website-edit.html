@@ -5,7 +5,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name = "viewport" content = "initial-scale = 1.25, user-scalable = no">
-    <title>WidgetHeading</title>
+    <title>WebsiteEdit</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/style.css" rel="stylesheet"/>
 </head>
@@ -15,16 +15,16 @@
     <div class="container">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="../Widget/widget-list.html" class="navbar-link">
-                    <span class="glyphicon glyphicon-menu-left pull-left"></span>
+                <a href="website-list.html" class="navbar-link pull-left">
+                    <span class="glyphicon glyphicon-menu-left"></span>
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                Widget Edit
+                Edit Website
             </a>
             <p class="navbar-text pull-right">
-                <a href="../Widget/widget-list.html" class="navbar-link pull-right">
-                    <span class="glyphicon glyphicon-ok"></span>
+                <a href="website-list.html" class="navbar-link pull-right">
+                    <span class="glyphicon glyphicon-ok pull-right"></span>
                 </a>
             </p>
         </div>
@@ -35,35 +35,23 @@
 <div class="container">
     <form>
         <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Home Page First Heading">
+            <label for="name">Website Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Google" value="Facebook">
         </div>
         <div class="form-group">
-            <label for="text1">Text</label>
-            <input type="text" class="form-control" id="text1" placeholder="FACEBOOK">
-        </div>
-        <div class="form-group">
-            <label for="sel1">Size</label>
-            <select class="form-control" id="sel1">
-                <option> </option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-            </select>
+            <label for="descr">Website Description</label>
+            <textarea class="form-control" id="descr" placeholder="Google is a search engine ..." rows="4">Facebook is a corporation and an online social networking service headquartered in Menlo Park, California, in the United States.</textarea>
+            <!--<input type="textarea" class="form-control" id="descr" placeholder="Google is a search engine ..." />-->
         </div>
     </form>
-
-    <a class="btn btn-danger btn-block"
-       href="widget-list.html">Delete</a>
+    <a class="btn btn-danger btn-block" href="website-list.html">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="navbar-footer">
             <div class="navbar-text pull-right">
-                <a href="../User/profile.html">
+                <a href="../User/profile.view.client.html">
                     <span class="glyphicon glyphicon-user pull-right"></span>
                 </a>
             </div>

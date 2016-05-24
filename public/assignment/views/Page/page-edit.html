@@ -5,7 +5,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name = "viewport" content = "initial-scale = 1.25, user-scalable = no">
-    <title>Youtube</title>
+    <title>PageEdit</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
     <link href="../css/style.css" rel="stylesheet"/>
 </head>
@@ -15,17 +15,17 @@
     <div class="container">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="../Widget/widget-list.html" class="navbar-link pull-left">
+                <a href="page-list.html" class="navbar-link pull-left">
                     <span class="glyphicon glyphicon-menu-left"></span>
                 </a>
             </p>
             <a class="navbar-brand" href="#">
-                Widget Edit
+                Edit Page
             </a>
             <p class="navbar-text pull-right">
-                <a href="../Widget/widget-list.html" class="navbar-link pull-right">
-                    <span class="glyphicon glyphicon-ok"></span>
-                </a>
+                    <a href="page-list.html" class="navbar-link pull-right">
+                        <span class="glyphicon glyphicon-ok pull-right"></span>
+                    </a>
             </p>
         </div>
     </div>
@@ -36,31 +36,22 @@
     <form>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Top Heading">
+            <input type="text" class="form-control" id="name" placeholder="Page Name" value="Home">
         </div>
         <div class="form-group">
-            <label for="text1">Text</label>
-            <input type="text" class="form-control" id="text1" placeholder="logo">
+            <label for="title">Title</label>
+            <input type="textarea" class="form-control" id="title" placeholder="Page Title" value="Home Page">
         </div>
-        <div class="form-group">
-            <label for="url">URL</label>
-            <input type="text" class="form-control" id="url" placeholder="https://facebook/logo.png">
-        </div>
-        <div class="form-group">
-            <label for="width1">Width</label>
-            <input type="text" class="form-control" id="width1" placeholder="example: 500px or 100%">
-        </div>
+        <a class="btn btn-danger  btn-block"
+           href="page-list.html">Delete</a>
     </form>
-
-    <a class="btn btn-danger btn-block"
-       href="widget-list.html">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="navbar-footer">
             <div class="navbar-text pull-right">
-                <a href="../User/profile.html">
+                <a href="../User/profile.view.client.html">
                     <span class="glyphicon glyphicon-user pull-right"></span>
                 </a>
             </div>
