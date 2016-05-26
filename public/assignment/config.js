@@ -27,5 +27,10 @@
                     controller: "ProfileController",
                     controllerAs: "model"
                 })
+                .when("/user/:uid/website" , {
+                    templateUrl:"views/Website/website-list.view.client.html",
+                    controller: "WebsiteListController",
+                    controllerAs: "model"
+                })
     }   
 })();
