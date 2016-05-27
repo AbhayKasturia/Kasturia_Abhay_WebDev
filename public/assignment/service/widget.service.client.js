@@ -1,28 +1,27 @@
 /**
  * Created by Abhay on 5/26/2016.
  */
-
-/**
- * Created by Abhay on 5/26/2016.
- */
 (function (){
     angular
         .module("WebAppMaker")
-        .factory("WebsiteService",WebsiteService);   /*service and factory method for singleton - same thing but syntax different*/
+        .factory("WidgetService",WidgetService);   /*service and factory method for singleton - same thing but syntax different*/
 
-    var websites =
-        [
-            { "_id": "123", "name": "Facebook", "desc": "Social Networking Site",   "developerId": "456" },
-            { "_id": "234", "name": "Tweeter", "desc": "Social Networking Site",    "developerId": "456" },
-            { "_id": "456", "name": "Gizmodo",  "desc": "Social Networking Site",   "developerId": "456" },
-            { "_id": "567", "name": "Tic Tac Toe", "desc": "Social Networking Site","developerId": "123" },
-            { "_id": "678", "name": "Checkers", "desc": "Social Networking Site",   "developerId": "123" },
-            { "_id": "789", "name": "Chess", "desc": "Social Networking Site",      "developerId": "234" }
-        ];
+    var widgets =
+            [
+                { "_id": "123", "widgetType": "HEADER", "pageId": "321", "size": 2, "text": "GIZMODO"},
+                { "_id": "234", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
+                { "_id": "345", "widgetType": "IMAGE", "pageId": "321", "width": "100%",
+                    "url": "http://lorempixel.com/400/200/"},
+                { "_id": "456", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"},
+                { "_id": "567", "widgetType": "HEADER", "pageId": "321", "size": 4, "text": "Lorem ipsum"},
+                { "_id": "678", "widgetType": "YOUTUBE", "pageId": "321", "width": "100%",
+                    "url": "https://youtu.be/AM2Ivdi9c4E" },
+                { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
+            ];
 
-    function WebsiteService() {
+    function WidgetService() {
         var api = {
-            findWebsiteByUserID: findWebsiteByUserID,
+            findWidgetByPageID: findWidgetByPageID,
             findWebsiteByWebsiteID: findWebsiteByWebsiteID,
             createWebsite: createWebsite,
             findUserByUsernameAndPassword: findUserByUsernameAndPassword,
@@ -30,7 +29,7 @@
             deleteWebsite: deleteWebsite
         };
         return api;
-        
+
 
         function createWebsite(developerId , name , desc) {
             var newWebsite = {
@@ -89,16 +88,13 @@
             return null;
         }
 
-        function findWebsiteByUserID(uid) {
-            var user_website = [];
-            for (var i in websites) {
-                if (websites[i].developerId === uid)
-                    user_website.push(websites[i]);
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "User not found";*/
+        function findWidgetByPageID(pid) {
+            var page_widgets = [];
+            for (var i in widgets) {
+                if (widgets[i].pageId=== pid)
+                    page_widgets.push(widgets[i]);
             }
-            return user_website;
+            return page_widgets;
         }
 
         function findUserByUsernameAndPassword(username, password) {

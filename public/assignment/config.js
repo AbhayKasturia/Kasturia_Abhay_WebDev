@@ -32,5 +32,20 @@
                     controller: "WebsiteListController",
                     controllerAs: "model"
                 })
+                .when("/user/:uid/website/new" , {
+                    templateUrl:"views/Website/website-new.view.client.html",
+                    controller: "WebsiteNewController",
+                    controllerAs: "model"
+                })
+                .when("/user/:uid/website/:wid" , {
+                    templateUrl:"views/Website/website-edit.view.client.html",
+                    controller: "WebsiteEditController",
+                    controllerAs: "model"
+                })
+                .when("/user/:uid/website/:wid/page/:pid/widget" , {
+                    templateUrl:"views/Widget/widget-list.view.client.html",
+                    controller: "WidgetListController",
+                    controllerAs: "model"
+                })
     }   
 })();

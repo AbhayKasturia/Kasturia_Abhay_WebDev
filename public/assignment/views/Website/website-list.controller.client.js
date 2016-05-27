@@ -8,6 +8,7 @@
 
     function WebsiteListController($routeParams , WebsiteService) {      /* dependency injection */
         var vm= this;
+        vm.uid = $routeParams.uid;
 
         function init() {
             vm.websites = WebsiteService.findWebsiteByUserID($routeParams.uid);

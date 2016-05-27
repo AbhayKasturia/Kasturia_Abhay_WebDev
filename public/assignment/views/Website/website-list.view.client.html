@@ -5,7 +5,7 @@
             Websites
         </a>
         <p class="navbar-text pull-right">
-            <a href="website-new.view.client.html" class="navbar-link pull-right">
+            <a href="#/user/{{model.uid}}/website/new" class="navbar-link pull-right">
                    <span class="glyphicon glyphicon-plus"></span>
             </a>
         </p>
@@ -13,43 +13,17 @@
 </div>
 </nav>
 
-{{model.websites}}
-
 <div class="container">
 <ul class="list-group">
-    <li class="list-group-item">
-        <a href="../views/Page/page-list.html">Facebook</a>
+    <li ng-repeat="website in model.websites" class="list-group-item">
+        <a href="#/user/{{website.developerId}}/website/{{website._id}}/page">
+            {{website.name}}
+            {{website.developerID}}
+        </a>
         <a href="#" class="pull-right">
             <span class="glyphicon glyphicon-triangle-right"></span>
         </a>
-        <a href="website-edit.view.client.html" class="pull-right">
-            <span class="glyphicon glyphicon-cog"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        <a href="page-list.html">Twitter</a>
-        <a href="#" class="pull-right">
-            <span class="glyphicon glyphicon-triangle-right"></span>
-        </a>
-        <a href="website-edit.view.client.html" class="pull-right">
-            <span class="glyphicon glyphicon-cog"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        <a href="page-list.html">Instagram</a>
-        <a href="#" class="pull-right">
-            <span class="glyphicon glyphicon-triangle-right"></span>
-        </a>
-        <a href="website-edit.view.client.html" class="pull-right">
-            <span class="glyphicon glyphicon-cog"></span>
-        </a>
-    </li>
-    <li class="list-group-item">
-        <a href="page-list.html">Google</a>
-        <a href="#" class="pull-right">
-            <span class="glyphicon glyphicon-triangle-right"></span>
-        </a>
-        <a href="website-edit.view.client.html" class="pull-right">
+        <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="pull-right">
             <span class="glyphicon glyphicon-cog"></span>
         </a>
     </li>
