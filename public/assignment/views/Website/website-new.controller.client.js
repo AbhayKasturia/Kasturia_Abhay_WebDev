@@ -9,11 +9,18 @@
     function WebsiteNewController($location , $routeParams , WebsiteService) {      /* dependency injection */
         var vm= this;
         vm.uid = $routeParams.uid;
+        vm.wid = $routeParams.wid;
         vm.createWebsite = createWebsite;
 
         function createWebsite(name,desc){
-            var newWebsite = WebsiteService.createWebsite(vm.uid,name,desc);
-            if(newWebsite) {
+            var newWebsite = {
+                _id: (new Date()).getTime()+"",
+                name: name,
+                desc: desc,
+                developerId: vm.uid
+            };
+            var newWeb = WebsiteService.createWebsite(vm.uid,newWebsite);
+            if(newWeb) {
                 $location.url("/user/"+vm.uid+"/website");
             }
             else {

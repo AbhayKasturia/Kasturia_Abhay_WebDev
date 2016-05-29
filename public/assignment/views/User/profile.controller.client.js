@@ -18,13 +18,10 @@
         init();
 
         function updateUser(newUser) {
-            UserService.updateUser(id,newUser);
-            /*for (var i in users) {
-                if (users[i]._id === id) {
-                    users[i]=newUser;
-                }
-            }*/
-            
+            if(UserService.updateUser(id,newUser))
+                vm.success = "Successfully updated your profile! :)";
+            else
+                vm.error = "Not able to update your profile , try again!";
         }
     }
 })();

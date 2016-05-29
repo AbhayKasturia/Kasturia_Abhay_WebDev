@@ -14,10 +14,20 @@
 </div>
 </nav>
 
+<div ng-if="model.success"
+     class="alert alert-success"
+     role="alert">
+  {{model.success}}
+</div>
+
+<div ng-if="model.error"
+     class="alert alert-danger"
+     role="alert">
+  {{model.error}}
+</div>
 
 <div class="container">
 <form>
-  <div class="alert alert-success" role="alert">Successfully Checked</div>
   <div class="form-group">
     <label for="username">Username</label>
     <input ng-model="model.user.username"
@@ -62,7 +72,7 @@
 <div class="container">
   <div class="navbar-footer">
     <div class="navbar-text pull-right">
-      <a href="#/profile">
+      <a href="#/user/{{model.user._id}}">
         <span class="glyphicon glyphicon-user pull-right"></span>
       </a>
     </div>

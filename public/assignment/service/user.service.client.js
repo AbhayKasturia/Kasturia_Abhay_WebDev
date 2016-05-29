@@ -6,7 +6,6 @@
         .module("WebAppMaker")
         .factory("UserService",UserService);   /*service and factory method for singleton - same thing but syntax different*/
 
-
     var users =
         [
             {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
@@ -17,7 +16,7 @@
 
     function UserService() {
         var api = {
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
+            findUserByCredentials: findUserByCredentials,
             findUserByID: findUserbyID,
             updateUser: updateUser,
             createUser: createUser,
@@ -27,15 +26,18 @@
 
         function createUser(newUser) {
             users.push(newUser);
+            return 1;
         }
 
         function deleteUser(id) {
             for (var i in users) {
                 if (users[i]._id === id)
                 {
+                    users.splice(i,1);
                     return 1;
                 }
             }
+            return 0;
         }
 
         function updateUser(id,newUser) {
@@ -45,9 +47,6 @@
                     users[i]=newUser;
                     return 1;
                 }
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "User not found";*/
             }
             return 0;
         }
@@ -56,20 +55,14 @@
             for (var i in users) {
                 if (users[i]._id === id)
                     return users[i];
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "User not found";*/
             }
             return null;
         }
 
-        function findUserByUsernameAndPassword(username, password) {
+        function findUserByCredentials(username, password) {
             for (var i in users) {
                 if (users[i].username === username && users[i].password === password)
                     return users[i];
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "User not found";*/
             }
             return null;
         }

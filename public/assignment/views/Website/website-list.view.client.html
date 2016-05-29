@@ -18,9 +18,8 @@
     <li ng-repeat="website in model.websites" class="list-group-item">
         <a href="#/user/{{website.developerId}}/website/{{website._id}}/page">
             {{website.name}}
-            {{website.developerID}}
         </a>
-        <a href="#" class="pull-right">
+        <a class="pull-right">
             <span class="glyphicon glyphicon-triangle-right"></span>
         </a>
         <a href="#/user/{{website.developerId}}/website/{{website._id}}" class="pull-right">
@@ -34,7 +33,7 @@
 <div class="container">
     <div class="navbar-footer">
         <div class="navbar-text pull-right">
-            <a href="../User/profile.view.client.html">
+            <a href="#/profile/{{model.uid}}">
                 <span class="glyphicon glyphicon-user pull-right"></span>
             </a>
         </div>

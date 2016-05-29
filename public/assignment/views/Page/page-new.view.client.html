@@ -1,29 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name = "viewport" content = "initial-scale = 1.25, user-scalable = no">
-    <title>NewPage</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="page-list.html" class="navbar-link pull-left">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page" class="navbar-link pull-left">
                     <span class="glyphicon glyphicon-menu-left"></span>
                 </a>
             </p>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 New Page
             </a>
             <p class="navbar-text pull-right">
-                <a href="page-list.html" class="navbar-link pull-right">
+                <a ng-click="model.createPage(name)" class="navbar-link pull-right">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -36,11 +23,19 @@
     <form>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Page Name">
+            <input ng-model="name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Page Name">
         </div>
         <div class="form-group">
             <label for="title">Title</label>
-            <input type="textarea" class="form-control" id="title" placeholder="Page Title" >
+            <input ng-model="title"
+                   type="textarea"
+                   class="form-control"
+                   id="title"
+                   placeholder="Page Title">
         </div>
     </form>
 </div>
@@ -49,7 +44,7 @@
     <div class="container">
         <div class="navbar-footer">
             <div class="navbar-text pull-right">
-                <a href="../User/profile.view.client.html">
+                <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user pull-right"></span>
                 </a>
             </div>

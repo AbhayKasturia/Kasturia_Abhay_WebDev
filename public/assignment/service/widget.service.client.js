@@ -72,7 +72,7 @@
                 }
                 //$location.url("/profile/"+users[i]._id);
                 /*else
-                 vm.error = "User not found";*/
+                 vm.error = "user not found";*/
             }
             return 0;
         }
@@ -83,7 +83,7 @@
                     return websites[i];
                 //$location.url("/profile/"+users[i]._id);
                 /*else
-                 vm.error = "User not found";*/
+                 vm.error = "user not found";*/
             }
             return null;
         }
@@ -103,7 +103,7 @@
                     return users[i];
                 //$location.url("/profile/"+users[i]._id);
                 /*else
-                 vm.error = "User not found";*/
+                 vm.error = "user not found";*/
             }
             return null;
         }

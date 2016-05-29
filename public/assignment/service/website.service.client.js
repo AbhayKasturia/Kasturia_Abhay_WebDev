@@ -22,94 +22,57 @@
 
     function WebsiteService() {
         var api = {
-            findWebsiteByUserID: findWebsiteByUserID,
-            findWebsiteByWebsiteID: findWebsiteByWebsiteID,
+            findWebsiteByUser: findWebsiteByUser,
+            findWebsiteByID: findWebsiteByID,
+            updateWebsite: updateWebsite,
             createWebsite: createWebsite,
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
-            updateUser: updateUser,
             deleteWebsite: deleteWebsite
         };
         return api;
-        
 
-        function createWebsite(developerId , name , desc) {
-            var newWebsite = {
-                _id: (new Date()).getTime()+"",
-                name: name,
-                desc: desc,
-                developerId: developerId
-            };
+        function createWebsite(developerId , newWebsite) {
             websites.push(newWebsite);
-            return newWebsite;
+            return 1;
         }
 
-        function deleteWebsite(developerId , wid) {
-
+        function deleteWebsite(wid) {
             for (var i in websites) {
-                if (websites[i]._id === wid && websites[i].developerId === developerId)
+                if (websites[i]._id === wid)
                 {
                     websites.splice(i,1);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function deleteUser(id) {
-            for (var i in users) {
-                if (users[i]._id === id)
-                {
                     return 1;
                 }
-            }
-        }
-
-        function updateUser(id,newUser) {
-            for (var i in users) {
-                if (users[i].developerIdid === id)
-                {
-                    users[i]=newUser;
-                    return 1;
-                }
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "User not found";*/
             }
             return 0;
         }
 
-        function findWebsiteByWebsiteID(wid) {
+        function updateWebsite(wid,newWebsite) {
+            for (var i in websites) {
+                if (websites[i]._id === wid)
+                {
+                    websites[i]=newWebsite;
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+        function findWebsiteByID(wid) {
             for (var i in websites) {
                 if (websites[i]._id === wid)
                     return websites[i];
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "User not found";*/
             }
             return null;
         }
 
-        function findWebsiteByUserID(uid) {
+        function findWebsiteByUser(uid) {
             var user_website = [];
             for (var i in websites) {
                 if (websites[i].developerId === uid)
                     user_website.push(websites[i]);
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "User not found";*/
             }
             return user_website;
         }
 
-        function findUserByUsernameAndPassword(username, password) {
-            for (var i in users) {
-                if (users[i].username === username && users[i].password === password)
-                    return users[i];
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "User not found";*/
-            }
-            return null;
-        }
     }
 })();
