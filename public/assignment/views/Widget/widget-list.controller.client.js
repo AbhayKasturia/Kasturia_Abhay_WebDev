@@ -15,7 +15,7 @@
         vm.getSafeURL = getSafeURL;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetByPageID(vm.pid);
+            vm.widgets = WidgetService.findWidgetByPageID(vm.pid)
         }
         init();
 

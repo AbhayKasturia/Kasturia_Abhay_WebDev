@@ -1,29 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <meta name = "viewport" content = "initial-scale = 1.25, user-scalable = no">
-    <title>WidgetHeading</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet"/>
-    <link href="../css/style.css" rel="stylesheet"/>
-</head>
-<body>
-
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                <a href="st.html" class="navbar-link">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link">
                     <span class="glyphicon glyphicon-menu-left pull-left"></span>
                 </a>
             </p>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a href="st.html" class="navbar-link pull-right">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link pull-right">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -32,19 +19,30 @@
 </nav>
 
 
+
 <div class="container">
     <form>
         <div class="form-group">
             <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" placeholder="Home Page First Heading">
+            <input ng-model = "model.widget.name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Home Page First Heading">
         </div>
         <div class="form-group">
             <label for="text1">Text</label>
-            <input type="text" class="form-control" id="text1" placeholder="FACEBOOK">
+            <input ng-model = "model.widget.text"
+                   type="text"
+                   class="form-control"
+                   id="text1"
+                   placeholder="FACEBOOK">
         </div>
         <div class="form-group">
             <label for="sel1">Size</label>
-            <select class="form-control" id="sel1">
+            <select ng-model = "model.widget.size"
+                    class="form-control"
+                    id="sel1">
                 <option> </option>
                 <option>1</option>
                 <option>2</option>
@@ -56,20 +54,17 @@
     </form>
 
     <a class="btn btn-danger btn-block"
-       href="widget-list.view.client.html">Delete</a>
+       ng-click="model.deleteWidget()">Delete</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="navbar-footer">
             <div class="navbar-text pull-right">
-                <a href="../user/profile.view.client.html">
+                <a href="#/profile/{{model.uid}}">
                     <span class="glyphicon glyphicon-user pull-right"></span>
                 </a>
             </div>
         </div>
     </div>
 </nav>
-
-</body>
-</html>

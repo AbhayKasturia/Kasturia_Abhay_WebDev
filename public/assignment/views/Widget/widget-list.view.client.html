@@ -2,15 +2,15 @@
     <div class="container">
         <div class="navbar-header">
             <p class="navbar-text pull-left">
-                    <a href="../views/Page/page-list.html" class="navbar-link pull-left">
+                    <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/" class="navbar-link pull-left">
                         <span class="glyphicon glyphicon-menu-left"></span>
                     </a>
             </p>
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand">
                 Widgets
             </a>
             <p class="navbar-text pull-right">
-                <a href="widget-chooser.html" class="navbar-link pull-right">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/new" class="navbar-link pull-right">
                     <span class="glyphicon glyphicon-plus"></span>
                 </a>
             </p>
@@ -22,7 +22,7 @@
 
     <div ng-repeat="widget in model.widgets"class="jga-widget">
         <div class="jga-widget-tool">
-            <a href="widget-heading.html">
+            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}">
                 <span class="glyphicon glyphicon-cog"></span>
             </a>
             <span class="glyphicon glyphicon glyphicon-align-justify"></span>
@@ -73,7 +73,7 @@
     <div class="container">
         <div class="navbar-footer">
             <div class="navbar-text pull-right">
-                <a href="../user/profile.view.client.html">
+                <a href="#/profile/{{model.uid}}">
                     <span class="glyphicon glyphicon-user pull-right"></span>
                 </a>
             </div>

@@ -21,71 +21,17 @@
 
     function WidgetService() {
         var api = {
+            createWidget: createWidget,
             findWidgetByPageID: findWidgetByPageID,
-            findWebsiteByWebsiteID: findWebsiteByWebsiteID,
-            createWebsite: createWebsite,
-            findUserByUsernameAndPassword: findUserByUsernameAndPassword,
-            updateUser: updateUser,
-            deleteWebsite: deleteWebsite
+            findWidgetByID: findWidgetByID,
+            updateWidget: updateWidget,
+            deleteWidget: deleteWidget
         };
         return api;
 
-
-        function createWebsite(developerId , name , desc) {
-            var newWebsite = {
-                _id: (new Date()).getTime()+"",
-                name: name,
-                desc: desc,
-                developerId: developerId
-            };
-            websites.push(newWebsite);
-            return newWebsite;
-        }
-
-        function deleteWebsite(developerId , wid) {
-
-            for (var i in websites) {
-                if (websites[i]._id === wid && websites[i].developerId === developerId)
-                {
-                    websites.splice(i,1);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        function deleteUser(id) {
-            for (var i in users) {
-                if (users[i]._id === id)
-                {
-                    return 1;
-                }
-            }
-        }
-
-        function updateUser(id,newUser) {
-            for (var i in users) {
-                if (users[i].developerIdid === id)
-                {
-                    users[i]=newUser;
-                    return 1;
-                }
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "user not found";*/
-            }
-            return 0;
-        }
-
-        function findWebsiteByWebsiteID(wid) {
-            for (var i in websites) {
-                if (websites[i]._id === wid)
-                    return websites[i];
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "user not found";*/
-            }
-            return null;
+        function createWidget(pid , newWidget) {
+            widgets.push(newWidget);
+            return newWidget;
         }
 
         function findWidgetByPageID(pid) {
@@ -97,15 +43,34 @@
             return page_widgets;
         }
 
-        function findUserByUsernameAndPassword(username, password) {
-            for (var i in users) {
-                if (users[i].username === username && users[i].password === password)
-                    return users[i];
-                //$location.url("/profile/"+users[i]._id);
-                /*else
-                 vm.error = "user not found";*/
+        function findWidgetByID(wgid) {
+            for (var i in widgets) {
+                if (widgets[i]._id === wgid)
+                    return widgets[i];
             }
             return null;
+        }
+
+        function updateWidget(wgid,newWidget) {
+            for (var i in users) {
+                if (widgets[i]._id === wgid)
+                {
+                    widgets[i]=newWidget;
+                    return 1;
+                }
+            }
+            return 0;
+        }
+
+        function deleteWidget(wgid) {
+            for (var i in widgets) {
+                if (widgets[i]._id === wgid)
+                {
+                    widgets.splice(i,1);
+                    return 1;
+                }
+            }
+            return 0;
         }
     }
 })();
