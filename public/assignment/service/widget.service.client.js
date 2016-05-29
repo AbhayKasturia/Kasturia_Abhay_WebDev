@@ -52,7 +52,7 @@
         }
 
         function updateWidget(wgid,newWidget) {
-            for (var i in users) {
+            for (var i in widgets) {
                 if (widgets[i]._id === wgid)
                 {
                     widgets[i]=newWidget;

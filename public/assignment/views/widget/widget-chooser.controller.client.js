@@ -22,6 +22,7 @@
         {
             var newWidget = {
                 _id: (new Date()).getTime()+"",
+                pageId: pid,
                 widgetType: "HEADER"
             };
 
@@ -35,6 +36,7 @@
         {
             var newWidget = {
                 _id: (new Date()).getTime()+"",
+                pageId: pid,
                 widgetType: "IMAGE"
             };
 
@@ -48,6 +50,7 @@
         {
             var newWidget = {
                 _id: (new Date()).getTime()+"",
+                pageId: pid,
                 widgetType: "YOUTUBE"
             };
 
