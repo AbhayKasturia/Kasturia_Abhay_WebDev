@@ -1,0 +1,91 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                    <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/" class="navbar-link pull-left">
+                        <span class="glyphicon glyphicon-menu-left"></span>
+                    </a>
+            </p>
+            <a class="navbar-brand">
+                Widgets
+            </a>
+            <p class="navbar-text pull-right">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/new" class="navbar-link pull-right">
+                    <span class="glyphicon glyphicon-plus"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div ng-repeat="widget in model.widgets"class="jga-widget">
+        <div class="jga-widget-tool">
+            <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{widget._id}}">
+                <span class="glyphicon glyphicon-cog"></span>
+            </a>
+            <span class="glyphicon glyphicon glyphicon-align-justify"></span>
+        </div>
+        <div ng-switch="widget.widgetType">
+            <div ng-switch-when="HEADER" ng-switch="widget.size">
+                <div ng-switch-when=1>
+                    <h1>{{widget.text}}</h1>
+                </div>
+                <div ng-switch-when=2>
+                    <h2>{{widget.text}}</h2>
+                </div>
+                <div ng-switch-when=3>
+                    <h3>{{widget.text}}</h3>
+                </div>
+                <div ng-switch-when=4>
+                    <h4>{{widget.text}}</h4>
+                </div>
+                <div ng-switch-when=5>
+                    <h5>{{widget.text}}</h5>
+                </div>
+                <div ng-switch-when=6>
+                    <h6>{{widget.text}}</h6>
+                </div>
+                <div ng-switch-default>
+                    Unable to render
+                </div>
+            </div>
+            <div ng-switch-when="HTML">
+                <div ng-bind-html="model.getSafeHTML(widget)"></div>
+            </div>
+            <div ng-switch-when="IMAGE">
+                <img width="{{widget.width}}" ng-src="{{widget.url}}"/>
+            </div>
+            <div ng-switch-when="YOUTUBE">
+                <img width="{{widget.width}}" src="{{widget.url}}"/>
+                <iframe width={{widget.width}} ng-src="{{model.getSafeURL(widget)}}" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div ng-switch-default>
+                Unable to render
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#/user/{{model.uid}}">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+            <div class="navbar-text pull-left">
+                    <span class="glyphicon glyphicon glyphicon-play"></span>
+            </div>
+            <div class="navbar-text pull-left">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+</body>
+</html>
