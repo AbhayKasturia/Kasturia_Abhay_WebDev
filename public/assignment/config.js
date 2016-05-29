@@ -9,11 +9,6 @@
 
     function Config($routeProvider){   /*Well know angular object in ng-modular ,  used for dependency injection*/
             $routeProvider
-                .when("/default" , {
-                    templateUrl:"views/user/login.view.client.html",
-                    controller: "LoginController",
-                    controllerAs: "model"
-                })
                 .when("/login" , {
                     templateUrl:"views/user/login.view.client.html",
                     controller: "LoginController",
@@ -72,6 +67,11 @@
                 .when("/user/:uid/website/:wid/page/:pid/widget/:wgid" , {
                     templateUrl:"views/widget/widget-edit.view.client.html",
                     controller: "WidgetEditController",
+                    controllerAs: "model"
+                })
+                .when("/default" , {
+                    templateUrl:"index.html",
+                    controller: "LoginController",
                     controllerAs: "model"
                 })
     }   
