@@ -22,7 +22,7 @@
         {
             var newWidget = {
                 _id: (new Date()).getTime()+"",
-                pageId: pid,
+                pageId: vm.pid,
                 widgetType: "HEADER"
             };
 
@@ -36,7 +36,7 @@
         {
             var newWidget = {
                 _id: (new Date()).getTime()+"",
-                pageId: pid,
+                pageId: vm.pid,
                 widgetType: "IMAGE"
             };
 
@@ -50,7 +50,7 @@
         {
             var newWidget = {
                 _id: (new Date()).getTime()+"",
-                pageId: pid,
+                pageId: vm.pid,
                 widgetType: "YOUTUBE"
             };
 
