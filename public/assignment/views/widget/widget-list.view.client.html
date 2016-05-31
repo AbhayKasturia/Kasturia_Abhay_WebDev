@@ -58,7 +58,6 @@
                 <img width="{{widget.width}}" ng-src="{{widget.url}}"/>
             </div>
             <div ng-switch-when="YOUTUBE">
-                <img width="{{widget.width}}" src="{{widget.url}}"/>
                 <iframe width={{widget.width}} ng-src="{{model.getSafeURL(widget)}}" frameborder="0" allowfullscreen></iframe>
             </div>
             <div ng-switch-default>

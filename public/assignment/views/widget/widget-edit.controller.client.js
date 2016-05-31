@@ -16,7 +16,7 @@
         vm.updateWidget = updateWidget;
 
         function init() {
-            vm.widget = WidgetService.findWidgetByID(vm.wgid)
+            vm.widget = WidgetService.findWidgetByID(vm.wgid);
         }
         init();
 
@@ -24,14 +24,14 @@
             if(WidgetService.deleteWidget(vm.wgid))
                 $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
             else
-                vm.error = "Unable to delete"
+                vm.error = "Unable to delete";
         }
 
         function updateWidget(newWidget) {
             if(WidgetService.updateWidget(vm.wgid,newWidget))
                 $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
             else
-                vm.error = "Unable to delete"
+                vm.error = "Unable to delete";
         }
     }
 })();
