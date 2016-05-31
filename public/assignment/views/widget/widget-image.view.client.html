@@ -56,7 +56,6 @@
         <div class="form-group">
             <label for="upload_image" class="control-label">Upload</label>
             <input ng-model="model.widget.upload"
-                   href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget"
                    type="file"
                    id="upload_image"
                    class="file form-control"
@@ -64,7 +63,7 @@
         </div>
     </form>
 
-    <a class="btn btn-primary btn-block">
+    <a class="btn btn-primary btn-block" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
         Upload Image
     </a>
     <a class="btn btn-danger btn-block"
