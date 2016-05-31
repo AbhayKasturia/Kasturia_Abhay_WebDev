@@ -18,13 +18,14 @@
     </div>
 </nav>
 
-<div ng-if="model.error"
-     class="alert alert-danger"
-     role="alert">
-    {{model.error}}
-</div>
-
 <div class="container">
+
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+
     <form>
         <div class="form-group">
             <label for="name">Name</label>
