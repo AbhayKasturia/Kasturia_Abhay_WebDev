@@ -16,51 +16,46 @@ module.exports = function(app) {
 
     app.post("/api/user/:uid/website" , createWebsite);
     app.get("/api/user/:uid/website" , findAllWebsitesForUser);
-    app.get("/api/user?username=:username" , findUserbyUsername);
-    app.get("/api/user/:uid" , findUserById);
-    app.get("/api/user?username=username&password=password" ,findUserByCredentials);
-    app.put("/api/user/:uid" , updateUser);
-    app.delete("/api/user/:uid" , deleteUser);
+    app.get("/api/website/:wid" , findWebsiteByID);
+    app.put("/api/website/:wid" , updateWebsite);
+    app.delete("/api/website/:wid" , deleteWebsite);
 
-    function getUsers(req,res){
-        res.send(users);
-        return;
-    }
 
-    function findUserById(req,res){
-        var uid = req.params.uid;
+    function findWebsiteByID(req,res){
+        var wid = req.params.wid;
         for(var i in users) {
-            if(users[i]._id === uid) {
-                res.json(users[i]);
+            if(websites[i]._id === wid) {
+                res.json(websites[i]);
                 return;
             }
         }
         res.json();
     };
 
-    function findUserByUsername(username, res){
-        for(var i in users){
-            if(users[i].username === username)
+    function findAllWebsitesForUser(req, res){
+        var uid = req.params.uid;
+        var user_websites = [];
+        for(var i in websites){
+            if(websites[i].developerId_=== uid)
             {
-                res.json(users[i]);
-                return;
+                user_websites.push(websites[i]);
             }
         }
-        res.json();
+        res.send(user_websites);
     }
 
-    function createUser(req , res) {
-        var user = req.body;
-        users.push(user);
+    function createWebsite(req , res) {
+        var newWebsite = req.body;
+        websites.push(newWebsite);
         res.sendStatus(200);
     }
 
     function deleteUser(req, res) {
-        var id = req.params.uid;
-        for (var i in users) {
-            if (users[i]._id === id)
+        var id = req.params.wid;
+        for (var i in websites) {
+            if (websites[i]._id === id)
             {
-                users.splice(i,1);
+                websites.splice(i,1);
                 res.sendStatus(200);
                 return;
             }
@@ -69,12 +64,12 @@ module.exports = function(app) {
     }
 
     function updateUser(req, res) {
-        var id = req.params.uid;
-        var newUser = req.body;
-        for (var i in users) {
-            if (users[i]._id === id)
+        var id = req.params.wid;
+        var newWebsite = req.body;
+        for (var i in websites) {
+            if (websites[i]._id === id)
             {
-                users[i]=newUser;
+                websites[i]=newWebsite;
                 res.sendStatus(200);
                 return;
             }
@@ -82,22 +77,4 @@ module.exports = function(app) {
         res.sendStatus(400);
     }
 
-    function findUserbyID(id) {
-        for (var i in users) {
-            if (users[i]._id === id)
-                return users[i];
-        }
-        return null;
-    }
-
-    function findUserByCredentials(username, password , res) {
-        for (var i in users) {
-            if (users[i].username === username && users[i].password === password)
-            {
-                res.json(users[i]);
-                return;
-            }
-        }
-        res.json();
-    }
 };
