@@ -22,9 +22,9 @@ module.exports = function(app) {
 
 
     function findWebsiteByID(req,res){
-        var wid = req.params.wid;
-        for(var i in users) {
-            if(websites[i]._id === wid) {
+        var id = req.params.wid;
+        for(var i in websites) {
+            if(websites[i]._id === id) {
                 res.json(websites[i]);
                 return;
             }
