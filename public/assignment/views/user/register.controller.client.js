@@ -21,10 +21,14 @@
                     username: username,
                     password: password
                 };
-                if(UserService.createUser(newUser))
-                    $location.url("/user/"+newUser._id);
-                else
-                    vm.error = "Unable to register";
+                UserService
+                    .createUser(newUser)
+                    .then(function(response){
+                        if(response.data)
+                            $location.url("/user/"+newUser._id);
+                        else
+                            vm.error = "Unable to register";
+                    });
             }
             else
                 vm.error = "Password doesn't match!!!"

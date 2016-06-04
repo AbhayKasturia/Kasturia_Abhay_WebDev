@@ -6,15 +6,7 @@
         .module("WebAppMaker")
         .factory("UserService",UserService);   /*service and factory method for singleton - same thing but syntax different*/
 
-    var users =
-        [
-            {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-            {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-            {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-            {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-        ];
-
-    function UserService() {
+    function UserService($http) {
         var api = {
             findUserByCredentials: findUserByCredentials,
             findUserByID: findUserbyID,
@@ -25,46 +17,27 @@
         return api;
 
         function createUser(newUser) {
-            users.push(newUser);
-            return 1;
+            return $http.post("/api/user",newUser);
         }
 
         function deleteUser(id) {
-            for (var i in users) {
-                if (users[i]._id === id)
-                {
-                    users.splice(i,1);
-                    return 1;
-                }
-            }
-            return 0;
+            var url = "/api/user/"+ id;
+            return $http.delete(url);
         }
 
         function updateUser(id,newUser) {
-            for (var i in users) {
-                if (users[i]._id === id)
-                {
-                    users[i]=newUser;
-                    return 1;
-                }
-            }
-            return 0;
+            var url = "/api/user/" + id;
+            return $http.put(url, newUser);
         }
 
         function findUserbyID(id) {
-            for (var i in users) {
-                if (users[i]._id === id)
-                    return users[i];
-            }
-            return null;
+            var url = "/api/user/" + id;
+            return $http.get(url);
         }
 
         function findUserByCredentials(username, password) {
-            for (var i in users) {
-                if (users[i].username === username && users[i].password === password)
-                    return users[i];
-            }
-            return null;
+            var url = "/api/user?username="+username+"&password"+password;
+            return $http.get(url);
         }
     }
 })();

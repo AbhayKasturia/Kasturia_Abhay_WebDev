@@ -10,18 +10,25 @@
         var vm = this;
         vm.updateUser = updateUser;
 
-        var id = $routeParams.uid; /* ["id"] or ".id"*/
+        var id = $routeParams.uid;
+        /* ["id"] or ".id"*/
 
         function init() {
-            vm.user = UserService.findUserByID(id);
+            UserService.findUserByID(id)
+                .then(function (response) {
+                    vm.user = response.data;
+                })
         }
+
         init();
 
         function updateUser(newUser) {
-            if(UserService.updateUser(id,newUser))
-                vm.success = "Successfully updated your profile! :)";
-            else
-                vm.error = "Not able to update your profile , try again!";
+            UserService.updateUser(id, newUser)
+                .then(function (response) {
+                        vm.success = "Successfully updated your profile! :)";
+                    },
+                    function (error) {
+                        vm.error = "Not able to update your profile , try again!";
+                    });
         }
-    }
-})();
+    }})();

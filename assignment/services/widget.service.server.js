@@ -17,7 +17,6 @@ module.exports = function(app) {
             { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
         ];
 
-
     app.post("/api/page/:pid/widget" , createWidget);
     app.get("/api/page/:pid/widget" , findAllWidgetsForPage);
     app.get("/api/widget/:wgid" , findWidgetByID);
@@ -80,5 +79,4 @@ module.exports = function(app) {
         }
         res.sendStatus(400);
     }
-
 };

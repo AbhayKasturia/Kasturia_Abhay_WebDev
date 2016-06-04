@@ -10,13 +10,6 @@
         .module("WebAppMaker")
         .factory("PageService",PageService);   /*service and factory method for singleton - same thing but syntax different*/
 
-    var pages =
-            [
-                { "_id": "321", "name": "Post 1", "websiteId": "456" },
-                { "_id": "432", "name": "Post 2", "websiteId": "456" },
-                { "_id": "543", "name": "Post 3", "websiteId": "456" }
-            ];
-
     function PageService() {
         var api = {
             findPageByWebsiteID: findPageByWebsiteID,
@@ -28,47 +21,28 @@
         return api;
 
         function findPageByWebsiteID(wid) {
-            var website_pages = [];
-            for (var i in pages) {
-                if (pages[i].websiteId === wid)
-                    website_pages.push(pages[i]);
-            }
-            return website_pages;
+            var url = "/api/website/:wid/page" ;
+            return $http.get(url);
         }
 
         function findPageByID(pid) {
-            for (var i in pages) {
-                if (pages[i]._id === pid)
-                    return pages[i];
-            }
-            return null;
+            var url = "/api/page/" + pid;
+            return $http.get(url);
         }
 
         function updatePage(pid,newPage) {
-            for (var i in pages) {
-                if (pages[i]._id === pid)
-                {
-                    pages[i]=newPage;
-                    return 1;
-                }
-            }
-            return 0;
+            var url = "/api/page/" + pid;
+            return $http.put(url , newPage);
         }
 
         function deletePage(pid) {
-            for (var i in pages) {
-                if (pages[i]._id === pid)
-                {
-                    pages.splice(i,1);
-                    return 1;
-                }
-            }
-            return 0;
+            var url = "/api/page/" + pid;
+            return $http.delete(url);
         }
 
         function createPage(wid , newPage) {
-            pages.push(newPage);
-            return 1;
+            var url = "/api/website/:wid/page" ;
+            return $http.post(url , newPage);
         }
     }
 })();
