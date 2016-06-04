@@ -26,10 +26,14 @@
                 widgetType: "HEADER"
             };
 
-            if(WidgetService.createWidget(vm.pid,newWidget))
-                $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
-            else
-                vm.error= "Unable to create widget";
+            WidgetService
+                .createWidget(vm.pid,newWidget)
+                .then(function(response){
+                    if(response.data)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
+                    else
+                        vm.error= "Unable to create widget";
+                });
         }
 
         function createImage()
@@ -40,10 +44,14 @@
                 widgetType: "IMAGE"
             };
 
-            if(WidgetService.createWidget(vm.pid,newWidget))
-                $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
-            else
-                vm.error= "Unable to create widget";
+            WidgetService
+                .createWidget(vm.pid,newWidget)
+                .then(function(response){
+                    if(response.data)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
+                    else
+                        vm.error= "Unable to create widget";
+                });
         }
 
         function createYoutube()
@@ -54,10 +62,14 @@
                 widgetType: "YOUTUBE"
             };
 
-            if(WidgetService.createWidget(vm.pid,newWidget))
-                $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
-            else
-                vm.error= "Unable to create widget";
+            WidgetService
+                .createWidget(vm.pid,newWidget)
+                .then(function(response){
+                    if(response.data)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
+                    else
+                        vm.error= "Unable to create widget";
+                });
         }
 
         function getSafeHTML(widget)
@@ -72,6 +84,5 @@
             var url = "https://www.youtube.com/embed/"+ id;
             return $sce.trustAsResourceUrl(url);
         }
-
     }
 })();

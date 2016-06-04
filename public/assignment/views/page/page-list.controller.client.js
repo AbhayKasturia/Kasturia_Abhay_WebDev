@@ -11,10 +11,13 @@
         var vm= this;
         vm.uid = $routeParams.uid;
         vm.wid = $routeParams.wid;
-        
 
         function init() {
-            vm.pages = PageService.findPageByWebsiteID(vm.wid);
+            PageService
+                .findPageByWebsiteID(vm.wid)
+                .then(function(response){
+                    vm.pages = response.data;
+                });
         }
         init();
     }

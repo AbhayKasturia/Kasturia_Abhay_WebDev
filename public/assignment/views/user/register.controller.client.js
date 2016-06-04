@@ -1,9 +1,7 @@
 /**
  * Created by Abhay on 5/28/2016.
  */
-/**
- * Created by Abhay on 5/24/2016.
- */
+
 (function(){
     angular
         .module("WebAppMaker")

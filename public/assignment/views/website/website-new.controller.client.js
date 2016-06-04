@@ -19,13 +19,18 @@
                 desc: desc,
                 developerId: vm.uid
             };
-            var newWeb = WebsiteService.createWebsite(vm.uid,newWebsite);
-            if(newWeb) {
-                $location.url("/user/"+vm.uid+"/website");
-            }
-            else {
-                vm.error="Unable to create website";
-            }
+            WebsiteService
+                .createWebsite(vm.uid,newWebsite)
+                .then(function(response){
+                    var newWeb = response.data;
+
+                    if(newWeb) {
+                        $location.url("/user/"+vm.uid+"/website");
+                    }
+                    else {
+                        vm.error="Unable to create website";
+                    }
+                });
         }
     }
 })();

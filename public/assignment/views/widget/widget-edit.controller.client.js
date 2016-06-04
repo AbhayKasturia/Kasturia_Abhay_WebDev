@@ -16,22 +16,34 @@
         vm.updateWidget = updateWidget;
 
         function init() {
-            vm.widget = WidgetService.findWidgetByID(vm.wgid);
+            WidgetService
+                .findWidgetByID(vm.wgid)
+                .then(function(response){
+                    vm.widget = response.data;
+                });
         }
         init();
 
         function deleteWidget() {
-            if(WidgetService.deleteWidget(vm.wgid))
-                $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
-            else
-                vm.error = "Unable to delete";
+            WidgetService
+                .deleteWidget(vm.wgid)
+                .then(function(response){
+                    if(response.data)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
+                    else
+                        vm.error = "Unable to delete";
+                });
         }
 
         function updateWidget(newWidget) {
-            if(WidgetService.updateWidget(vm.wgid,newWidget))
-                $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
-            else
-                vm.error = "Unable to delete";
+            WidgetService
+                .updateWidget(vm.wgid,newWidget)
+                .then(function(response){
+                    if(response.data)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
+                    else
+                        vm.error = "Unable to delete";
+                });
         }
     }
 })();

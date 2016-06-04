@@ -15,7 +15,11 @@
         vm.getSafeURL = getSafeURL;
 
         function init() {
-            vm.widgets = WidgetService.findWidgetByPageID(vm.pid)
+            WidgetService
+                .findWidgetByPageID(vm.pid)
+                .then(function(response){
+                    vm.widgets = response.data;
+                });
         }
         init();
 
@@ -31,6 +35,5 @@
             var url = "https://www.youtube.com/embed/"+ id;
             return $sce.trustAsResourceUrl(url);
         }
-
     }
 })();
