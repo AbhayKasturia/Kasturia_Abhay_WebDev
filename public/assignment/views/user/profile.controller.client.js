@@ -14,10 +14,11 @@
         /* ["id"] or ".id"*/
 
         function init() {
-            UserService.findUserByID(id)
+            UserService
+                .findUserByID(id)
                 .then(function (response) {
                     vm.user = response.data;
-                })
+                });
         }
 
         init();

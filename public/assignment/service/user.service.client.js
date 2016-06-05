@@ -9,7 +9,7 @@
     function UserService($http) {
         var api = {
             findUserByCredentials: findUserByCredentials,
-            findUserByID: findUserbyID,
+            findUserByID: findUserByID,
             updateUser: updateUser,
             createUser: createUser,
             deleteUser: deleteUser
@@ -30,13 +30,13 @@
             return $http.put(url, newUser);
         }
 
-        function findUserbyID(id) {
+        function findUserByID(id) {
             var url = "/api/user/" + id;
             return $http.get(url);
         }
 
         function findUserByCredentials(username, password) {
-            var url = "/api/user?username="+username+"&password"+password;
+            var url = "/api/user?username="+username+"&password="+password;
             return $http.get(url);
         }
     }
