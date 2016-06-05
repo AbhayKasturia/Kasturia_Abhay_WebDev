@@ -32,14 +32,14 @@ module.exports = function(app) {
 
     function findAllPagesForWebsite(req, res){
         var wid = req.params.wid;
-        var websites_pages = [];
+        var website_pages = [];
         for(var i in pages){
             if(pages[i].websiteId === wid)
             {
-                websites_pages.push(pages[i]);
+                website_pages.push(pages[i]);
             }
         }
-        res.send(websites_pages);
+        res.send(website_pages);
     }
 
     function createPage(req , res) {

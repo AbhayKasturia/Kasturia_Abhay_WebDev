@@ -10,7 +10,7 @@
         .module("WebAppMaker")
         .factory("WebsiteService",WebsiteService);   /*service and factory method for singleton - same thing but syntax different*/
 
-    function WebsiteService() {
+    function WebsiteService($http) {
         var api = {
             findWebsiteByUser: findWebsiteByUser,
             findWebsiteByID: findWebsiteByID,
@@ -21,7 +21,7 @@
         return api;
 
         function createWebsite(developerId , newWebsite) {
-            var url="/api/user/:uid/website";
+            var url = "/api/user/"+developerId+"/website" ;
             return $http.post(url,newWebsite);
         }
 
@@ -41,7 +41,7 @@
         }
 
         function findWebsiteByUser(uid) {
-            var url = "/api/user/:uid/website" ;
+            var url = "/api/user/"+uid+"/website" ;
             return $http.get(url);
         }
 

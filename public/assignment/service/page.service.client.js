@@ -10,7 +10,7 @@
         .module("WebAppMaker")
         .factory("PageService",PageService);   /*service and factory method for singleton - same thing but syntax different*/
 
-    function PageService() {
+    function PageService($http) {
         var api = {
             findPageByWebsiteID: findPageByWebsiteID,
             findPageByID: findPageByID,
@@ -21,7 +21,7 @@
         return api;
 
         function findPageByWebsiteID(wid) {
-            var url = "/api/website/:wid/page" ;
+            var url = "/api/website/"+ wid + "/page" ;
             return $http.get(url);
         }
 
@@ -41,7 +41,7 @@
         }
 
         function createPage(wid , newPage) {
-            var url = "/api/website/:wid/page" ;
+            var url = "/api/website/"+ wid +"/page" ;
             return $http.post(url , newPage);
         }
     }

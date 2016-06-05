@@ -13,14 +13,13 @@ module.exports = function(app) {
             { "_id": "678", "name": "Checkers", "desc": "Social Networking Site",   "developerId": "123" },
             { "_id": "789", "name": "Chess", "desc": "Social Networking Site",      "developerId": "234" }
         ];
-
+    
     app.post("/api/user/:uid/website" , createWebsite);
     app.get("/api/user/:uid/website" , findAllWebsitesForUser);
     app.get("/api/website/:wid" , findWebsiteByID);
     app.put("/api/website/:wid" , updateWebsite);
     app.delete("/api/website/:wid" , deleteWebsite);
-
-
+    
     function findWebsiteByID(req,res){
         var id = req.params.wid;
         for(var i in websites) {
@@ -36,12 +35,12 @@ module.exports = function(app) {
         var uid = req.params.uid;
         var user_websites = [];
         for(var i in websites){
-            if(websites[i].developerId_=== uid)
+            if(websites[i].developerId=== uid)
             {
                 user_websites.push(websites[i]);
             }
         }
-        res.send(user_websites);
+        res.json(user_websites);
     }
 
     function createWebsite(req , res) {
@@ -50,7 +49,7 @@ module.exports = function(app) {
         res.sendStatus(200);
     }
 
-    function deleteUser(req, res) {
+    function deleteWebsite(req, res) {
         var id = req.params.wid;
         for (var i in websites) {
             if (websites[i]._id === id)
@@ -63,7 +62,7 @@ module.exports = function(app) {
         res.sendStatus(400);
     }
 
-    function updateUser(req, res) {
+    function updateWebsite(req, res) {
         var id = req.params.wid;
         var newWebsite = req.body;
         for (var i in websites) {

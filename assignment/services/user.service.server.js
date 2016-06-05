@@ -9,17 +9,33 @@ module.exports = function(app) {
         {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
     ];
 
-    app.get("/api/user" , getUsers);
+/*    app.get("/api/user" , getUsers);
     app.post("/api/user" , createUser);
-    app.get("/api/user?username=:username" , findUserByUsername);
+    app.get("/api/user?username=username" , findUserByUsername);
     app.get("/api/user/:uid" , findUserByID);
     app.get("/api/user?username=username&password=password" ,findUserByCredentials);
     app.put("/api/user/:uid" , updateUser);
-    app.delete("/api/user/:uid" , deleteUser);
+    app.delete("/api/user/:uid" , deleteUser);*/
+
+    app.post("/api/user", createUser);
+    app.get("/api/user", getUsers);
+    app.get("/api/user/:uid", findUserByID);
+    app.put("/api/user/:uid", updateUser);
+    app.delete("/api/user/:uid",deleteUser);
 
     function getUsers(req,res){
-        res.send(users);
-        return;
+        var username = req.query.username;
+        var password = req.query.password;
+
+        if(username&&password){
+            findUserByCredentials(username,password,res);
+        }
+        else
+        if(username){
+            findUserByUsername(username,res);
+        }
+        else
+            res.send(users);
     }
 
     function findUserByID(req,res){

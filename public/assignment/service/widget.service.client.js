@@ -6,7 +6,7 @@
         .module("WebAppMaker")
         .factory("WidgetService",WidgetService);   /*service and factory method for singleton - same thing but syntax different*/
 
-    function WidgetService() {
+    function WidgetService($http) {
         var api = {
             createWidget: createWidget,
             findWidgetByPageID: findWidgetByPageID,
@@ -17,12 +17,12 @@
         return api;
 
         function createWidget(pid , newWidget) {
-            var url = "/api/page/:pid/widget" ;
+            var url = "/api/page/"+pid+"/widget" ;
             return $http.post(url , newWidget);
         }
 
         function findWidgetByPageID(pid) {
-            var url = "/api/page/:pid/widget" ;
+            var url = "/api/page/"+pid+"/widget" ;
             return $http.get(url);
         }
 
