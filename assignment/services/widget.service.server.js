@@ -17,11 +17,31 @@ module.exports = function(app) {
             { "_id": "789", "widgetType": "HTML", "pageId": "321", "text": "<p>Lorem ipsum</p>"}
         ];
 
+    var multer = require('multer');
+    var upload = multer({ dest: __dirname+'/../../public/uploads' });
+
     app.post("/api/page/:pid/widget" , createWidget);
     app.get("/api/page/:pid/widget" , findAllWidgetsForPage);
     app.get("/api/widget/:wgid" , findWidgetByID);
     app.put("/api/widget/:wgid" , updateWidget);
     app.delete("/api/widget/:wgid" , deleteWidget);
+    app.post ("/api/upload", upload.single('myFile'), uploadImage);
+
+    function uploadImage(req, res) {
+
+        var widgetId      = req.body.widgetId;
+        var width         = req.body.width;
+        var myFile        = req.file;
+
+        var originalname  = myFile.originalname; // file name on user's computer
+        var filename      = myFile.filename;     // new file name in upload folder
+        var path          = myFile.path;         // full path of uploaded file
+        var destination   = myFile.destination;  // folder where file is saved to
+        var size          = myFile.size;
+        var mimetype      = myFile.mimetype;
+
+        res.send(200);
+    }
 
 
     function findWidgetByID(req,res){

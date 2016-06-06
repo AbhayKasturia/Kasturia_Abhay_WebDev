@@ -20,6 +20,11 @@
                 .then(function(response){
                     vm.widgets = response.data;
                 });
+
+            var objects = jQuery(".container");
+
+            $(".container")
+                .sortable({});
         }
         init();
 
