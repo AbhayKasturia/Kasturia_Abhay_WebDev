@@ -20,7 +20,6 @@
 
 
 <div class="container">
-    <form>
         <div class="form-group">
             <label for="name">Name</label>
             <input ng-model="model.widget.name"
@@ -53,29 +52,22 @@
                    id="width1"
                    placeholder="example: 500px or 100%">
         </div>
- <!--       <div class="form-group">
-            <label for="upload_image" class="control-label">Upload</label>
-            <input ng-model="model.widget.upload"
-                   type="file"
-                   id="upload_image"
-                   class="file form-control"
-                   data-show-preview="false">
-        </div>-->
         <form action="/api/upload"  method="post" enctype="multipart/form-data">
-            <input  name="myFile"   type="file" class="form-control"/>
-            <input  name="width"    value="{{model.widget.width}}" style="display: none"/>
-            <input  name="widgetId" value="{{model.widget._id}}"   style="display: none"/>
-            <button type="submit"   class="btn btn-block btn-primary">Upload Image</button>
+            <input  name="myFile" type="file" class="form-control"/>
+            <input  name="width"  value="{{model.widget.width}}" style="display: none"/>
+            <input  name="wgid" value="{{model.widget._id}}"   style="display: none"/>
+            <input  name="uid" value="{{model.uid}}"   style="display: none"/>
+            <input  name="pid" value="{{model.pid}}"   style="display: none"/>
+            <input  name="wid" value="{{model.wid}}"   style="display: none"/>
+            <button type="submit"  class="btn btn-block btn-primary">Upload Image</button>
         </form>
-    </form>
 
-<!--    <a class="btn btn-primary btn-block" href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget">
-        Upload Image
-    </a>-->
-    <a class="btn btn-danger btn-block"
-       ng-click="model.deleteWidget()">
-        Delete
-    </a>
+    <div class="custom-btns">
+        <a class="btn btn-primary btn-block"
+           href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}/flickr">Flickr Search</a>
+        <a ng-click="model.deleteWidget()"
+           class="btn btn-danger btn-block">Delete</a>
+    </div>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">

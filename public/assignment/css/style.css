@@ -42,3 +42,7 @@ li.list-group-item {
 a:hover {
     text-decoration: none;
 }
+
+.custom-btns {
+    margin-top: 5px;
+}

@@ -23,8 +23,7 @@
 
             var objects = jQuery(".container");
 
-            $(".container")
-                .sortable({});
+            $(".container").sortable({axis : "y"});
         }
         init();
 

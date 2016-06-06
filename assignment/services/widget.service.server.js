@@ -29,18 +29,25 @@ module.exports = function(app) {
 
     function uploadImage(req, res) {
 
-        var widgetId      = req.body.widgetId;
-        var width         = req.body.width;
-        var myFile        = req.file;
+        var widgetId = req.body.wgid ;
+        var width = req.body.width ;
+        var myFile = req.file;
+        var originalname = myFile.originalname; // file name on user's computer
+        var filename = myFile.filename; // new file name in upload folder
+        var path = myFile.path; // full path of uploaded file
+        var destination = myFile.destination; // folder where file is saved to
+        var size = myFile.size;
+        var mimetype = myFile.mimetype;
 
-        var originalname  = myFile.originalname; // file name on user's computer
-        var filename      = myFile.filename;     // new file name in upload folder
-        var path          = myFile.path;         // full path of uploaded file
-        var destination   = myFile.destination;  // folder where file is saved to
-        var size          = myFile.size;
-        var mimetype      = myFile.mimetype;
+        for(var i in widgets){
+            if(widgets[i]._id === widgetId){
+                widgets[i].url = "/uploads/"+filename;
+            }
+        }
 
-        res.send(200);
+        console.log(req.body);
+        res.redirect("/assignment/index.html#/user/"+req.body.uid+"/website/"+req.body.wid+"/page/"+req.body.pid+"/widget/"+widgetId);
+
     }
 
 
@@ -69,7 +76,7 @@ module.exports = function(app) {
 
     function createWidget(req , res) {
         var newWidget = req.body;
-        pages.push(newWidget);
+        widgets.push(newWidget);
         res.sendStatus(200);
     }
 
