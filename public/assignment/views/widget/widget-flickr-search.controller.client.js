@@ -35,10 +35,11 @@
             url += "/" + photo.id + "_" + photo.secret + "_b.jpg";
 
             var widget = {
-                widgetId : vm.wgid,
-                widgetType : "IMAGE",
+                _id : vm.wgid,
+                widgetType : 'IMAGE',
                 pageId : vm.pid,
-                url : url
+                url : url,
+                width: "100%"
             };
 
             WidgetService

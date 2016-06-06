@@ -20,6 +20,7 @@ module.exports = function(app) {
     var multer = require('multer');
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
+    app.get("/api/widget" , allWidgets);
     app.post("/api/page/:pid/widget" , createWidget);
     app.get("/api/page/:pid/widget" , findAllWidgetsForPage);
     app.get("/api/widget/:wgid" , findWidgetByID);
@@ -48,6 +49,10 @@ module.exports = function(app) {
         console.log(req.body);
         res.redirect("/assignment/index.html#/user/"+req.body.uid+"/website/"+req.body.wid+"/page/"+req.body.pid+"/widget/"+widgetId);
 
+    }
+
+    function allWidgets(req,res){
+        res.send(widgets);
     }
 
 
