@@ -98,7 +98,6 @@ module.exports = function(app) {
             if (users[i].username === username && users[i].password === password)
             {
                 res.json(users[i]);
-                res.sendStatus(200);
                 return;
             }
         }

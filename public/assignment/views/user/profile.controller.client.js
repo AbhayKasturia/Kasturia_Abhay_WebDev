@@ -6,12 +6,17 @@
         .module("WebAppMaker")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($routeParams , UserService) {      /* route paramaters can be retrieved using this */
+    function ProfileController($location , $routeParams , UserService) {      /* route paramaters can be retrieved using this */
         var vm = this;
-        vm.updateUser = updateUser;
+        vm.uid = $routeParams.uid;
 
         var id = $routeParams.uid;
         /* ["id"] or ".id"*/
+
+
+        vm.updateUser = updateUser;
+        vm.deleteUser = deleteUser;
+
 
         function init() {
             UserService
@@ -32,4 +37,20 @@
                         vm.error = "Not able to update your profile , try again!";
                     });
         }
+
+        function deleteUser(){
+            UserService
+                .deleteUser(vm.uid)
+                .then(
+                    function(response){
+                        $location.url("/login");
+                        console.log("deleted");
+                    },
+                    function(){
+                        vm.error = "Cannot delete"
+                        console.log(vm.error);
+                    }
+                );
+        }
+
     }})();
