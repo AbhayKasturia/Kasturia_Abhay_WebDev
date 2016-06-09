@@ -15,15 +15,16 @@
             if(password === vpassword)
             {
                 var newUser = {
-                    _id: (new Date()).getTime()+"",
+                    // _id: (new Date()).getTime()+"",
                     username: username,
                     password: password
                 };
                 UserService
                     .createUser(newUser)
                     .then(function(response){
+                        var user = response.data;
                         if(response.data)
-                            $location.url("/user/"+newUser._id);
+                            $location.url("/user/"+user._id);
                         else
                             vm.error = "Unable to register";
                     });
