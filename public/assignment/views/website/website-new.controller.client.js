@@ -14,7 +14,7 @@
 
         function createWebsite(name,desc){
             var newWebsite = {
-                _id: (new Date()).getTime()+"",
+                // _id: (new Date()).getTime()+"",
                 name: name,
                 desc: desc,
                 developerId: vm.uid

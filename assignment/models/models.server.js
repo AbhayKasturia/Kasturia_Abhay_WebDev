@@ -11,7 +11,8 @@ module.exports = function(){
     mongoose.connect('mongodb://localhost/cs5610summer1');
 
     var models = {
-        userModel: require("./user/user.model.server.js")()
+        userModel: require("./user/user.model.server.js")(),
+        websiteModel: require("./website/website.model.server.js")()
         // we need to add other models here as well
     };
     return models;

@@ -44,7 +44,7 @@ module.exports = function(){
 
         return User
             .update({_id: uid},{
-                $set: user
+                $set: newuser
             });
     }
 }
