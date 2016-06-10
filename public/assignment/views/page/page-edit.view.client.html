@@ -26,15 +26,20 @@
         {{model.error}}
     </div>
 
-    <form>
+    <form name="myForm">
         <div class="form-group">
             <label for="name">Name</label>
-            <input ng-model="model.page.name"
+            <input ng-model="model.page.name" required
+                   name="name"
                    type="text"
                    class="form-control"
                    id="name"
                    placeholder="Page Name">
         </div>
+        <span ng-show="myForm.name.$error.required"
+              class="err">
+            *Required Field
+        </span>
         <div class="form-group">
             <label for="title">Title</label>
             <input ng-model="model.page.title"

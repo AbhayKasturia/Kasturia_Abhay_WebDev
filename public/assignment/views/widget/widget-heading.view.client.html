@@ -1,5 +1,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
+
+        <div ng-if="model.error"
+             class="alert alert-danger"
+             role="alert">
+            {{model.error}}
+        </div>
+
         <div class="navbar-header">
             <p class="navbar-text pull-left">
                 <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link">
@@ -21,15 +28,20 @@
 
 
 <div class="container">
-    <form>
+    <form name="myForm">
         <div class="form-group">
             <label for="name">Name</label>
-            <input ng-model = "model.widget.name"
+            <input ng-model = "model.widget.name" required
+                   name="name"
                    type="text"
                    class="form-control"
                    id="name"
                    placeholder="Home Page First Heading">
         </div>
+        <span ng-show="myForm.name.$error.required"
+              class="err">
+            *Required Field
+        </span>
         <div class="form-group">
             <label for="text1">Text</label>
             <input ng-model = "model.widget.text"

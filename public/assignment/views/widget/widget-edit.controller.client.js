@@ -36,14 +36,21 @@
         }
 
         function updateWidget(newWidget) {
-            WidgetService
-                .updateWidget(vm.wgid,newWidget)
-                .then(function(response){
-                    if(response.data)
-                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
-                    else
-                        vm.error = "Unable to delete";
-                });
+            if(newWidget.name)
+            {
+                WidgetService
+                    .updateWidget(vm.wgid,newWidget)
+                    .then(function(response){
+                        if(response.data)
+                            $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
+                        else
+                            vm.error = "Unable to delete";
+                    });
+            }
+            else {
+                vm.error = "You did not fill all the required fields!!";
+            }
+
         }
     }
 })();

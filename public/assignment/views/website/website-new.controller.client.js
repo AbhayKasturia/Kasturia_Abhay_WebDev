@@ -13,24 +13,30 @@
         vm.createWebsite = createWebsite;
 
         function createWebsite(name,desc){
-            var newWebsite = {
-                // _id: (new Date()).getTime()+"",
-                name: name,
-                desc: desc,
-                _user: vm.uid
-            };
-            WebsiteService
-                .createWebsite(vm.uid,newWebsite)
-                .then(function(response){
-                    var newWeb = response.data;
+            if(name) {
+                var newWebsite = {
+                    // _id: (new Date()).getTime()+"",
+                    name: name,
+                    desc: desc,
+                    _user: vm.uid
+                };
+                WebsiteService
+                    .createWebsite(vm.uid, newWebsite)
+                    .then(function (response) {
+                        var newWeb = response.data;
 
-                    if(newWeb) {
-                        $location.url("/user/"+vm.uid+"/website");
-                    }
-                    else {
-                        vm.error="Unable to create website";
-                    }
-                });
+                        if (newWeb) {
+                            $location.url("/user/" + vm.uid + "/website");
+                        }
+                        else {
+                            vm.error = "Unable to create website";
+                        }
+                    });
+            }
+            else
+            {
+                vm.error = "You did not fill all the required fields!!";
+            }
         }
     }
 })();

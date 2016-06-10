@@ -22,17 +22,25 @@
         init();
 
         function updatePage(newPage){
-            PageService
-                .updatePage(vm.pid,newPage)
-                .then(function(response){
-                    var updatePage = response.data;
-                    if(updatePage) {
-                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
-                    }
-                    else {
-                        vm.error="Unable to update page";
-                    }
-                });
+            if(newPage.name)
+            {
+                PageService
+                    .updatePage(vm.pid,newPage)
+                    .then(function(response){
+                        var updatePage = response.data;
+                        if(updatePage) {
+                            $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page");
+                        }
+                        else {
+                            vm.error="Unable to update page";
+                        }
+                    });
+            }
+            else
+            {
+                vm.error = "You did not fill all the required fields!!";
+            }
+
         }
 
         function deletePage(){

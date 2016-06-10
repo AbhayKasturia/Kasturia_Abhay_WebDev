@@ -20,14 +20,28 @@
 
 
 <div class="container">
+
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+
+    <form name="myForm">
+
         <div class="form-group">
             <label for="name">Name</label>
-            <input ng-model="model.widget.name"
+            <input ng-model="model.widget.name" required
+                   name="name"
                    type="text"
                    class="form-control"
                    id="name"
                    placeholder="Top Heading">
         </div>
+        <span ng-show="myForm.name.$error.required"
+          class="err">
+            *Required Field
+        </span>
         <div class="form-group">
             <label for="text1">Text</label>
             <input ng-model="model.widget.text"
@@ -52,6 +66,7 @@
                    id="width1"
                    placeholder="example: 500px or 100%">
         </div>
+    </form>
         <form action="/api/upload"  method="post" enctype="multipart/form-data">
             <input  name="myFile" type="file" class="form-control"/>
             <input  name="width"  value="{{model.widget.width}}" style="display: none"/>

@@ -5,21 +5,40 @@
         {{model.error}}
     </div>
 
-    <h1>Register</h1>
-    <input ng-model="username"
-           placeholder="username"
-           type="text"
-           class="form-control" />
-    <input ng-model="password"
-           placeholder="password"
-           type="password"
-           class="form-control"/>
-    <input ng-model="vpassword"
-           placeholder="verify password"
-           type="password"
-           class="form-control"/>
+    <div class="form-group" ng-form name="myForm">
+        <h1>Register</h1>
+        <input ng-model="username" required
+               name="username"
+               class="form-control"
+               placeholder="username"
+               type="text"/>
+        <span ng-show="myForm.username.$error.required"
+              class="err">
+            *Required Field
+        </span>
+        <input ng-model="password" required
+               name="password"
+               class="form-control"
+               placeholder="password"
+               type="password"/>
+        <span ng-show="myForm.password.$error.required"
+              class="err">
+            *Required Field
+        </span>
+        <input ng-model="vpassword" required
+               name="vpassword"
+               class="form-control"
+               placeholder="verify password"
+               type="password"/>
+        <span ng-show="myForm.vpassword.$error.required"
+              class="err">
+            *Required Field
+        </span>
+    </div>
+
     <a ng-click="model.createUser(username,password,vpassword)"
        class="btn btn-primary btn-block"
        role="button">Register</a>
     <a class="btn btn-danger btn-block" href="#/login" role="button">Cancel</a>
+
 </div>

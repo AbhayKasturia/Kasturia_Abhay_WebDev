@@ -12,9 +12,11 @@
         vm.createUser = createUser;
 
         function createUser(username,password,vpassword) {
-            if(password === vpassword)
+            if(username && password && vpassword)
             {
-                var newUser = {
+                if(password === vpassword)
+                {
+                    var newUser = {
                     // _id: (new Date()).getTime()+"",
                     username: username,
                     password: password
@@ -26,11 +28,15 @@
                         if(response.data)
                             $location.url("/user/"+user._id);
                         else
-                            vm.error = "Unable to register";
+                            vm.error = "Unable to register, please try again later!";
                     });
+                }
+                else
+                    vm.error = "Password doesn't match!!!"
             }
-            else
-                vm.error = "Password doesn't match!!!"
+            else {
+                vm.error = "You did not fill all the required fields!!";
+            }
         }
     }
 })();

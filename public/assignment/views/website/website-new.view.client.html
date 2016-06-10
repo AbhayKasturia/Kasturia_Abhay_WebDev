@@ -20,10 +20,19 @@
 
 
 <div class="container">
-<form>
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+<form name="myForm">
     <div class="form-group">
         <label for="name">Website Name</label>
-        <input ng-model="name" type="text" class="form-control" id="name" placeholder="Google">
+        <input name="name" ng-model="name" required type="text" class="form-control" id="name" placeholder="Google">
+        <span ng-show="myForm.name.$error.required"
+              class="err">
+            *Required Field
+        </span>
     </div>
     <div class="form-group">
         <label for="desc">Website Description</label>

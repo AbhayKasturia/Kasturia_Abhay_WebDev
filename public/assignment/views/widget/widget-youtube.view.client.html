@@ -20,15 +20,27 @@
 
 
 <div class="container">
-    <form>
+
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+
+    <form name="myForm">
         <div class="form-group">
             <label for="name">Name</label>
-            <input ng-model="model.widget.name"
+            <input ng-model="model.widget.name" required
+                   name="name"
                    type="text"
                    class="form-control"
                    id="name"
                    placeholder="Top Heading">
         </div>
+        <span ng-show="myForm.name.$error.required"
+              class="err">
+            *Required Field
+        </span>
         <div class="form-group">
             <label for="text1">Text</label>
             <input ng-model="model.widget.text"

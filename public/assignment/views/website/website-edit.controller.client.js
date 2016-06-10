@@ -24,16 +24,23 @@
         init();
 
         function updateWebsite(newWebsite){
-            WebsiteService
-                .updateWebsite(vm.wid,newWebsite)
-                .then(function(response){
-                    if(response.data) {
-                        $location.url("/user/"+vm.uid+"/website");
-                    }
-                    else {
-                        vm.error="Unable to update website";
-                    }
-            });
+            if(newWebsite.name)
+            {
+                WebsiteService
+                    .updateWebsite(vm.wid,newWebsite)
+                    .then(function(response){
+                        if(response.data) {
+                            $location.url("/user/"+vm.uid+"/website");
+                        }
+                        else {
+                            vm.error="Unable to update website";
+                        }
+                    });
+            }
+            else {
+                vm.error = "You did not fill all the required fields!!";
+            }
+
         }
 
         function deleteWebsite(){
