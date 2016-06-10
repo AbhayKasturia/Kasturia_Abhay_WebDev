@@ -91,46 +91,65 @@ module.exports = function(app, models) {
 
     function findAllWidgetsForPage(req, res){
         var pid = req.params.pid;
-        var page_widgets = [];
-        for(var i in widgets){
-            if(widgets[i].pageId === pid)
-            {
-                page_widgets.push(widgets[i]);
-            }
-        }
-        res.send(page_widgets);
+        widgetModel
+            .findAllWidgetsForPage(pid)
+            .then(
+                function(page_widgets) {
+                    console.log(page_widgets);
+                    res.json(page_widgets);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            );
     }
 
     function createWidget(req , res) {
         var newWidget = req.body;
-        widgets.push(newWidget);
-        res.sendStatus(200);
+
+        widgetModel
+            .createWidget(newWidget)
+            .then(
+                function(newWidget) {
+                    console.log(newWidget);
+                    res.json(newWidget);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            );
     }
 
     function deleteWidget(req, res) {
         var id = req.params.wgid;
-        for (var i in widgets) {
-            if (widgets[i]._id === id)
-            {
-                widgets.splice(i,1);
-                res.sendStatus(200);
-                return;
-            }
-        }
-        res.sendStatus(400);
+
+        widgetModel
+            .deleteWebsite(id)
+            .then(
+                function(stats){
+                    console.log(stats);
+                    res.send(200);
+                },
+                function(error){
+                    res.statusCode(404).send(err);
+                }
+            );
     }
 
     function updateWidget(req, res) {
         var id = req.params.wgid;
         var newWidget = req.body;
-        for (var i in widgets) {
-            if (widgets[i]._id === id)
-            {
-                widgets[i]=newWidget;
-                res.sendStatus(200);
-                return;
-            }
-        }
-        res.sendStatus(400);
+
+        widgetModel
+            .updateWidget(id, newWidget)
+            .then(
+                function(newWidget) {
+                    console.log(newWidget);
+                    res.json(newWidget);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            );
     }
 };

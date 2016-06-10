@@ -21,16 +21,19 @@
         function createHeading()
         {
             var newWidget = {
-                _id: (new Date()).getTime()+"",
-                pageId: vm.pid,
-                widgetType: "HEADER"
+                // _id: (new Date()).getTime()+"",
+                name: "newWidget",
+                _page: vm.pid,
+                type: "HEADING"
             };
 
             WidgetService
                 .createWidget(vm.pid,newWidget)
                 .then(function(response){
-                    if(response.data)
-                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
+                    var widget = response.data;
+
+                    if(widget)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+widget._id);
                     else
                         vm.error= "Unable to create widget";
                 });
@@ -39,16 +42,19 @@
         function createImage()
         {
             var newWidget = {
-                _id: (new Date()).getTime()+"",
-                pageId: vm.pid,
-                widgetType: "IMAGE"
+                // _id: (new Date()).getTime()+"",
+                name: "newWidget",
+                _page: vm.pid,
+                type: "IMAGE"
             };
 
             WidgetService
                 .createWidget(vm.pid,newWidget)
                 .then(function(response){
-                    if(response.data)
-                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
+                    var widget = response.data;
+
+                    if(widget)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+widget._id);
                     else
                         vm.error= "Unable to create widget";
                 });
@@ -57,16 +63,19 @@
         function createYoutube()
         {
             var newWidget = {
-                _id: (new Date()).getTime()+"",
-                pageId: vm.pid,
-                widgetType: "YOUTUBE"
+                // _id: (new Date()).getTime()+"",
+                name: "newWidget",
+                _page: vm.pid,
+                type: "YOUTUBE"
             };
 
             WidgetService
                 .createWidget(vm.pid,newWidget)
                 .then(function(response){
-                    if(response.data)
-                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+newWidget._id);
+                    var widget = response.data;
+
+                    if(widget)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+widget._id);
                     else
                         vm.error= "Unable to create widget";
                 });
