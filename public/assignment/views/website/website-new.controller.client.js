@@ -17,7 +17,7 @@
                 // _id: (new Date()).getTime()+"",
                 name: name,
                 desc: desc,
-                developerId: vm.uid
+                _user: vm.uid
             };
             WebsiteService
                 .createWebsite(vm.uid,newWebsite)

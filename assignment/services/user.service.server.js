@@ -125,7 +125,7 @@ module.exports = function(app , models) {
         var newUser = req.body;
 
         userModel
-            .updateUser(id, newuser)
+            .updateUser(id, newUser)
             .then(
                 function(user) {
                     console.log(user);

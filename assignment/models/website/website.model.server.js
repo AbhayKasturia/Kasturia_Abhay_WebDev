@@ -24,15 +24,17 @@ module.exports = function(){
     return api;
 
     function findAllWebsitesForUser(uid){
-        return Website.find({_user: uid});
+        return Website.find({"_user": uid});
     }
 
     function findWebsiteByID(wid){
         return Website.findById(wid);
     }
 
-    function createWebsite(Website){
-        return Website.create(Website);
+    function createWebsite(newWebsite){
+        delete newWebsite._id;
+
+        return Website.create(newWebsite);
     }
 
     function deleteWebsite(wid){
