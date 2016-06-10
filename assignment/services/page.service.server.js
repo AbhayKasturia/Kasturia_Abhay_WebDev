@@ -2,7 +2,9 @@
  * Created by Abhay on 6/3/2016.
  */
 
-module.exports = function(app) {
+module.exports = function(app, models) {
+
+    var pageModel = models.pageModel;
 
     var pages =
         [
@@ -21,58 +23,78 @@ module.exports = function(app) {
 
     function findPageByID(req,res){
         var id = req.params.pid;
-        for(var i in pages) {
-            if(pages[i]._id === id) {
-                res.json(pages[i]);
-                return;
-            }
-        }
-        res.json();
+        pageModel
+            .findPageByID(id)
+            .then(
+                function(page) {
+                    res.json(page);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     };
 
     function findAllPagesForWebsite(req, res){
         var wid = req.params.wid;
-        var website_pages = [];
-        for(var i in pages){
-            if(pages[i].websiteId === wid)
-            {
-                website_pages.push(pages[i]);
-            }
-        }
-        res.send(website_pages);
+
+        pageModel
+            .findAllPagesForWebsite(wid)
+            .then(
+                function(website_pages) {
+                    console.log(website_pages);
+                    res.json(website_pages);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            );
     }
 
     function createPage(req , res) {
         var newPage = req.body;
-        pages.push(newPage);
-        res.sendStatus(200);
+        pageModel
+            .createPage(newPage)
+            .then(
+                function(newPage) {
+                    console.log(newPage);
+                    res.json(newPage);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            )
     }
 
     function deletePage(req, res) {
         var id = req.params.pid;
-        for (var i in pages) {
-            if (pages[i]._id === id)
-            {
-                pages.splice(i,1);
-                res.sendStatus(200);
-                return;
-            }
-        }
-        res.sendStatus(400);
+        pageModel
+            .deletePage(id)
+            .then(
+                function(stats){
+                    console.log(stats);
+                    res.send(200);
+                },
+                function(error){
+                    res.statusCode(404).send(err);
+                }
+            );
     }
 
     function updatePage(req, res) {
         var id = req.params.pid;
         var newPage = req.body;
-        for (var i in pages) {
-            if (pages[i]._id === id)
-            {
-                pages[i]=newPage;
-                res.sendStatus(200);
-                return;
-            }
-        }
-        res.sendStatus(400);
+        pageModel
+            .updatePage(id, newPage)
+            .then(
+                function(newPage) {
+                    console.log(newPage);
+                    res.json(newPage);
+                },
+                function(error) {
+                    res.statusCode(400).send(error);
+                }
+            );
     }
 
 };

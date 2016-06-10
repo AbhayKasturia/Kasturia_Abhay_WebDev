@@ -9,11 +9,12 @@
         vm.wid = $routeParams.wid;
         vm.createPage = createPage;
 
-        function createPage(name){
+        function createPage(name, title){
             var newPage = {
-                _id: (new Date()).getTime()+"",
+                // _id: (new Date()).getTime()+"",
                 name: name,
-                websiteId: vm.wid
+                title: title,
+                _website: vm.wid
             };
             PageService
                 .createPage(vm.wid,newPage)

@@ -2,7 +2,9 @@
  * Created by Abhay on 6/3/2016.
  */
 
-module.exports = function(app) {
+module.exports = function(app, models) {
+
+    var widgetModel = models.widgetModel;
 
     var widgets =
         [
@@ -20,7 +22,6 @@ module.exports = function(app) {
     var multer = require('multer');
     var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
-    app.get("/api/widget" , allWidgets);
     app.post("/api/page/:pid/widget" , createWidget);
     app.get("/api/page/:pid/widget" , findAllWidgetsForPage);
     app.get("/api/widget/:wgid" , findWidgetByID);
@@ -40,31 +41,52 @@ module.exports = function(app) {
         var size = myFile.size;
         var mimetype = myFile.mimetype;
 
-        for(var i in widgets){
-            if(widgets[i]._id === widgetId){
-                widgets[i].url = "/uploads/"+filename;
-            }
-        }
+        widgetModel
+            .findWidgetByID(widgetId)
+            .then(
+                function(widget) {
+                    widget.url= "/uploads/"+filename;
+                    widgetModel
+                        .updateWidget(id, widget)
+                        .then(
+                            function(widget) {
+                                console.log(widget);
+                                res.json(widget);
+                            },
+                            function(error) {
+                                res.statusCode(400).send(error);
+                            }
+                        );
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+
+        // for(var i in widgets){
+        //     if(widgets[i]._id === widgetId){
+        //         widgets[i].url = "/uploads/"+filename;
+        //     }
+        // }
 
         console.log(req.body);
         res.redirect("/assignment/index.html#/user/"+req.body.uid+"/website/"+req.body.wid+"/page/"+req.body.pid+"/widget/"+widgetId);
 
     }
 
-    function allWidgets(req,res){
-        res.send(widgets);
-    }
-
-
     function findWidgetByID(req,res){
         var id = req.params.wgid;
-        for(var i in widgets) {
-            if(widgets[i]._id === id) {
-                res.json(widgets[i]);
-                return;
-            }
-        }
-        res.json();
+
+        widgetModel
+            .findWidgetByID(id)
+            .then(
+                function(widget) {
+                    res.json(widget);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            );
     };
 
     function findAllWidgetsForPage(req, res){
