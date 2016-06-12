@@ -17,6 +17,9 @@
         vm.createHeading = createHeading;
         vm.createImage = createImage;
         vm.createYoutube = createYoutube;
+        vm.createText = createText;
+        vm.createHTML = createHTML;
+
 
         function createHeading()
         {
@@ -67,6 +70,49 @@
                 name: "newWidget",
                 _page: vm.pid,
                 type: "YOUTUBE"
+            };
+
+            WidgetService
+                .createWidget(vm.pid,newWidget)
+                .then(function(response){
+                    var widget = response.data;
+
+                    if(widget)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+widget._id);
+                    else
+                        vm.error= "Unable to create widget";
+                });
+        }
+
+        function createHTML()
+        {
+            var newWidget = {
+                // _id: (new Date()).getTime()+"",
+                name: "newWidget",
+                _page: vm.pid,
+                type: "HTML"
+            };
+
+            WidgetService
+                .createWidget(vm.pid,newWidget)
+                .then(function(response){
+                    var widget = response.data;
+
+                    if(widget)
+                        $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget/"+widget._id);
+                    else
+                        vm.error= "Unable to create widget";
+                });
+        }
+
+        function createText()
+        {
+            var newWidget = {
+                // _id: (new Date()).getTime()+"",
+                name: "newWidget",
+                _page: vm.pid,
+                type: "TEXT",
+                text: ""
             };
 
             WidgetService

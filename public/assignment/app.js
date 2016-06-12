@@ -3,5 +3,5 @@
  */
 (function (){
     angular
-        .module("WebAppMaker", ["ngRoute"]);             /*declare dependency on the application*/
+        .module("WebAppMaker", ["ngRoute" , "textAngular"]);             /*declare dependency on the application*/
 })();

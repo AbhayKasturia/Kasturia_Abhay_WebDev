@@ -1,0 +1,50 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link pull-left">
+                    <span class="glyphicon glyphicon-menu-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">
+                HTML Widget Edit
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link pull-right">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+<div class="container">
+
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+
+    <form name="myForm">
+        <div ng-model="model.widget.text"
+             text-angular
+             ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+        ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+        ['indent','outdent'],['html']]">
+        </div>
+    </form>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#/user/{{model.uid}}">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

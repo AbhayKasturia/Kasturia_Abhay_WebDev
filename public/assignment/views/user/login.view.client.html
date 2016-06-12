@@ -12,9 +12,12 @@
                ng-model="username" required
                class="form-control"
                placeholder="username"
-               type="text"/>
-        <span ng-show="myForm.username.$error.required"
-              class="err">
+               type="text"
+               autocorrect="off"
+               autocapitalize=off"/>
+        <span   ng-if = "model.error"
+                ng-show="myForm.username.$error.required"
+                class="err">
             *Required Field
         </span>
         <input name="password"
@@ -22,8 +25,9 @@
                class="form-control"
                placeholder="password"
                type="password"/>
-        <span ng-show="myForm.password.$error.required"
-              class="err">
+        <span   ng-if = "model.error"
+                ng-show="myForm.password.$error.required"
+                class="err">
             *Required Field
         </span>
     <!--<h1>{{myForm.username.$invalid}}</h1>-->
