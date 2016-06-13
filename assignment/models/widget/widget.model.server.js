@@ -34,7 +34,19 @@ module.exports = function(){
     function createWidget(newWidget){
         delete newWidget._id;
 
-        return Widget.create(newWidget);
+        var pid = newWidget._page;
+
+        return Widget
+            .find({"_page": pid})
+            .then(
+                function (widgets) {
+                    newWidget.order = widgets.length;
+                    return Widget.create(newWidget);
+                },
+                function (error) {
+                    return null;
+                }
+            );
     }
 
     function deleteWidget(wgid){
@@ -49,4 +61,11 @@ module.exports = function(){
                 $set: newWidget
             });
     }
+
+    function reorderWidget(pid,widgets){
+
+        return  Widget.update({_page: pid}, {$set: widgets}, false, true);
+
+    }
+
 }

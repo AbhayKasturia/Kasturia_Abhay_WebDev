@@ -111,7 +111,7 @@
                 // _id: (new Date()).getTime()+"",
                 name: "newWidget",
                 _page: vm.pid,
-                type: "TEXT",
+                type: "INPUT",
                 text: ""
             };
 
