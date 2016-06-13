@@ -28,7 +28,12 @@
     </div>
 
     <form name="myForm">
-        <div ng-model="model.widget.text"
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input ng-model="model.widget.name" type="text" class="form-control" id="name" placeholder="Main Page - Paragraph 2">
+        </div>
+        <label for="html">HTML</label>
+        <div id="html" ng-model="model.widget.text"
              text-angular
              ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
         ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],

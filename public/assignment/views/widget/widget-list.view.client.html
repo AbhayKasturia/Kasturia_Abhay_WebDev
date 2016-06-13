@@ -51,7 +51,7 @@
                 </div>
             </div>
             <div ng-switch-when="HTML">
-                <div ng-bind-html="model.getSafeHTML(widget.text)"></div>
+                <div ng-bind-html="model.getSafeHTML(widget)"></div>
             </div>
             <div ng-switch-when="IMAGE">
                 <img width="{{widget.width}}" ng-src="{{widget.url}}"/>
@@ -59,14 +59,20 @@
             <div ng-switch-when="YOUTUBE" class="youtube-widget">
                 <iframe width={{widget.width}} ng-src="{{model.getSafeURL(widget)}}" frameborder="0" allowfullscreen></iframe>
             </div>
-            <div ng-switch-when="TEXT">
-                <div ng-if="widget.formatted" text-angular ta-toolbar="..."></div>
-                <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
-                       placeholder="{{widget.textInput.placeholder}}" class="form-control"/>
-                <textarea ng-if="!widget.formatted && (widget.rows > 1)"
-                          rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
-                          class="form-control">{{widget.text}}</textarea>
+
+            <div ng-switch-when="INPUT">
+                <div ng-switch-when="INPUT">
+                    <div ng-if="widget.formatted" text-angular ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                                ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                                ['indent','outdent'],['html']]"></div>
+                    <input ng-if="!widget.formatted && (!widget.rows || widget.rows===1)"
+                           placeholder="{{widget.textInput.placeholder}}" class="form-control"/>
+                    <textarea ng-if="!widget.formatted && (widget.rows > 1)"
+                              rows="{{widget.rows}}" placeholder="{{widget.placeholder}}"
+                              class="form-control">{{widget.text}}</textarea>
+                </div>
             </div>
+
             <div ng-switch-default>
                 Unable to render
             </div>

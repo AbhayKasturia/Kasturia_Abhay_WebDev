@@ -21,7 +21,7 @@
                     vm.widgets = response.data;
                 });
 
-            var objects = jQuery(".container");
+            // var objects = jQuery(".container");
 
             // $(".container").sortable({axis : "y"});
         }

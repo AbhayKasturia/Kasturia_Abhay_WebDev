@@ -1,0 +1,82 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link pull-left">
+                    <span class="glyphicon glyphicon-menu-left"></span>
+                </a>
+            </p>
+            <a class="navbar-brand" href="#">
+                HTML Widget Edit
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateWidget(model.widget)" class="navbar-link pull-right">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+
+
+<div class="container">
+    <form role="form">
+        <form>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input id="name"
+                       ng-model="model.widget.name"
+                       type="text"
+                       class="form-control"
+                       placeholder="Main Page Text">
+            </div>
+            <div class="form-group">
+                <label for="text">Text</label>
+                <input id="text"
+                       ng-model="model.widget.text"
+                       type="text"
+                       class="form-control"
+                       placeholder="Hi , welcome to Facebook">
+            </div>
+            <div class="form-group">
+                <label for="rows">Rows</label>
+                <input id="rows"
+                       ng-model="model.widget.rows"
+                       type="number"
+                       class="form-control"
+                       placeholder="5">
+            </div>
+            <div class="form-group">
+                <label for="placeholder">Placeholder</label>
+                <input id="placeholder"
+                       ng-model="model.widget.placeholder"
+                       class="form-control">
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="text"
+                           readonly
+                           class="form-control"
+                           value="Formatted"/>
+                <span class="input-group-addon">
+                    <input ng-model="model.widget.formatted" type="checkbox"/>
+                </span>
+                </div>
+            </div>
+        </form>
+        <a class="btn btn-danger btn-block" ng-click="model.deleteWidget()">Delete</a>
+    </form>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#/user/{{model.uid}}">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

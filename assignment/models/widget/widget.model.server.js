@@ -62,10 +62,36 @@ module.exports = function(){
             });
     }
 
-    function reorderWidget(pid,widgets){
+    function reorderWidget(pid,start,end){
+        console.log("Start="+start);
+        console.log("End="+end);
 
-        return  Widget.update({_page: pid}, {$set: widgets}, false, true);
+        return Widget
+            .find({_page: pid}, function (err, widgets) {
+                widgets.forEach(function(widget){
+                    if(start< end){
+                        if(widget.order > start && widget.order <= end){
+                            widget.order= widget.order - 1;
+                            widget.save();
+                        }
 
+                        else if(widget.order === start){
+                            widget.order = end;
+                            widget.save();
+                        }
+                    } else{
+                        if(widget.order < start && widget.order >= end){
+                            widget.order=widget.order+1;
+                            widget.save();
+
+                        }
+                        else if(widget.order === start){
+                            widget.order = end;
+                            widget.save();
+                        }
+                    }
+                });
+            });
     }
 
 }

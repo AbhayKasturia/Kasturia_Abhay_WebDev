@@ -137,40 +137,20 @@ module.exports = function(app, models) {
     function reorderWidget(req,res){
 
         var pid = req.params.pid;
-        var start = req.query.start;
-        var end = req.query.end;
+        var start = parseInt(req.query.start);
+        var end = parseInt(req.query.end);
+
+        start = start;
+        end = end;
+
         widgetModel
-            .findAllWidgetsForPage(pid)
+            .reorderWidget( pid , start, end)
             .then(
-                function(widgets) {
-                    widgets.forEach(function(widget){
-                        delete widget._id;
-                        if(widget.order>start && widget.order<=end){
-                            widget.order = widget.order-1;
-                            widget.save();
-                        }
-                        else if(widget.order<start && widget.order>=end){
-                            widget.order = widget.order+1;
-                            widget.save();
-                        }
-                        else if(widget.order==start){
-                            widget.order = end;
-                            widget.save();
-                        }
-                    });
-                    
-                    widgetModel
-                        .reorderWidget(pid,widgets)
-                        .then(
-                            function(response){
-                                res.json(widgets);
-                            },
-                            function(error){
-                                res.json({});
-                            });
+                function (stats) {
+                    res.sendStatus(200);
                 },
-                function(error){
-                    res.json({});
+                function (error) {
+                    res.sendStatus(400);
                 });
     }
     
