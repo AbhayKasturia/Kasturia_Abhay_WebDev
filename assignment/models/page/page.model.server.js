@@ -36,7 +36,7 @@ module.exports = function(){
     }
 
     function deletePage(pid){
-        return Page.remove({_id: wid});
+        return Page.remove({_id: pid});
     }
 
     function updatePage(pid , newPage){
