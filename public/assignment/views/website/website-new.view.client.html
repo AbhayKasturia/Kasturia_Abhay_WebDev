@@ -10,7 +10,7 @@
                 New Website
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.createWebsite(name,desc)" class="navbar-link pull-right">
+                <a ng-click="model.createWebsite(name,desc); submitted=true" class="navbar-link pull-right">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -29,7 +29,7 @@
     <div class="form-group">
         <label for="name">Website Name</label>
         <input name="name" ng-model="name" required type="text" class="form-control" id="name" placeholder="Google">
-        <span ng-show="myForm.name.$error.required"
+        <span ng-show="submitted && myForm.name.$error.required"
               class="err">
             *Required Field
         </span>

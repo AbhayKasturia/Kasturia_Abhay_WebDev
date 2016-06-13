@@ -15,8 +15,7 @@
                type="text"
                autocorrect="off"
                autocapitalize=off"/>
-        <span   ng-if = "model.error"
-                ng-show="myForm.username.$error.required"
+        <span   ng-show="submitted && myForm.username.$error.required"
                 class="err">
             *Required Field
         </span>
@@ -25,15 +24,14 @@
                class="form-control"
                placeholder="password"
                type="password"/>
-        <span   ng-if = "model.error"
-                ng-show="myForm.password.$error.required"
+        <span   ng-show="submitted && myForm.password.$error.required"
                 class="err">
             *Required Field
         </span>
     <!--<h1>{{myForm.username.$invalid}}</h1>-->
     <!--<h1>{{myForm.password.$invalid}}</h1>-->
 
-    <a ng-click="model.login(username,password)"
+    <a ng-click="model.login(username,password); submitted=true"
        class="btn btn-primary btn-block"
        role="button">Login
     </a>

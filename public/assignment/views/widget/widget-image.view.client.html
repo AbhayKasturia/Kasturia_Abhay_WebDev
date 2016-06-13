@@ -10,7 +10,7 @@
                 Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWidget(model.widget)" class="navbar-link pull-right">
+                <a ng-click="model.updateWidget(model.widget); submitted=true" class="navbar-link pull-right">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -38,7 +38,7 @@
                    id="name"
                    placeholder="Top Heading">
         </div>
-        <span ng-show="myForm.name.$error.required"
+        <span ng-show="submitted && myForm.name.$error.required"
           class="err">
             *Required Field
         </span>

@@ -10,7 +10,7 @@
                 Edit Website
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWebsite(model.website)" class="navbar-link pull-right">
+                <a ng-click="model.updateWebsite(model.website); submitted=true" class="navbar-link pull-right">
                     <span class="glyphicon glyphicon-ok pull-right"></span>
                 </a>
             </p>
@@ -37,7 +37,7 @@
                    placeholder="Google"
                    value="Facebook">
         </div>
-        <span ng-show="myForm.name.$error.required"
+        <span ng-show="submitted && myForm.name.$error.required"
               class="err">
             *Required Field
         </span>
