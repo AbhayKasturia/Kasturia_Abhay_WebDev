@@ -15,7 +15,7 @@ module.exports = function(app, models) {
     app.put("/api/widget/:wgid" , updateWidget);
     app.delete("/api/widget/:wgid" , deleteWidget);
     app.post ("/api/upload", upload.single('myFile'), uploadImage);
-    app.put("/page/:pageId/widget",reorderWidget);
+    app.put("/page/:pid/widget",reorderWidget);
 
     function uploadImage(req, res) {
 

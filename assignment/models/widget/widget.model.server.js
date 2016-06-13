@@ -18,7 +18,8 @@ module.exports = function(){
         deleteWidget: deleteWidget,
         updateWidget: updateWidget,
         findWidgetByID: findWidgetByID,
-        findAllWidgetsForPage: findAllWidgetsForPage
+        findAllWidgetsForPage: findAllWidgetsForPage,
+        reorderWidget: reorderWidget
     };
 
     return api;
@@ -40,7 +41,7 @@ module.exports = function(){
             .find({"_page": pid})
             .then(
                 function (widgets) {
-                    newWidget.order = widgets.length;
+                    newWidget.order = widgets.length + 1;
                     return Widget.create(newWidget);
                 },
                 function (error) {

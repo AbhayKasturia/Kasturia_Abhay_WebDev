@@ -13,6 +13,7 @@
         vm.pid = $routeParams.pid;
         vm.getSafeHTML = getSafeHTML;
         vm.getSafeURL = getSafeURL;
+        vm.reorderWidget=reorderWidget;
 
         function init() {
             WidgetService
