@@ -41,7 +41,7 @@ module.exports = function(){
             .find({"_page": pid})
             .then(
                 function (widgets) {
-                    newWidget.order = widgets.length + 1;
+                    newWidget.order = widgets.length ;
                     return Widget.create(newWidget);
                 },
                 function (error) {
