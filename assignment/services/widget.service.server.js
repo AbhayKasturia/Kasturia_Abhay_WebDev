@@ -35,7 +35,7 @@ module.exports = function(app, models) {
                 function(widget) {
                     widget.url= "/uploads/"+filename;
                     widgetModel
-                        .updateWidget(id, widget)
+                        .updateWidget(widgetId, widget)
                         .then(
                             function(widget) {
                                 console.log(widget);
