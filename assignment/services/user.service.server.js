@@ -30,6 +30,16 @@ module.exports = function(app , models) {
     app.put("/api/user/:uid", updateUser);
     app.delete("/api/user/:uid",deleteUser);
     app.post("/api/logout",logout);
+    app.get("/api/loggedin",loggedIn);
+
+    function loggedIn(req,res){
+        if(req.isAuthenticated()){  // passport function which authenticate if a user is logged in and has valid running sessions
+            res.json(req.user);
+        }
+        else {
+            res.send('0');
+        }
+    }
 
     passport.use('local', new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
