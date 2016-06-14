@@ -70,3 +70,7 @@ span.err {
     padding-top: 60px;
     padding-bottom: 10px;
 }
+
+.pointer-fix {
+    cursor: pointer;
+}

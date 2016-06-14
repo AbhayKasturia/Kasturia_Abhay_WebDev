@@ -16,6 +16,20 @@
 
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
+        vm.logout = logout;
+
+        function logout(){
+            UserService
+                .logout()
+                .then(
+                    function(response){
+                        $location.url("/login");
+                    },
+                    function(){
+                        $location.url("/login");
+                    }
+                )
+        }
 
 
         function init() {

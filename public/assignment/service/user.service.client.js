@@ -12,9 +12,24 @@
             findUserByID: findUserByID,
             updateUser: updateUser,
             createUser: createUser,
-            deleteUser: deleteUser
+            deleteUser: deleteUser,
+            login: login,
+            logout: logout
         };
+
         return api;
+
+        function logout(){
+            return $http.post("/api/logout");
+        }
+
+        function login(username,password){
+            var user = {
+                username: username,
+                password: password
+            };
+            return $http.post("/api/login",user);
+        }
 
         function createUser(newUser) {
             return $http.post("/api/user",newUser);

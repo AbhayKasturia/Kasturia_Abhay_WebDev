@@ -8,7 +8,7 @@ angular
 
 function LoginController($location , UserService) {      /* dependency injection */
     var vm= this;
-
+    
     vm.login = function(username,password) {
 
         // if(usernamevalid) {
@@ -21,7 +21,7 @@ function LoginController($location , UserService) {      /* dependency injection
         if(username && password)
         {
             UserService
-                .findUserByCredentials(username, password)
+                .login(username, password)
                 .then(function (response) {
 
                     var user = response.data;
