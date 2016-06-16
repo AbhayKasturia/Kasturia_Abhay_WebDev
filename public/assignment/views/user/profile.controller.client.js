@@ -10,7 +10,7 @@
         var vm = this;
         vm.uid = $routeParams.uid;
 
-        var id = $routeParams.uid;
+        var id = $rootScope.currentUser._id;
         /* ["id"] or ".id"*/
 
 

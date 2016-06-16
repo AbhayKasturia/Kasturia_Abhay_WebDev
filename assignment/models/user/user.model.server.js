@@ -18,10 +18,20 @@ module.exports = function(){
         deleteUser: deleteUser,
         updateUser: updateUser,
         findUserByID: findUserByID,
-        findUserByCredentials: findUserByCredentials
+        findUserByCredentials: findUserByCredentials,
+        findUserByUsername: findUserByUsername,
+        findFacebookUser: findFacebookUser
     };
 
     return api;
+
+    function findFacebookUser(id){
+        return User.findOne({"facebook.id": id});
+    }
+
+    function findUserByUsername(username){
+        return User.findOne({username: username});
+    }
 
     function findUserByID(uid){
         return User.findById(uid);

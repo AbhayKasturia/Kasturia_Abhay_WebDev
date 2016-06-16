@@ -15,7 +15,8 @@
             deleteUser: deleteUser,
             login: login,
             logout: logout,
-            loggedIn:loggedIn
+            loggedIn:loggedIn,
+            register:register
         };
 
         return api;
@@ -38,6 +39,10 @@
 
         function createUser(newUser) {
             return $http.post("/api/user",newUser);
+        }
+
+        function register(newUser) {
+            return $http.post("/api/register",newUser);
         }
 
         function deleteUser(id) {

@@ -102,10 +102,12 @@
                         var user=response.data;
                         console.log(user);
                         if(user == '0'){
+                            $rootScope.currentUser=null;
                             deferred.reject();
                             $location.url("/login");
                         }
                         else {
+                            $rootScope.currentUser=user;
                             deferred.resolve();
                         }
                     },

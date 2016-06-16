@@ -5,23 +5,10 @@ module.exports = function(app , models) {
 
     var userModel = models.userModel;
 
+    var bcrypt = require("bcrypt-nodejs");
     var passport = require('passport');
     var LocalStrategy = require('passport-local').Strategy;
-
-    var users =         [
-        {_id: "123", username: "alice",    password: "alice",    firstName: "Alice",  lastName: "Wonder"  },
-        {_id: "234", username: "bob",      password: "bob",      firstName: "Bob",    lastName: "Marley"  },
-        {_id: "345", username: "charly",   password: "charly",   firstName: "Charly", lastName: "Garcia"  },
-        {_id: "456", username: "jannunzi", password: "jannunzi", firstName: "Jose",   lastName: "Annunzi" }
-    ];
-
-/*    app.get("/api/user" , getUsers);
-    app.post("/api/user" , createUser);
-    app.get("/api/user?username=username" , findUserByUsername);
-    app.get("/api/user/:uid" , findUserByID);
-    app.get("/api/user?username=username&password=password" ,findUserByCredentials);
-    app.put("/api/user/:uid" , updateUser);
-    app.delete("/api/user/:uid" , deleteUser);*/
+    var FacebookStrategy = require('passport-facebook').Strategy;
 
     app.post("/api/user", createUser);
     app.post("/api/login",passport.authenticate('local'), login);
@@ -31,6 +18,84 @@ module.exports = function(app , models) {
     app.delete("/api/user/:uid",deleteUser);
     app.post("/api/logout",logout);
     app.get("/api/loggedin",loggedIn);
+    app.post("/api/register",register);
+    app.get("/auth/facebook",passport.authenticate('facebook'), facebooklogin);
+    app.get('/auth/facebook/callback',
+        passport.authenticate('facebook', {
+            successRedirect: '/assignment/#/profile',
+            failureRedirect: '/assignment/#/login'
+        }));
+
+    function facebooklogin(token, refreshToken, profile, done){
+        userModel
+            .findFacebookUser(profile.id)
+            .then(
+                function(fbuser){
+                    if(fbuser) {
+                        return done(null, fbuser);
+                    }
+                    else {
+                        fbuser = {
+                            username: profile.displayName.replace(/ /g,' '),
+                            facebook: {
+                                token: token,
+                                id: profile.id,
+                                displayName: profile.displayName,
+                            }
+                        };
+                        userModel
+                            .createUser(fbuser)
+                            .then(
+                                function(user){
+                                    done(null,user);
+                                }
+                            );
+                    }
+                }
+            )
+        res.send(user);
+    }
+
+    function register(req,res){
+        var username = req.body.username;
+        var password = req.body.password;
+
+        userModel
+            .findUserByUsername(username)
+            .then(
+                function(user){
+                    if(user)
+                    {
+                        res.status(400).send("Username already exists");
+                        return;
+                    }
+                    else {
+                        var user = req.body
+                        user.password = bcrypt.hashSync(user.password); // this function has 2 versions and the sync version will block the thread and only continue when registered. This will block cycles of CPU and is not recommendable for more than 10 users/time for registration
+                        userModel
+                            .createUser(user);
+                    }
+                },
+                function(err){
+                    res.status(400).send(err);
+                    return;
+                }
+            )
+            .then(
+                function(user){
+                    if(user) {
+                        req.login(user,function(err){   // passport function provided to set any user to the current user - it serializes and adds them to session and cookies
+                            if(err){
+                                res.status(400).send(err);
+                            }
+                            else {
+                                res.json(user);
+                            }
+                        })
+                    }
+                }
+            )
+    }
 
     function loggedIn(req,res){
         if(req.isAuthenticated()){  // passport function which authenticate if a user is logged in and has valid running sessions
@@ -45,6 +110,13 @@ module.exports = function(app , models) {
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
 
+    var facebookConfig = {
+        clientID     : process.env.FACEBOOK_CLIENT_ID,
+        clientSecret : process.env.FACEBOOK_CLIENT_SECRET,
+        callbackURL  : process.env.FACEBOOK_CALLBACK_URL
+    };
+
+    passport.use('facebook',new FacebookStrategy(facebookConfig,facebooklogin));
 
     function localStrategy(username,password,done){
         userModel
@@ -121,13 +193,6 @@ module.exports = function(app , models) {
                     res.statusCode(404).send(error);
                 }
             );
-        // for(var i in users) {
-        //     if(users[i]._id === uid) {
-        //         res.json(users[i]);
-        //         return;
-        //     }
-        // }
-        // res.json();
     };
 
     function findUserByUsername(username, res){
@@ -155,9 +220,6 @@ module.exports = function(app , models) {
                 res.statusCode(400).send(error);
             }
         )
-
-        // // users.push(new_user);
-        // res.send(new_user);
     }
 
     function deleteUser(req, res) {
@@ -174,17 +236,6 @@ module.exports = function(app , models) {
                     res.statusCode(404).send(err);
                 }
             );
-        //
-        //
-        // for (var i in users) {
-        //     if (users[i]._id === id)
-        //     {
-        //         users.splice(i,1);
-        //         res.sendStatus(200);
-        //         return;
-        //     }
-        // }
-        // res.sendStatus(400);
     }
 
     function updateUser(req, res) {
@@ -203,15 +254,6 @@ module.exports = function(app , models) {
                 }
             );
 
-        // for (var i in users) {
-        //     if (users[i]._id === id)
-        //     {
-        //         users[i]=newUser;
-        //         res.sendStatus(200);
-        //         return;
-        //     }
-        // }
-        // res.sendStatus(400);
     }
 
     function findUserByCredentials(username, password ,req, res) {
@@ -228,15 +270,5 @@ module.exports = function(app , models) {
                     res.statusCode(400).send(err);
                 }
             );
-        //
-        // for (var i in users) {
-        //     if (users[i].username === username && users[i].password === password)
-        //     {
-        //         res.json(users[i]);
-        //         return;
-        //     }
-        // }
-        // res.json();
-        // res.sendStatus(400);
     }
 };
