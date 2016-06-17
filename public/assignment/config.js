@@ -24,6 +24,14 @@
                     controller: "RegisterController",
                     controllerAs: "model"
                 })
+                .when("/profile" , { /*added placeholder to navigate to non uid profile page*/
+                    templateUrl:"views/user/profile.view.client.html",
+                    controller: "ProfileController",
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
+                })
                 .when("/user/:uid" , { /*added placeholder to navigate to uid profile page*/
                     templateUrl:"views/user/profile.view.client.html",
                     controller: "ProfileController",
@@ -91,7 +99,7 @@
                     redirectTo: "/login"
                 });
 
-        function checkLoggedIn(UserService,$location,$q){
+        function checkLoggedIn(UserService,$location,$q,$rootScope){
             
             var deferred = $q.defer();
             

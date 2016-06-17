@@ -36,7 +36,7 @@ module.exports = function(app , models) {
                     }
                     else {
                         fbuser = {
-                            username: profile.displayName.replace(/ /g,' '),
+                            username: profile.displayName.replace(/ /g,''),
                             facebook: {
                                 token: token,
                                 id: profile.id,
@@ -53,7 +53,6 @@ module.exports = function(app , models) {
                     }
                 }
             )
-        res.send(user);
     }
 
     function register(req,res){
