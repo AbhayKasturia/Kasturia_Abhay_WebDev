@@ -1,0 +1,44 @@
+<div class ="container">
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+
+    <div class="form-group" ng-form name="myForm">
+        <h1>Register</h1>
+        <input ng-model="username" required
+               name="username"
+               class="form-control"
+               placeholder="username"
+               type="text"/>
+        <span ng-show="submitted && myForm.username.$error.required"
+              class="err">
+            *Required Field
+        </span>
+        <input ng-model="password" required
+               name="password"
+               class="form-control"
+               placeholder="password"
+               type="password"/>
+        <span ng-show="submitted && myForm.password.$error.required"
+              class="err">
+            *Required Field
+        </span>
+        <input ng-model="vpassword" required
+               name="vpassword"
+               class="form-control"
+               placeholder="verify password"
+               type="password"/>
+        <span ng-show="submitted && myForm.vpassword.$error.required"
+              class="err">
+            *Required Field
+        </span>
+    </div>
+
+    <a ng-click="model.createUser(username,password,vpassword); submitted=true"
+       class="btn btn-primary btn-block"
+       role="button">Register</a>
+    <a class="btn btn-danger btn-block" href="#/login" role="button">Cancel</a>
+
+</div>
