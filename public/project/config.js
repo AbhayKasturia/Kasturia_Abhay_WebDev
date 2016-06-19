@@ -44,9 +44,14 @@
                         loggedIn: checkLoggedIn
                     }
                 })
-                .when("/user/:uid/question" , { /*added placeholder to navigate to uid profile page*/
+                .when("/user/:uid/question" , { 
                     templateUrl:"views/questions/question-home.view.client.html",
                     controller: "QuestionHomeController",
+                    controllerAs: "model"
+                })
+                .when("/user/:uid/question/:qid", {
+                    templateUrl: "views/questions/question-interact.view.client.html",
+                    controller: "QuestionInteractController",
                     controllerAs: "model"
                 })
                 .otherwise({

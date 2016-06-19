@@ -3,23 +3,34 @@
  */
 (function(){
     angular
-        .module("WebAppMaker")
-        .factory("YahooService", YahooService);
+        .module("FindAnswers")
+        .factory("StackEService", StackEService);
 
-    var key = "dj0yJmk9TXlnUDYzdWt4UlNFJmQ9WVdrOVlYbHVhblJoTTJVbWNHbzlNQS0tJnM9Y29uc3VtZXJzZWNyZXQmeD0xMQ--";
-    var secret = "641f92f23515cb223b2f235c1541db63b9c2a180";
-    var urlBase = "http://answers.yahooapis.com/AnswersService/V1/getByCategory?appid=YahooDemo&category_id=CAT_ID";
-
-    function FlickrService($http) {
+    function StackEService($http) {
         var api = {
-            searchPhotos: searchPhotos
+            searchQuestions: searchQuestions,
+            searchQuestionByID: searchQuestionByID
         };
         return api;
 
-        function searchQuestions(searchTerm) {
-            var url = urlBase
-                .replace("appid", key)
-                .replace("CAT_ID","396545664");
+        function searchQuestionByID(qid){
+            url = "https://api.stackexchange.com/2.2/questions/{ids}/answers?order=desc&sort=activity&site=stackoverflow";
+            url = url.replace("{ids}",qid);
+
+            return $http.get(url);
+        }
+
+        function searchQuestions(searchTerm,page_number,tags) {
+
+            var url = "https://api.stackexchange.com/2.2/questions/featured?page=1&pagesize=10&order=desc&sort=activity&tagged=TAGS&site=stackoverflow";
+
+            url = url
+                .replace("page=1", "page="+page_number)
+                .replace("TAGS",tags);
+
+            if(tags === "")
+                url = url.replace("&tagged=","");
+
             return $http.get(url);
         }
     }

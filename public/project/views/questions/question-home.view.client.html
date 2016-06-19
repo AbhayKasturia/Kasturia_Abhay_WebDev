@@ -13,23 +13,41 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="container row">
     <div class="input-group">
-        <input ng-model="model.flickr.searchText" type="text" class="form-control">
+        <input ng-model="model.ques.searchText"
+               type="text"
+               class="form-control"
+               placeholder="Search your question here">
     <span class="input-group-btn">
-        <a ng-click="model.searchQuestions(model.yahoo.searchText)" class="btn btn-default" type="button">
+        <a ng-click="model.searchQuestions(model.ques.searchText,1)"
+           class="btn btn-default"
+           type="button">
             <span class="glyphicon glyphicon-search"></span>
         </a>
     </span>
     </div>
 
-    <div class="row">
-        <div class="col-xs-4" ng-repeat="photo in model.photos.photo">
-            <img ng-click="model.selectPhoto(photo)"
-                 ng-src="https://farm{{photo.farm}}.staticflickr.com/{{photo.server}}/{{photo.id}}_{{photo.secret}}_s.jpg"/>
-        </div>
+    <div class="list-group"
+         ng-repeat="question in model.questions">
+        <a href="#user/{{model.uid}}/question/{{question.question_id}}" class="list-group-item">
+            <h4 class="list-group-item-heading">{{question.title}}</h4>
+            <p class="list-group-item-text">There are <b><mark>{{question.answer_count}}</mark></b>  available for this question.</p>
+        </a>
     </div>
+
+    <ul class="pagination pull-left">
+        <li><a ng-click="model.searchQuestions(model.ques.searchText,1)">1</a></li>
+        <li><a ng-click="model.searchQuestions(model.ques.searchText,2)">2</a></li>
+        <li><a ng-click="model.searchQuestions(model.ques.searchText,3)">3</a></li>
+        <li><a ng-click="model.searchQuestions(model.ques.searchText,4)">4</a></li>
+        <li><a ng-click="model.searchQuestions(model.ques.searchText,5)">5</a></li>
+    </ul>
 </div>
+
+
+
+
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
