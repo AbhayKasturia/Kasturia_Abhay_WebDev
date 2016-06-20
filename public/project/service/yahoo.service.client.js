@@ -1,6 +1,4 @@
-/**
- * Created by Abhay on 6/5/2016.
- */
+
 (function(){
     angular
         .module("FindAnswers")

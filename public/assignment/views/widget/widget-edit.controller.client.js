@@ -45,6 +45,8 @@
                             $location.url("/user/"+vm.uid+"/website/"+vm.wid+"/page/"+vm.pid+"/widget");
                         else
                             vm.error = "Unable to delete";
+                    },function(error){
+                        vm.error = "Unable to delete";
                     });
             }
             else {

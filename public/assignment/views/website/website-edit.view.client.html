@@ -30,6 +30,7 @@
         <div class="form-group">
             <label for="name">Website Name</label>
             <input ng-model="model.website.name" required
+                   ng-class="{ 'error-when' : submitted && myForm.name.$error.required }"
                    name="name"
                    type="text"
                    class="form-control"

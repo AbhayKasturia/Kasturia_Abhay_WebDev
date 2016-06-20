@@ -61,14 +61,16 @@ a:hover {
     height: 100%;
 }
 
-input.ng-invalid {
+.error-when {
+    border: 2px red solid;
+}
+
+.error-also {
     border: 2px red solid;
 }
 
 span.err {
     color: rgba(229, 9, 9, 0.71);
-    padding-top: 60px;
-    padding-bottom: 10px;
 }
 
 .pointer-fix {

@@ -10,6 +10,7 @@
         <h1>Login</h1>
         <input name="username"
                ng-model="username" required
+               ng-class="{ 'error-when' : submitted && myForm.username.$error.required }"
                class="form-control"
                placeholder="username"
                type="text"
@@ -21,6 +22,7 @@
         </span>
         <input name="password"
                ng-model="password" required
+               ng-class="{ 'error-when' : submitted && myForm.password.$error.required }"
                class="form-control"
                placeholder="password"
                type="password"/>
@@ -32,6 +34,7 @@
     <!--<h1>{{myForm.password.$invalid}}</h1>-->
 
     <a ng-click="model.login(username,password); submitted=true"
+       type="submit"
        class="btn btn-primary btn-block"
        role="button">Login
     </a>

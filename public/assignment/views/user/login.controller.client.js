@@ -30,6 +30,9 @@ function LoginController($location , UserService) {      /* dependency injection
                         $location.url("/user/" + user._id);
                     else
                         vm.error = "User not found";
+                },
+                function (error) {
+                    vm.error = "User not found";
                 });
         }
         else

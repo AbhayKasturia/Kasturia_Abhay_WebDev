@@ -8,6 +8,7 @@
     <div class="form-group" ng-form name="myForm">
         <h1>Register</h1>
         <input ng-model="username" required
+               ng-class="{ 'error-when' : submitted && myForm.username.$error.required }"
                name="username"
                class="form-control"
                placeholder="username"
@@ -17,6 +18,7 @@
             *Required Field
         </span>
         <input ng-model="password" required
+               ng-class="{ 'error-when' : submitted && model.perror , 'error-also' : submitted && myForm.vpassword.$error.required  }"
                name="password"
                class="form-control"
                placeholder="password"
@@ -25,7 +27,12 @@
               class="err">
             *Required Field
         </span>
+        <span  ng-show="submitted && model.perror"
+              class="err">
+            *{{model.perror}}
+        </span>
         <input ng-model="vpassword" required
+               ng-class="{ 'error-when' : submitted && model.perror , 'error-also' : submitted && myForm.vpassword.$error.required}"
                name="vpassword"
                class="form-control"
                placeholder="verify password"
@@ -33,6 +40,10 @@
         <span ng-show="submitted && myForm.vpassword.$error.required"
               class="err">
             *Required Field
+        </span>
+        <span  ng-show="submitted && model.perror"
+               class="err">
+            *{{model.perror}}
         </span>
     </div>
 

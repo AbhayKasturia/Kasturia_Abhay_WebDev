@@ -1,12 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
 
-        <div ng-if="model.error"
-             class="alert alert-danger"
-             role="alert">
-            {{model.error}}
-        </div>
-
         <div class="navbar-header">
             <p class="navbar-text pull-left">
                 <a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget" class="navbar-link">
@@ -28,10 +22,18 @@
 
 
 <div class="container">
+
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+
     <form name="myForm">
         <div class="form-group">
             <label for="name">Name</label>
             <input ng-model = "model.widget.name" required
+                   ng-class="{ 'error-when' : submitted && myForm.name.$error.required }"
                    name="name"
                    type="text"
                    class="form-control"

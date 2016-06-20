@@ -43,7 +43,7 @@ module.exports = function(app , models) {
                                 displayName: profile.displayName,
                             }
                         };
-                        userModel
+                        return userModel
                             .createUser(fbuser)
                             .then(
                                 function(user){
@@ -71,7 +71,7 @@ module.exports = function(app , models) {
                     else {
                         var user = req.body
                         user.password = bcrypt.hashSync(user.password); // this function has 2 versions and the sync version will block the thread and only continue when registered. This will block cycles of CPU and is not recommendable for more than 10 users/time for registration
-                        userModel
+                        return userModel
                             .createUser(user);
                     }
                 },
@@ -119,10 +119,10 @@ module.exports = function(app , models) {
 
     function localStrategy(username,password,done){
         userModel
-            .findUserByCredentials(username, password)
+            .findUserByUsername(username)
             .then(
                 function(user){
-                    if(user)
+                    if(user && bcrypt.compareSync(password,user.password))
                         done(null,user); // only valid request
                     else
                         done(null,false); // will give an unauthenticate error

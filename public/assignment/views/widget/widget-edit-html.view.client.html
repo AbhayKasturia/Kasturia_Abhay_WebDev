@@ -10,7 +10,7 @@
                 HTML Widget Edit
             </a>
             <p class="navbar-text pull-right">
-                <a ng-click="model.updateWidget(model.widget)" class="navbar-link pull-right">
+                <a ng-click="model.updateWidget(model.widget); submitted=true" class="navbar-link pull-right">
                     <span class="glyphicon glyphicon-ok"></span>
                 </a>
             </p>
@@ -30,8 +30,18 @@
     <form name="myForm">
         <div class="form-group">
             <label for="name">Name</label>
-            <input ng-model="model.widget.name" type="text" class="form-control" id="name" placeholder="Main Page - Paragraph 2">
+            <input ng-model="model.widget.name" required
+                   ng-class="{ 'error-when' : submitted && myForm.name.$error.required }"
+                   name="name"
+                   type="text"
+                   class="form-control"
+                   id="name"
+                   placeholder="Main Page - Paragraph 2">
         </div>
+        <span ng-show="submitted && myForm.name.$error.required"
+              class="err">
+            *Required Field
+        </span>
         <label for="html">HTML</label>
         <div id="html" ng-model="model.widget.text"
              text-angular
