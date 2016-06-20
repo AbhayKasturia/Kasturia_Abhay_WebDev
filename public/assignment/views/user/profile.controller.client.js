@@ -54,7 +54,7 @@
 
         function deleteUser(){
             UserService
-                .deleteUser(vm.uid)
+                .deleteUser(id)
                 .then(
                     function(response){
                         $location.url("/login");
