@@ -7,12 +7,22 @@
     function StackEService($http) {
         var api = {
             searchQuestions: searchQuestions,
-            searchQuestionByID: searchQuestionByID
+            searchQuestionbyID: searchQuestionbyID,
+            searchAnswersByQuestionID: searchAnswersByQuestionID
         };
         return api;
 
-        function searchQuestionByID(qid){
-            url = "https://api.stackexchange.com/2.2/questions/{ids}/answers?order=desc&sort=activity&site=stackoverflow";
+        function searchQuestionbyID(qid) {
+            url = "https://api.stackexchange.com/2.2/questions/{ids}?order=desc&sort=activity&site=stackoverflow&filter=withbody";
+            url = url.replace("{ids}",qid);
+
+            return $http.get(url);
+        }
+
+
+
+        function searchAnswersByQuestionID(qid){
+            url = "https://api.stackexchange.com/2.2/questions/{ids}/answers?order=desc&sort=activity&site=stackoverflow&filter=withbody";
             url = url.replace("{ids}",qid);
 
             return $http.get(url);

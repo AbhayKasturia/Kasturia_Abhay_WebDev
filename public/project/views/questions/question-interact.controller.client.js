@@ -4,27 +4,44 @@
         .module("FindAnswers")
         .controller("QuestionInteractController",QuestionInteractController);
 
-    function QuestionInteractController($location,$routeParams,StackEService) {
+    function QuestionInteractController($sce, $location,$routeParams,StackEService) {
         var vm = this;
         vm.uid=$routeParams.uid;
         vm.qid=$routeParams.qid;
 
-        vm.searchQuestionByID = searchQuestionByID;
+        vm.searchQuestionbyID = searchQuestionbyID;
 
         function init() {
-            searchQuestionByID(vm.qid);
+            searchQuestionbyID(vm.qid);
+            searchAnswersByQuestionID(vm.qid);
         }
 
         init();
 
-        function searchQuestionByID(qid) {
+        function searchQuestionbyID(qid) {
             StackEService
-                .searchQuestionByID(qid)
+                .searchQuestionbyID(qid)
+                .then(
+                    function(response){
+                        console.log(response.data.items[0]);
+                        vm.question = response.data.items[0];
+                    }
+                )
+        }
+
+        function searchAnswersByQuestionID(qid) {
+            StackEService
+                .searchAnswersByQuestionID(qid)
                 .then(
                     function(response){
                         console.log(response);
-                        vm.question = response.data.items;
+                        vm.answers = response.data.items;
                     });
+        }
+
+        function getSafeHTML(text)
+        {
+            return $sce.trustAsHtml(text);
         }
     }
 })();
