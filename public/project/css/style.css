@@ -85,8 +85,13 @@ span.err {
 
 .list-group {
     margin: 15px;
+    padding-left: 15px;
 }
 
 .pagination {
 
+}
+
+.list-group-item-heading {
+    background-color: cornsilk;
 }

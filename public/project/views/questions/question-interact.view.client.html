@@ -1,21 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<div class="list-group">
-    <a class="list-group-item">
-        <h4 class="list-group-item-heading">{{model.question.title}}</h4>
-        <h3 class="list-group-item-heading">
-            <div ng-bind-html="model.getSafeHTML(model.question.body)"></div>
-        </h3>
-        <div ng-repeat="answer in model.answers">
-            <p class="list-group-item-text">
-                <div ng-bind-html="model.getSafeHTML(answer.body)"></div>
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <p class="navbar-text pull-left">
+                <!--<a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}" class="navbar-link">-->
+                <!--<span class="glyphicon glyphicon-menu-left"></span>-->
+                <!--</a>-->
             </p>
+            <a class="navbar-brand">
+                Find Answers
+            </a>
         </div>
-    </a>
+    </div>
+</nav>
+
+
+<div class="container">
+    {{model.user_answer}}
+
+    <div class="list-group  alert alert-danger">
+        <a class="list-group-item">
+            <h4 class="list-group-item-heading">{{model.question.title}}</h4>
+            <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(model.question.body)"></div>
+        </a>
+    </div>
+    <div class="list-group alert alert-success"  ng-repeat="answer in model.answers">
+        <a class="list-group-item">
+            <div class ="list-group-item-heading">Answered on {{answer.last_activity_date}}</div>
+            <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(answer.body)"></div>
+        </a>
+    </div>
+
+    <div text-angular
+         ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                     ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                     ['indent','outdent'],['html']]"
+         placeholder-text="Enter your answer here"
+         ng-model="model.user_answer"
+         name="user_answer">
+    </div>
+
+    <div class="form-group custom-btns btn-block">
+        <div class="btn btn-primary btn-lg" ng-click="model.saveAnswer()"> Submit </div>
+        <!--preview option-->
+        <div class="btn btn-danger btn-lg" ng-click="model.cancelAnswer()"> Cancel </div>
+    </div>
+
 </div>
-</body>
-</html>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#/user/project/{{model.uid}}">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

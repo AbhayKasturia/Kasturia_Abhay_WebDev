@@ -4,12 +4,16 @@
         .module("FindAnswers")
         .controller("QuestionInteractController",QuestionInteractController);
 
-    function QuestionInteractController($sce, $location,$routeParams,StackEService) {
+    function QuestionInteractController($sce, $location,$routeParams,StackEService,QuestionService) {
         var vm = this;
         vm.uid=$routeParams.uid;
         vm.qid=$routeParams.qid;
 
         vm.searchQuestionbyID = searchQuestionbyID;
+        vm.searchAnswersByQuestionID = searchAnswersByQuestionID;
+        vm.saveAnswer = saveAnswer;
+        vm.cancelAnswer = cancelAnswer;
+        vm.getSafeHTML = getSafeHTML;
 
         function init() {
             searchQuestionbyID(vm.qid);
@@ -18,12 +22,27 @@
 
         init();
 
+        function cancelAnswer(){
+            vm.user_answer = "";
+        }
+
+        function saveAnswer(){
+            console.log(vm.question);
+
+            QuestionService
+                .newAnswer(vm.question,vm.user_answer,vm.uid)
+                .then(
+                    function(response){
+                        init();
+                    }
+                )
+        }
+
         function searchQuestionbyID(qid) {
             StackEService
                 .searchQuestionbyID(qid)
                 .then(
                     function(response){
-                        console.log(response.data.items[0]);
                         vm.question = response.data.items[0];
                     }
                 )
@@ -34,7 +53,6 @@
                 .searchAnswersByQuestionID(qid)
                 .then(
                     function(response){
-                        console.log(response);
                         vm.answers = response.data.items;
                     });
         }
