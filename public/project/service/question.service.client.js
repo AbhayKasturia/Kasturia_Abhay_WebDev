@@ -12,16 +12,33 @@
 
     function QuestionService($http) {
         var api = {
-            newAnswer: newAnswer
+            newAnswer: newAnswer,
+            newquestion: newquestion,
+            searchQuestionByID: searchQuestionByID
         };
 
         return api;
+
+        function searchQuestionByID(qid){
+            var url = "/api/project/searchquestionbyid:qid"
+
+            return $http.get(url);
+        }
 
         function newAnswer(question, user_answer , uid) {
             var url = "/api/project/newanswer";
             var send_objects = {
                 question: question,
                 user_answer: user_answer,
+                uid: uid
+            };
+            return $http.post(url, send_objects);
+        }
+
+        function newquestion(question , uid){
+            var url = "/api/project/newquestion";
+            var send_objects = {
+                question: question,
                 uid: uid
             };
             return $http.post(url, send_objects);

@@ -49,6 +49,11 @@
                     controller: "QuestionHomeController",
                     controllerAs: "model"
                 })
+                .when("/user/:uid/question/new", {
+                    templateUrl: "views/questions/question-new.view.client.html",
+                    controller: "QuestionNewController",
+                    controllerAs: "model"
+                })
                 .when("/user/:uid/question/:qid", {
                     templateUrl: "views/questions/question-interact.view.client.html",
                     controller: "QuestionInteractController",

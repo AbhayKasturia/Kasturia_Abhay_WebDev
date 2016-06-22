@@ -9,6 +9,48 @@ module.exports = function(app , models) {
     var answerModel = models.projectAnswerModel;
     
     app.post("/api/project/newanswer", newAnswer);
+    app.post("/api/project/newquestion", newQuestion);
+    app.get("/api/project/searchquestionbyid:qid", searchQuestionByID);
+
+    function  searchQuestionByID(req,res){
+        var qid = req.params.qid;
+
+        questionModel
+            .findQuestionByID(qid)
+            .then(
+                function(question) {
+                    if(question)
+                        res.json(question);
+                    else
+                        res.statusCode(404);
+                },
+                function(error) {
+                    res.statusCode(404).send(error);
+                }
+            );
+    }
+    
+    function newQuestion(req,res){
+        var recv_objects = req.body;
+        var question = {
+            stackQuestion: false,
+            title: recv_objects.question.title,
+            text: recv_objects.question.body,
+            posted_by: recv_objects.uid
+        }
+
+        questionModel
+            .createQuestion(question)
+            .then(
+                function(new_question){
+                    res.json(new_question);
+                },
+                function(err){
+                    res.send(err);
+                }
+            )
+    }
+    
 
     function addAnswerByQuestionID(qid,new_answer,question,uid,res){
         questionModel
@@ -54,8 +96,6 @@ module.exports = function(app , models) {
                 }
             );
     }
-
-
 
     function addAnswer(question,new_answer,res){
         new_answer.question_id = question._id;

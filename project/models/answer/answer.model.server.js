@@ -33,7 +33,6 @@ module.exports = function(){
     }
 
     function createAnswer(answer){
-        console.log(answer);
         return Answer.create(answer);
     }
 
