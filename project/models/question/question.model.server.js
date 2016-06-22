@@ -29,7 +29,7 @@ module.exports = function(){
     }
 
     function findQuestionByID(qid){
-        return Question.findOne({_id: qid});
+        return Question.findOne({ _id: qid});
     }
 
     function createQuestion(question){

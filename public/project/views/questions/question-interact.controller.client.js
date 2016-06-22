@@ -60,8 +60,10 @@
                 .searchQuestionByID(qid)
                 .then(
                     function(question){
-                        if(question)
-                            vm.question = question;
+                        if(question){
+                            vm.question = question.data;
+                            vm.question.body = question.data.text;
+                        }
                     }
                 );
         }

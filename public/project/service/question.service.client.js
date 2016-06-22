@@ -20,7 +20,7 @@
         return api;
 
         function searchQuestionByID(qid){
-            var url = "/api/project/searchquestionbyid:qid"
+            var url = "/api/project/searchquestionbyid"+qid;
 
             return $http.get(url);
         }
