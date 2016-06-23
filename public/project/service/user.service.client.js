@@ -16,10 +16,16 @@
             login: login,
             logout: logout,
             loggedIn:loggedIn,
-            register:register
+            register:register,
+            searchUsersByUsername:searchUsersByUsername
         };
 
         return api;
+    
+        function searchUsersByUsername(searchText){
+            var url = "/api/searchUsers/"+searchText;
+            return $http.get(url);
+        }
 
         function loggedIn(){
             return $http.get("/api/project/loggedin");

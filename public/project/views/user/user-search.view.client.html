@@ -1,0 +1,57 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Profile
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateUser(model.user)"
+                   class="navbar-link pull-right">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container user-search">
+    <div class="input-group">
+        <input ng-model="model.searchText"
+               type="text"
+               class="form-control"
+               placeholder="Find Other Users..">
+    <span class="input-group-btn">
+        <a ng-click="model.searchUsers(model.searchText)"
+           class="btn btn-default"
+           type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+    </span>
+    </div>
+    <div ng-if="model.error"
+         class="alert alert-danger">
+        {{model.error}}
+    </div>
+    <div class="row">
+        <a href="#/user/public/{{user._id}}"
+           class="col-xs-6 thumbnail"
+           ng-repeat="user in model.users">
+            <span>
+                <div style="width:100%">{{user.username}}</div>
+            </span>
+        </a>
+    </div>
+</div>
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container-fluid">
+        <div class="navbar-footer">
+            <p class="navbar-text pull-right">
+                <a href="#/user/{{model.userId}}" class="navbar-link">
+                  <span class="glyphicon glyphicon-user">
+                  </span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>

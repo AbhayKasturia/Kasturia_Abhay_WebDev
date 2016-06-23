@@ -36,6 +36,14 @@
                         loggedIn: checkLoggedIn
                     }
                 })
+                .when("/user/search" , { /*added placeholder to navigate to uid profile page*/
+                    templateUrl:"views/user/user-search.view.client.html",
+                    controller: "UserSearchController",
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
+                })
                 .when("/user/:uid" , { /*added placeholder to navigate to uid profile page*/
                     templateUrl:"views/user/profile.view.client.html",
                     controller: "ProfileController",
@@ -47,7 +55,10 @@
                 .when("/user/public/:uid" , { /*added placeholder to navigate to uid profile page*/
                     templateUrl:"views/user/public-profile.view.client.html",
                     controller: "PublicProfileController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
                 })
                 .when("/user/:uid/question" , { 
                     templateUrl:"views/questions/question-home.view.client.html",

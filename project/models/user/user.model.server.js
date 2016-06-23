@@ -17,10 +17,18 @@ module.exports = function(){
         findUserByCredentials: findUserByCredentials,
         findUserByUsername: findUserByUsername,
         findFacebookUser: findFacebookUser,
-        findGoogleUser: findGoogleUser
+        findGoogleUser: findGoogleUser,
+        searchUsersByUsername: searchUsersByUsername
     };
 
     return api;
+
+    function searchUsersByUsername(searchtext){
+        return User.find({'$or':[
+                            {'username':{'$regex':searchtext, '$options':'i'}},
+                            {'firstName':{'$regex':searchtext, '$options':'i'}},
+                            {'lastName':{'$regex':searchtext, '$options':'i'}}]}).sort('-dateCreated');
+    }
 
     function findGoogleUser(id){
         return User.findOne({"google.id": id});

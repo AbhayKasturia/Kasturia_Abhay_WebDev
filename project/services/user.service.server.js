@@ -15,6 +15,7 @@ module.exports = function(app , models) {
     app.post("/api/project/login",passport.authenticate('local'), login);
     app.post("/api/project/logout",logout);
     app.post("/api/project/register",register);
+    app.get("/api/searchUsers/:searchtext",searchUsers)
 
     app.get("/api/project/loggedin",loggedIn);
     app.get("/auth/project/facebook",passport.authenticate('facebook'), facebooklogin);
@@ -232,7 +233,7 @@ module.exports = function(app , models) {
                         done(null,false); // will give an unauthenticate error
                 },
                 function(error){
-                    done(err);
+                     done(err);
                 }
             );
     }
@@ -368,6 +369,26 @@ module.exports = function(app , models) {
                     console.log(req.session);
                     req.session.createUser=user;
                     res.json(user);
+                },
+                function(error){
+                    res.statusCode(400).send(err);
+                }
+            );
+    }
+    
+    function searchUsers(req,res){
+        var searchtext = req.params.searchtext;
+        
+        userModel
+            .searchUsersByUsername(searchtext)
+            .then(
+                function (users) {
+                    if(users){
+                        res.json(users);
+                    }
+                    else{
+                        res.statusCode(404);
+                    }
                 },
                 function(error){
                     res.statusCode(400).send(err);
