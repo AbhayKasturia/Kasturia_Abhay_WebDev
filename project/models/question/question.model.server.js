@@ -15,10 +15,15 @@ module.exports = function(){
         updateQuestion: updateQuestion,
         findQuestionByStackID: findQuestionByStackID,
         findQuestionsByUser: findQuestionsByUser,
-        findQuestionByID:findQuestionByID
+        findQuestionByID:findQuestionByID,
+        findQuestionByText: findQuestionByText
     };
 
     return api;
+
+    function findQuestionByText(searchtext){
+        return Question.find({"body":{ "$regex": searchtext, "$options": "i"}}).sort('-dateCreated');
+    }
 
     function findQuestionByStackID(id){
         return Question.findOne({"stackoverflow.id": id});

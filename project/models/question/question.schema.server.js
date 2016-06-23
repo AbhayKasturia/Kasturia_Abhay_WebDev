@@ -8,7 +8,7 @@ module.exports = function () {
     var QuestionSchema = mongoose.Schema({
         stackQuestion: {type: Boolean, required: true},
         title: {type: String, required: true},
-        text: String,
+        body: String,
         posted_by: {type: mongoose.Schema.ObjectId, ref:"ProjectUser"},
         is_answered: {type: Boolean, required: true,default: false},
         stackoverflow: {

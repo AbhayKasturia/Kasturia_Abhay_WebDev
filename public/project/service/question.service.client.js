@@ -9,12 +9,13 @@
     angular
         .module("FindAnswers")
         .factory("QuestionService",QuestionService);   /*service and factory method for singleton - same thing but syntax different*/
-
+    
     function QuestionService($http) {
         var api = {
             newAnswer: newAnswer,
             newquestion: newquestion,
-            searchQuestionByID: searchQuestionByID
+            searchQuestionByID: searchQuestionByID,
+            searchQuestionsByText: searchQuestionsByText
         };
 
         return api;
@@ -28,9 +29,9 @@
         function newAnswer(question, user_answer , uid) {
             var url = "/api/project/newanswer";
             var send_objects = {
-                question: question,
-                user_answer: user_answer,
-                uid: uid
+                "question": question,
+                "user_answer": user_answer,
+                "uid": uid
             };
             return $http.post(url, send_objects);
         }
@@ -38,10 +39,16 @@
         function newquestion(question , uid){
             var url = "/api/project/newquestion";
             var send_objects = {
-                question: question,
-                uid: uid
+                "question": question,
+                "uid": uid
             };
             return $http.post(url, send_objects);
+        }
+
+        function searchQuestionsByText(searchText , pageno){
+            var url = "/api/project/searchquestionbytext?pageno="+pageno+"&searchtext="+searchText;
+
+            return $http.get(url);
         }
     }
 })();

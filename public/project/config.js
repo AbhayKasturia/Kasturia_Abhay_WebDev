@@ -44,6 +44,11 @@
                         loggedIn: checkLoggedIn
                     }
                 })
+                .when("/user/public/:uid" , { /*added placeholder to navigate to uid profile page*/
+                    templateUrl:"views/user/public-profile.view.client.html",
+                    controller: "PublicProfileController",
+                    controllerAs: "model"
+                })
                 .when("/user/:uid/question" , { 
                     templateUrl:"views/questions/question-home.view.client.html",
                     controller: "QuestionHomeController",

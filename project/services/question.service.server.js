@@ -11,6 +11,33 @@ module.exports = function(app , models) {
     app.post("/api/project/newanswer", newAnswer);
     app.post("/api/project/newquestion", newQuestion);
     app.get("/api/project/searchquestionbyid:qid", searchQuestionByID);
+    app.get("/api/project/searchquestionbytext",searchQuestionByText);
+
+    function searchQuestionByText(req,res){
+        var pageno = req.query.pageno;
+        var searchtext = req.query.searchtext;
+
+        questionModel
+            .findQuestionByText(searchtext)
+            .then(
+                function(questions) {
+                    if (questions) {
+                        var res_questions=[];
+                        if(questions.length >= (pageno * 10))
+                            res_questions= questions.slice(((pageno*10)-10) , ((pageno*10)+10));
+                        else if(questions.length < (pageno * 10) && questions.length > ((pageno * 10)-10))
+                            res_questions= questions.slice(((pageno*10)-10) , questions.length);
+                        else if(questions.length <= ((pageno * 10)-10))
+                            res_questions=null;
+                        res.json(res_questions);
+                    }
+                    else {
+                        res.statusCode(404);
+                    }
+                },function(error){
+                    res.statusCode(404).send(error);
+            });
+    }
 
     function  searchQuestionByID(req,res){
         var qid = req.params.qid;
@@ -35,7 +62,7 @@ module.exports = function(app , models) {
         var question = {
             stackQuestion: false,
             title: recv_objects.question.title,
-            text: recv_objects.question.body,
+            body: recv_objects.question.body,
             posted_by: recv_objects.uid
         }
 

@@ -22,6 +22,8 @@ module.exports = function () {
         lastName: String,
         email: String,
         phone: Number,
+        followed_by:[{type: mongoose.Schema.ObjectId, ref:"ProjectUser"}],
+        following:[{type: mongoose.Schema.ObjectId, ref:"ProjectUser"}],
         dob: Date,   // or this {type: Date}
         dateCreated: {type: Date, default: Date.now()}
     },{collection: "project.user"});
