@@ -1,0 +1,67 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Find Answers
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateUser(model.user)"
+                   class="navbar-link pull-right">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <ul class="nav nav-tabs">
+        <li role="presentation"><a href="#/user/{{model.uid}}/admin/question">Questions</a></li>
+        <li role="presentation"><a href="#/user/{{model.uid}}/admin/user">Answers</a></li>
+        <li role="presentation" class="active"><a>Users</a></li>
+    </ul>
+
+    <div class="container user-search">
+        <div class="input-group">
+            <input ng-model="model.searchText"
+                   type="text"
+                   class="form-control"
+                   placeholder="Find Other Users..">
+    <span class="input-group-btn">
+        <a ng-click="model.searchUsers(model.searchText)"
+           class="btn btn-default"
+           type="button">
+            <span class="glyphicon glyphicon-search"></span>
+        </a>
+    </span>
+        </div>
+        <div ng-if="model.error"
+             class="alert alert-danger">
+            {{model.error}}
+        </div>
+        <div class="row">
+            <a href="#/user/public/{{user._id}}"
+               class="col-xs-6 thumbnail"
+               ng-repeat="user in model.users">
+            <span>
+                <div style="width:100%">{{user.username}}</div>
+            </span>
+            </a>
+        </div>
+    </div>
+
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#/user/{{model.user._id}}">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

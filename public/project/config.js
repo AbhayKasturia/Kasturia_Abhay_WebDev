@@ -65,9 +65,32 @@
                     controller: "QuestionHomeController",
                     controllerAs: "model"
                 })
+                .when("/user/:uid/admin/question" , {
+                    templateUrl:"views/admin/admin-home.view.client.html",
+                    controller: "AdminHomeController",
+                    controllerAs: "model"
+                })
+                .when("/user/:uid/admin/answer" , {
+                    templateUrl:"views/admin/admin-answer.view.client.html",
+                    controller: "AdminAnswerController",
+                    controllerAs: "model"
+                })
+                .when("/user/:uid/admin/user" , {
+                    templateUrl:"views/admin/admin-user.view.client.html",
+                    controller: "UserSearchController",
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
+                })
                 .when("/user/:uid/question/new", {
                     templateUrl: "views/questions/question-new.view.client.html",
                     controller: "QuestionNewController",
+                    controllerAs: "model"
+                })
+                .when("/user/:uid/admin/question/:qid" , {
+                    templateUrl:"views/admin/admin-question.view.client.html",
+                    controller: "AdminQuestionController",
                     controllerAs: "model"
                 })
                 .when("/user/:uid/question/:qid", {

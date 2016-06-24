@@ -12,10 +12,31 @@
 
     function AnswerService($http) {
         var api = {
-            searchAnswersByQuestionID: searchAnswersByQuestionID
+            searchAnswersByQuestionID: searchAnswersByQuestionID,
+            findAllUncheckedAnswers: findAllUncheckedAnswers,
+            updateAnswer: updateAnswer,
+            deleteAnswer: deleteAnswer
         };
 
         return api;
+
+        function deleteAnswer(id) {
+            var url = "/api/project/answer/"+ id;
+
+            return $http.delete(url);
+        }
+
+        function updateAnswer(qid,newanswer){
+            var url = "/api/project/updateanswer";
+
+            return $http.post(url, newanswer);
+        }
+
+        function findAllUncheckedAnswers(){
+            var url ="/api/uncheckedanswers";
+
+            return $http.get(url);
+        }
 
         function searchAnswersByQuestionID(qid) {
             var url = "/api/project/findAnswerByQuestion";

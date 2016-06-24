@@ -26,6 +26,12 @@
        role="alert">
     {{model.error}}
   </div>
+
+  <div ng-if="model.success"
+       class="alert alert-success"
+       role="alert">
+    {{model.message}}
+  </div>
 <form>
   <div class="form-group">
     <label for="username">Username</label>
@@ -42,6 +48,22 @@
            class="form-control"
            id="email"
            placeholder="johnsnow@nightwatch.com">
+  </div>
+  <div class="form-group">
+    <label for="About">About</label>
+    <input ng-model="model.user.about"
+           type="text"
+           class="form-control"
+           id="about"
+           placeholder="One liner about yourself">
+  </div>
+  <div class="form-group">
+    <label for="Skill">Skills</label>
+    <input ng-model="model.user.skill"
+           type="text"
+           class="form-control"
+           id="skill"
+           placeholder="List of skills you may have">
   </div>
   <div class="form-group">
     <label for="first-name">First Name</label>
@@ -62,7 +84,7 @@
 </form>
 
 <a class="btn btn-primary btn-block"
-   href="#/user/{{model.user._id}}/question">Your Home Page</a>
+   ng-click="model.redirect()">Your Home Page</a>
   <a ng-click="model.deleteUser()"
      class="btn btn-danger  btn-block">
     Delete

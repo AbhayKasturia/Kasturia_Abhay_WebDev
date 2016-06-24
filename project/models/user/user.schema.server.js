@@ -25,6 +25,9 @@ module.exports = function () {
         followed_by:[{type: mongoose.Schema.ObjectId, ref:"ProjectUser"}],
         following:[{type: mongoose.Schema.ObjectId, ref:"ProjectUser"}],
         dob: Date,   // or this {type: Date}
+        about: String,
+        skill: String,
+        is_admin: {type: Boolean, required: true,default: false},
         dateCreated: {type: Date, default: Date.now()}
     },{collection: "project.user"});
 

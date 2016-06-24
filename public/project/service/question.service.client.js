@@ -15,13 +15,28 @@
             newAnswer: newAnswer,
             newquestion: newquestion,
             searchQuestionByID: searchQuestionByID,
-            searchQuestionsByText: searchQuestionsByText
+            searchQuestionsByText: searchQuestionsByText,
+            findAllUncheckedQuestions: findAllUncheckedQuestions,
+            updateQuestion: updateQuestion,
+            deleteQuestion: deleteQuestion
         };
 
         return api;
 
+        function deleteQuestion(id) {
+            var url = "/api/project/question/"+ id;
+
+            return $http.delete(url);
+        }
+
+        function updateQuestion(qid,newquestion){
+            var url = "/api/project/updatequestion";
+
+            return $http.post(url, newquestion);
+        }
+
         function searchQuestionByID(qid){
-            var url = "/api/project/searchquestionbyid"+qid;
+            var url = "/api/project/searchquestionbyid/"+qid;
 
             return $http.get(url);
         }
@@ -47,6 +62,12 @@
 
         function searchQuestionsByText(searchText , pageno){
             var url = "/api/project/searchquestionbytext?pageno="+pageno+"&searchtext="+searchText;
+
+            return $http.get(url);
+        }
+
+        function findAllUncheckedQuestions(){
+            var url ="/api/uncheckedquestions";
 
             return $http.get(url);
         }

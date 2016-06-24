@@ -14,7 +14,12 @@
     vm.following = false;
     vm.follows = false;
     vm.follow = follow;
+    vm.admin = false;
     var currentuser;
+      vm.follow=follow;
+      vm.unfollow=unfollow;
+      vm.deleteUser=deleteUser;
+      vm.makeUserAdmin=makeUserAdmin;
 
 
     function init() {
@@ -42,6 +47,7 @@
                       vm.following == true;
                     }
                   }
+                    vm.admin = currentuser.is_admin;
                 });
           });
     }
@@ -113,6 +119,38 @@
               }
           );
     }
+
+      function deleteUser(){
+          UserService
+              .deleteUser(vm.uid)
+              .then(
+              function(response){
+                  $location.url("/user/"+userId+"/admin/user");
+              },function(err){
+                  vm. error = "Something went wrong please try again";
+              }
+          );
+      }
+
+      function makeUserAdmin(){
+          if(vm.user.is_admin){
+              vm.error="User is already an Admin";
+          }
+          else{
+            vm.user.is_admin=true;
+
+
+          UserService
+              .updateUser(vm.uid,vm.user)
+              .then(
+                  function(response){
+                      $location.url("/user/"+userId+"/admin/user");
+                  },function(err){
+                      vm. error = "Something went wrong please try again";
+                  }
+              );
+          }
+      }
 
 
   }})();

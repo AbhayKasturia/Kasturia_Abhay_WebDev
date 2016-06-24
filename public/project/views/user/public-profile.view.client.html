@@ -29,23 +29,44 @@
             <h2><strong>{{model.user.followed_by.length}}</strong></h2>
             <p><small>Followers</small></p>
             <div ng-if="!model.follows && !model.ownId">
-              <button class="btn btn-success btn-block">
+              <button class="btn btn-success btn-block"
+                      ng-click="model.follow()">
                 <span class="fa fa-plus-circle"></span>
                 Follow
               </button>
             </div>
             <div ng-if="model.follows && !model.ownId">
-              <button class="btn btn-danger btn-block">
+              <button class="btn btn-danger btn-block"
+                      ng-click="model.unfollow()">
                 <span class="fa fa-minus-circle"></span>
                 UnFollow
               </button>
             </div>
           </div>
-        <div class="col-xs-12 col-sm-4 emphasis">
-            <h2><strong>{{model.user.following.length}}</strong></h2>
-            <p><small>Following</small></p>
-            <button class="btn btn-info btn-block"><span class="fa fa-user"></span> See Followings </button>
+          <div class="col-xs-12 col-sm-4 emphasis">
+              <h2><strong>{{model.user.following.length}}</strong></h2>
+              <p><small>Following</small></p>
+              <button class="btn btn-info btn-block"><span class="fa fa-user"></span> See Followings </button>
+              <div ng-if="model.admin && !model.ownId">
+                <button class="btn btn-danger btn-block"
+                        ng-click="model.deleteUser()">
+                  Delete User
+                </button>
+              </div>
+              <div ng-if="model.admin && !model.ownId">
+                <button class="btn btn-success btn-block"
+                        ng-click="model.makeUserAdmin()">
+                  Make Admin
+                </button>
+              </div>
           </div>
+
+          <div ng-if="model.following && !model.ownId">
+            <button class="btn btn-success btn-block">
+              This User follows You
+            </button>
+          </div>
+
         </div>
     </div>
   </div>

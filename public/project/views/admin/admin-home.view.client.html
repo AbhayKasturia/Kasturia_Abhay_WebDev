@@ -1,0 +1,58 @@
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">
+                Find Answers
+            </a>
+            <p class="navbar-text pull-right">
+                <a ng-click="model.updateUser(model.user)"
+                   class="navbar-link pull-right">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </a>
+            </p>
+        </div>
+    </div>
+</nav>
+<div class="container">
+
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="#">Questions</a></li>
+        <li role="presentation"><a href="#/user/{{model.uid}}/admin/answer">Answers</a></li>
+        <li role="presentation"><a href="#/user/{{model.uid}}/admin/user">Users</a></li>
+    </ul>
+
+    <div ng-if="model.error"
+         class="alert alert-danger"
+         role="alert">
+        {{model.error}}
+    </div>
+
+    <div ng-if="model.success"
+         class="alert alert-success"
+         role="alert">
+        {{model.message}}
+    </div>
+
+    <div class="list-group"
+         ng-repeat="question in model.questions">
+        <a href="#user/{{model.uid}}/admin/question/{{question._id}}" class="list-group-item">
+            <h4 class="list-group-item-heading">{{question.title}}</h4>
+            <div class="list-group-item-text" ng-bind-html="model.getSafeHTML(question.body)">
+            </div>
+        </a>
+    </div>
+
+</div>
+
+
+<nav class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <div class="navbar-footer">
+            <div class="navbar-text pull-right">
+                <a href="#/user/{{model.user._id}}">
+                    <span class="glyphicon glyphicon-user pull-right"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>

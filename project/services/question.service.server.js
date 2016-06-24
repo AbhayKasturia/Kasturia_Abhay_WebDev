@@ -10,8 +10,61 @@ module.exports = function(app , models) {
     
     app.post("/api/project/newanswer", newAnswer);
     app.post("/api/project/newquestion", newQuestion);
-    app.get("/api/project/searchquestionbyid:qid", searchQuestionByID);
+    app.get("/api/project/searchquestionbyid/:qid", searchQuestionByID);
     app.get("/api/project/searchquestionbytext",searchQuestionByText);
+    app.get("/api/uncheckedquestions",findAllUncheckedQuestions);
+    app.post("/api/project/updatequestion",updateQuestion);
+    app.delete("/api/project/question/:qid",deleteQuestion);
+
+    function deleteQuestion(req, res) {
+        var id = req.params.qid;
+
+        questionModel
+            .deleteQuestion(id)
+            .then(
+                function(stats){
+                    console.log(stats);
+                    res.send(200);
+                },
+                function(error){
+                    res.statusCode(404).send(err);
+                }
+            );
+    }
+
+    function updateQuestion(req,res){
+        var newquestion = req.body;
+
+        questionModel
+            .updateQuestion(newquestion._id , newquestion)
+            .then(
+                function(question){
+                    if(question){
+                        res.json(question);
+                    }
+                    else
+                        res.sendStatus(404);
+                },function(err){
+                    res.statusCode(400).send(error);
+                }
+            );
+    }
+    
+    function findAllUncheckedQuestions(req,res){
+        questionModel
+            .findAllUncheckedQuestions()
+            .then(
+                function(questions){
+                    if(questions){
+                        res.json(questions);
+                    }
+                    else
+                        res.statusCode(404);
+                },function(err){
+                    res.statusCode(400).send(error);
+                }
+            );
+    }
 
     function searchQuestionByText(req,res){
         var pageno = req.query.pageno;

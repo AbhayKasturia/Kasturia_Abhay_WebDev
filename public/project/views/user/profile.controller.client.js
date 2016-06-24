@@ -17,6 +17,14 @@
         vm.updateUser = updateUser;
         vm.deleteUser = deleteUser;
         vm.logout = logout;
+        vm.redirect=redirect;
+        
+        function redirect(){
+            if(vm.user.is_admin)
+                $location.url("/user/"+vm.user._id+"/admin/question");
+            else
+                $location.url("/user/"+vm.user._id+"/question");
+        }
 
         function logout(){
             UserService
@@ -36,6 +44,9 @@
                 .findUserByID(id)
                 .then(function (response) {
                     vm.user = response.data;
+                    if(vm.user && vm.user.is_admin){
+                        vm.message = "Admin Profile Page";
+                    }
                 });
         }
 

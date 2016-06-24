@@ -16,10 +16,15 @@ module.exports = function(){
         findQuestionByStackID: findQuestionByStackID,
         findQuestionsByUser: findQuestionsByUser,
         findQuestionByID:findQuestionByID,
-        findQuestionByText: findQuestionByText
+        findQuestionByText: findQuestionByText,
+        findAllUncheckedQuestions: findAllUncheckedQuestions
     };
 
     return api;
+
+    function findAllUncheckedQuestions(){
+        return Question.find({"is_checked": false}).sort('-dateCreated');
+    }
 
     function findQuestionByText(searchtext){
         return Question.find({"body":{ "$regex": searchtext, "$options": "i"}}).sort('-dateCreated');

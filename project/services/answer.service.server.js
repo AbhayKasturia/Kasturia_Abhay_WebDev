@@ -9,6 +9,59 @@ module.exports = function(app , models) {
     var answerModel = models.projectAnswerModel;
     
     app.get("/api/project/findAnswerByQuestion", findAnswerByQuestion);
+    app.get("/api/uncheckedanswers",findAllUncheckedAnswers);
+    app.post("/api/project/updateanswer",updateAnswer);
+    app.delete("/api/project/answer/:qid",deleteAnswer);
+
+    function deleteAnswer(req, res) {
+        var id = req.params.aid;
+
+        answerModel
+            .deleteAnswer(id)
+            .then(
+                function(stats){
+                    console.log(stats);
+                    res.send(200);
+                },
+                function(error){
+                    res.statusCode(404).send(err);
+                }
+            );
+    }
+
+    function updateAnswer(req,res){
+        var newanswer = req.body;
+
+        answerModel
+            .updateAnswer(newanswer._id , newanswer)
+            .then(
+                function(answer){
+                    if(answer){
+                        res.json(answer);
+                    }
+                    else
+                        res.sendStatus(404);
+                },function(err){
+                    res.statusCode(400).send(error);
+                }
+            );
+    }
+
+    function findAllUncheckedAnswers(req,res){
+        answerModel
+            .findAllUncheckedAnswers()
+            .then(
+                function(answers){
+                    if(answers){
+                        res.json(answers);
+                    }
+                    else
+                        res.statusCode(404);
+                },function(err){
+                    res.statusCode(400).send(error);
+                }
+            );
+    }
 
     function findAnswerByQuestion(req,res){
         var qid = req.body;
