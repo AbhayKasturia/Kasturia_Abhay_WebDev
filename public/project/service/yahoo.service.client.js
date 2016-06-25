@@ -8,7 +8,8 @@
         var api = {
             searchQuestions: searchQuestions,
             searchQuestionbyID: searchQuestionbyID,
-            searchAnswersByQuestionID: searchAnswersByQuestionID
+            searchAnswersByQuestionID: searchAnswersByQuestionID,
+            searchQuestionByText:searchQuestionByText
         };
         return api;
 
@@ -38,6 +39,15 @@
 
             if(tags === "")
                 url = url.replace("&tagged=","");
+
+            return $http.get(url);
+        }
+
+        function searchQuestionByText(searchTerm){
+            var url ="https://api.stackexchange.com/2.2/search/advanced?pagesize=100&order=desc&sort=votes&body=as&site=stackoverflow&filter=withbody"
+
+            url = url
+                .replace("body=as","body="+searchTerm);
 
             return $http.get(url);
         }

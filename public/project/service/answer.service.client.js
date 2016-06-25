@@ -39,9 +39,9 @@
         }
 
         function searchAnswersByQuestionID(qid) {
-            var url = "/api/project/findAnswerByQuestion";
+            var url = "/api/project/findAnswerByQuestion/"+qid;
 
-            return $http.get(qid);
+            return $http.get(url);
         }
     }
 })();

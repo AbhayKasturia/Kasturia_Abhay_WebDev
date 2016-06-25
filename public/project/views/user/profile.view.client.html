@@ -1,17 +1,17 @@
 <nav class="navbar navbar-default navbar-fixed-top">
-<div class="container">
-  <div class="navbar-header">
-    <a class="navbar-brand" href="#">
-      Profile
-    </a>
-    <p class="navbar-text pull-right">
-      <a ng-click="model.updateUser(model.user)"
-         class="navbar-link pull-right">
-        <span class="glyphicon glyphicon-ok"></span>
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        Profile
       </a>
-    </p>
+      <p class="navbar-text pull-right">
+        <a ng-click="model.updateUser(model.user)"
+           class="navbar-link pull-right">
+          <span class="glyphicon glyphicon-ok"></span>
+        </a>
+      </p>
+    </div>
   </div>
-</div>
 </nav>
 
 <div class="container">
@@ -32,76 +32,77 @@
        role="alert">
     {{model.message}}
   </div>
-<form>
-  <div class="form-group">
-    <label for="username">Username</label>
-    <input ng-model="model.user.username"
-           type="text"
-           class="form-control"
-           id="username"
-           placeholder="JSnow">
-  </div>
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input ng-model="model.user.email"
-           type="email"
-           class="form-control"
-           id="email"
-           placeholder="johnsnow@nightwatch.com">
-  </div>
-  <div class="form-group">
-    <label for="About">About</label>
-    <input ng-model="model.user.about"
-           type="text"
-           class="form-control"
-           id="about"
-           placeholder="One liner about yourself">
-  </div>
-  <div class="form-group">
-    <label for="Skill">Skills</label>
-    <input ng-model="model.user.skill"
-           type="text"
-           class="form-control"
-           id="skill"
-           placeholder="List of skills you may have">
-  </div>
-  <div class="form-group">
-    <label for="first-name">First Name</label>
-    <input ng-model="model.user.firstName"
-           type="text"
-           class="form-control"
-           id="first-name"
-           placeholder="John">
-  </div>
-  <div class="form-group">
-    <label for="last-name">Last Name</label>
-    <input ng-model="model.user.lastName"
-           type="text"
-           class="form-control"
-           id="last-name"
-           placeholder="Snow">
-  </div>
-</form>
+  <form>
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input ng-model="model.user.username"
+             type="text"
+             class="form-control"
+             id="username"
+             placeholder="JSnow">
+    </div>
 
-<a class="btn btn-primary btn-block"
-   ng-click="model.redirect()">Your Home Page</a>
+    <div class="form-group">
+      <label for="first-name">First Name</label>
+      <input ng-model="model.user.firstName"
+             type="text"
+             class="form-control"
+             id="first-name"
+             placeholder="John">
+    </div>
+    <div class="form-group">
+      <label for="last-name">Last Name</label>
+      <input ng-model="model.user.lastName"
+             type="text"
+             class="form-control"
+             id="last-name"
+             placeholder="Snow">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input ng-model="model.user.email"
+             type="email"
+             class="form-control"
+             id="email"
+             placeholder="johnsnow@nightwatch.com">
+    </div>
+    <div class="form-group">
+      <label for="About">About</label>
+      <input ng-model="model.user.about"
+             type="text"
+             class="form-control"
+             id="about"
+             placeholder="One liner about yourself">
+    </div>
+    <div class="form-group">
+      <label for="Skill">Skills</label>
+      <input ng-model="model.user.skill"
+             type="text"
+             class="form-control"
+             id="skill"
+             placeholder="List of skills you may have">
+    </div>
+  </form>
+
+  <a class="btn btn-primary btn-block"
+     ng-click="model.redirect()">Your Home Page</a>
   <a ng-click="model.deleteUser()"
      class="btn btn-danger  btn-block">
     Delete
   </a>
-<a ng-click="model.logout ()"
-   class="btn btn-danger  btn-block"
-   href="#/login">Logout</a>
+  <a ng-click="model.logout ()"
+     class="btn btn-danger  btn-block"
+     href="#/login">Logout</a>
 </div>
 
 <nav class="navbar navbar-default navbar-fixed-bottom">
-<div class="container">
-  <div class="navbar-footer">
-    <div class="navbar-text pull-right">
-      <a href="#/user/{{model.user._id}}">
-        <span class="glyphicon glyphicon-user pull-right"></span>
-      </a>
+  <div class="container">
+    <div class="navbar-footer">
+      <div class="navbar-text pull-right">
+        <a href="#/user/{{model.user._id}}">
+          <span class="glyphicon glyphicon-user pull-right"></span>
+        </a>
+      </div>
     </div>
   </div>
-</div>
 </nav>

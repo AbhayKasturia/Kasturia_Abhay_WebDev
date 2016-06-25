@@ -7,8 +7,8 @@ module.exports = function(app , models) {
     var questionModel = models.projectQuestionModel;
 
     var answerModel = models.projectAnswerModel;
-    
-    app.get("/api/project/findAnswerByQuestion", findAnswerByQuestion);
+
+    app.get("/api/project/findAnswerByQuestion/:qid", findAnswerByQuestion);
     app.get("/api/uncheckedanswers",findAllUncheckedAnswers);
     app.post("/api/project/updateanswer",updateAnswer);
     app.delete("/api/project/answer/:qid",deleteAnswer);
@@ -63,8 +63,12 @@ module.exports = function(app , models) {
             );
     }
 
+    function findMongoQID(qid){
+
+    }
+
     function findAnswerByQuestion(req,res){
-        var qid = req.body;
+        var qid = req.params.qid;
 
         var mongo_qid="";
 
@@ -72,37 +76,65 @@ module.exports = function(app , models) {
             .findQuestionByStackID(qid)
             .then(
                 function(question){
-                    if(question)
+                    if(question){
                         mongo_qid=question._id;
+                        answerModel
+                            .findAnswerByQuestionID(mongo_qid)
+                            .then(
+                                function(answers){
+                                    res.json(answers);
+                                },
+                                function(err){
+                                    res.json("0");
+                                }
+                            );
+                    }
+                    else{
+                        questionModel
+                            .findQuestionByID(qid)
+                            .then(
+                                function(question){
+                                    if(question){
+                                        mongo_qid=question._id;
+
+                                        answerModel
+                                            .findAnswerByQuestionID(mongo_qid)
+                                            .then(
+                                                function(answers){
+                                                    res.json(answers);
+                                                },
+                                                function(err){
+                                                    res.json("0");
+                                                }
+                                            );
+                                    }
+                                }
+                            );
+                    }
                 },
                 function(err){
-                    res.send(404);
+                    questionModel
+                        .findQuestionByID(qid)
+                        .then(
+                            function(question){
+                                if(question){
+                                    mongo_qid=question.id;
+                                }
+                                answerModel
+                                    .findAnswerByQuestionID(mongo_qid)
+                                    .then(
+                                        function(answers){
+                                            res.json(answers);
+                                        },
+                                        function(err){
+                                            res.json("0");
+                                        }
+                                    );
+                            }
+                        );
+                },function(err){
+                    res.json("0");
                 }
-            )
-
-        questionModel
-            .findQuestionByID(qid)
-            .then(
-                function(question){
-                    if(question){
-                        mongo_qid=question.id;
-                    }
-                }
-            )
-
-        if(mongo_qid === "")
-            res.json("0");
-        else
-           answerModel
-               .findAnswerByQuestionID(mongo_qid)
-               .then(
-                   function(answers){
-                       res.json(answers);
-                   },
-                   function(err){
-                       res.json("0");
-                   }
-               )
-
+            );
     }
 };

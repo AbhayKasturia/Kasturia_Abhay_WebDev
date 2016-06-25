@@ -20,6 +20,7 @@
         function init() {
             searchQuestionbyID(vm.qid);
             searchAnswersByQuestionID(vm.qid);
+            searchAnswersByQuestionIDinDB(vm.qid);
         }
 
         init();
@@ -33,11 +34,12 @@
 
             QuestionService
                 .newAnswer(vm.question,vm.user_answer,vm.uid)
-                .then(
-                    function(response){
+                .then(function(response){
                         init();
+                    },function(err){
+                        vm.error = "Error creating Answer";
                     }
-                )
+                );
         }
 
         function searchQuestionbyID(qid) {
@@ -52,7 +54,7 @@
                     },function(err){
                         searchQuestionInDB(qid);
                     }
-                )
+                );
         }
         
         function searchQuestionInDB(qid){
@@ -72,17 +74,20 @@
                 .searchAnswersByQuestionID(qid)
                 .then(
                     function(response){
-                        vm.answers.push(response.data.items);
+                        vm.answers=response.data.items;
                     });
-            
+        }
+
+        function searchAnswersByQuestionIDinDB(qid){
             AnswerService
                 .searchAnswersByQuestionID(qid)
                 .then(
-                    function(response){
-                        if(response && response!="0")
-                            vm.answers.push(response);
-                    }
-                )
+                    function(answers){
+                        if(answers && answers!="0")
+                            vm.answers=vm.answers.concat(answers.data);
+                    },function(err){
+                        vm.message = "Answer not in DB";
+                    });
         }
 
         function getSafeHTML(text)

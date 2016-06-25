@@ -88,7 +88,7 @@ span.err {
 }
 
 .pagination {
-
+    margin-bottom: 60px;
 }
 
 .list-group-item-heading {
@@ -115,6 +115,10 @@ span.err {
     margin: 100px auto;
 }
 
+img {
+    width: 100%;
+}
+
 
 @import "http://fonts.googleapis.com/css?family=Roboto:300,400,500,700";
 
@@ -125,6 +129,7 @@ hgroup h1 { font: 500 normal 1.625em "Roboto",Arial,Verdana,sans-serif; color: #
 hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; color: #2a3644; margin: 0; padding-bottom: 10px; }
 
 .search-result {word-wrap:break-word;}
+.container {word-wrap:break-word;}
 .search-result .thumbnail { border-radius: 0 !important; }
 .search-result:first-child { margin-top: 0 !important; }
 .search-result { margin-top: 20px; }

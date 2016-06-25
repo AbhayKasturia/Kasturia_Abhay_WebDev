@@ -75,14 +75,14 @@ module.exports = function(app , models) {
             .then(
                 function(questions) {
                     if (questions) {
-                        var res_questions=[];
-                        if(questions.length >= (pageno * 10))
-                            res_questions= questions.slice(((pageno*10)-10) , ((pageno*10)+10));
-                        else if(questions.length < (pageno * 10) && questions.length > ((pageno * 10)-10))
-                            res_questions= questions.slice(((pageno*10)-10) , questions.length);
-                        else if(questions.length <= ((pageno * 10)-10))
-                            res_questions=null;
-                        res.json(res_questions);
+                        // var res_questions=[];
+                        // if(questions.length >= (pageno * 10))
+                        //     res_questions= questions.slice(((pageno*10)-10) , ((pageno*10)+10));
+                        // else if(questions.length < (pageno * 10) && questions.length > ((pageno * 10)-10))
+                        //     res_questions= questions.slice(((pageno*10)-10) , questions.length);
+                        // else if(questions.length <= ((pageno * 10)-10))
+                        //     res_questions=null;
+                        res.json(questions);
                     }
                     else {
                         res.statusCode(404);

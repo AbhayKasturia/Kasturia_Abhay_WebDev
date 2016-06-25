@@ -28,12 +28,13 @@
         <hgroup class="mb20">
             <h1>Search Results</h1>
             <h2 class="lead"
-                ng-if="model.searching">Top <strong class="text-danger">10</strong> search results for <strong class="text-danger">{{model.ques.searchText}}.Powered By StackOverflow and FindAnswers.</strong></h2>
+                ng-if="model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> search results for <strong class="text-danger">{{model.ques.searchText}}.</strong></h2>
             <h2 class="lead"
-                ng-show="!model.searching">Top <strong class="text-danger">10</strong> featured Questions. <strong class="text-danger">Powered By StackOverflow and FindAnswers</strong></h2>
+                ng-show="!model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> featured Questions. </h2>
+            <strong class="text-danger">Powered By StackOverflow and FindAnswers</strong>
         </hgroup>
 
-        <section class="col-xs-12 col-sm-12 col-md-12">
+    <section class="col-xs-12 col-sm-12 col-md-12">
             <article class="search-result row"
                      ng-repeat="question in model.questions">
 
@@ -45,7 +46,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-2">
                     <ul class="meta-search">
                         <li><i class="glyphicon glyphicon-comment"></i> <span>{{question.answer_count}} answers</span></li>
-                        <li><i class="glyphicon glyphicon-calendar"></i> <span>{{question.creation_date}}</span></li>
+                        <li><i class="glyphicon glyphicon-calendar"></i> <date>{{question.creation_date | date:'mediumDate'}}</date></li>
                         <li><i class="glyphicon glyphicon-tags"></i> <span>People</span></li>
                     </ul>
                 </div>
@@ -54,24 +55,6 @@
             </article>
 
         </section>
-    <!--</div>-->
-
-    <!--<div class="list-group"-->
-         <!--ng-repeat="question in model.questions">-->
-        <!--<a href="#user/{{model.uid}}/question/{{question.question_id}}" class="list-group-item">-->
-            <!--<h4 class="list-group-item-heading">{{question.title}}</h4>-->
-            <!--<p class="list-group-item-text">-->
-                <!--<div class="col-xs-12 col-sm-12 col-md-3 list-group-item">-->
-                    <!--<ul class= "meta-search">-->
-                        <!--<li><i class="fa fa-check fa-lg" ng-if="question.is_answered">answered</i>-->
-                            <!--<i class="fa fa-comment fa-lg">{{question.answer_count}}</i>-->
-                            <!--<i class="fa fa-clock-o fa-lg">{{question.last_activity_date}}</i>-->
-                        <!--</li>-->
-                    <!--</ul>-->
-                <!--</div>-->
-            <!--</p>-->
-        <!--</a>-->
-    <!--</div>-->
 
     <a href="#/user/{{model.uid}}/question/new"
        class="btn btn-primary custom-btns">
@@ -79,11 +62,15 @@
     </a>
 
     <ul class="pagination pull-left">
-        <li><a ng-click="model.searchQuestions(model.ques.searchText,1)">1</a></li>
-        <li><a ng-click="model.searchQuestions(model.ques.searchText,2)">2</a></li>
-        <li><a ng-click="model.searchQuestions(model.ques.searchText,3)">3</a></li>
-        <li><a ng-click="model.searchQuestions(model.ques.searchText,4)">4</a></li>
-        <li><a ng-click="model.searchQuestions(model.ques.searchText,5)">5</a></li>
+        <li><a ng-click="model.paginate(1)">1</a></li>
+        <li><a ng-click="model.paginate(2)">2</a></li>
+        <li><a ng-click="model.paginate(3)">3</a></li>
+        <li><a ng-click="model.paginate(4)">4</a></li>
+        <li><a ng-click="model.paginate(5)">5</a></li>
+        <li><a ng-click="model.paginate(6)">6</a></li>
+        <li><a ng-click="model.paginate(7)">7</a></li>
+        <li><a ng-click="model.paginate(8)">8</a></li>
+        <li><a ng-click="model.paginate(9)">9</a></li>
     </ul>
 
 </div>
