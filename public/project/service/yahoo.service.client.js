@@ -30,7 +30,7 @@
 
         function searchQuestions(searchTerm,page_number,tags) {
 
-            var url = "https://api.stackexchange.com/2.2/questions/featured?page=1&pagesize=10&order=desc&sort=activity&tagged=TAGS&site=stackoverflow";
+            var url = "https://api.stackexchange.com/2.2/questions/featured?page=1&pagesize=10&order=desc&sort=activity&tagged=TAGS&site=stackoverflow&filter=withbody";
 
             url = url
                 .replace("page=1", "page="+page_number)

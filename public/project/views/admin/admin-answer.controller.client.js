@@ -14,6 +14,7 @@
         vm.uid = $routeParams.uid;
         vm.getSafeHTML = getSafeHTML;
         vm.findQuestionByID= findQuestionByID;
+        vm.qa=[];
 
         function init() {
             init_answers();
@@ -23,7 +24,7 @@
 
         function findQuestionByID(qid){
 
-            var title;
+
 
             QuestionService
                 .searchQuestionByID(qid)
@@ -33,18 +34,34 @@
                     },function(err){
                         title = "Question might have been deleted , please delete the answer as well";
                     }
-                )
+                );
 
             return (title);
         }
 
         function init_answers(){
+            var title;
+
             AnswerService
                 .findAllUncheckedAnswers()
                 .then(
                     function(answers){
                         if(answers) {
                             vm.answers = answers.data;
+                            for (var i in vm.answers){
+                                QuestionService
+                                    .searchQuestionByID((vm.answers[i].question_id))
+                                    .then(
+                                        function(question){
+                                            title = question.body.title;
+                                            vm.answers[i].question_title = title;
+                                        },function(err){
+                                            title = "Question might have been deleted , please delete the answer as well";
+                                            vm.answers[i].question_title = title;
+                                        }
+                                    );
+
+                            }
                         }
                         else
                             vm.message = "There are no answers for review now, check back later";

@@ -1,4 +1,15 @@
-<div class ="container">
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                Login
+            </a>
+        </div>
+    </div>
+</nav>
+
+
+<div class ="container pad-center">
     <!--ng-show: Shows if the array has at least one element ng-if: the div is not part of the DOM and is added dynamically if it's true-->
     <div ng-if="model.error"
          class="alert alert-danger"
@@ -7,9 +18,9 @@
     </div>
 
     <div class="form-group" ng-form name="myForm">
-        <h1>Login</h1>
         <input name="username"
                ng-model="username" required
+               ng-class="{ 'error-when' : submitted && myForm.username.$error.required }"
                class="form-control"
                placeholder="username"
                type="text"
@@ -21,6 +32,7 @@
         </span>
         <input name="password"
                ng-model="password" required
+               ng-class="{ 'error-when' : submitted && myForm.password.$error.required }"
                class="form-control"
                placeholder="password"
                type="password"/>
@@ -28,27 +40,19 @@
                 class="err">
             *Required Field
         </span>
-    <!--<h1>{{myForm.username.$invalid}}</h1>-->
-    <!--<h1>{{myForm.password.$invalid}}</h1>-->
-
-    <a ng-click="model.login(username,password); submitted=true"
-       class="btn btn-primary btn-block"
-       role="button">Login
-    </a>
+        <a ng-click="model.login(username,password); submitted=true"
+           class="btn btn-primary btn-block"
+           role="button">Login
+        </a>
         <a class="btn btn-success btn-block"
-       href="#/register"
-       role="button">Register
-    </a>
-        <a href="/auth/project/facebook"
-           class="btn btn-social btn-block btn-facebook"
-           role="button">
-            <span class="fa fa-facebook-official"></span>Sign in with Facebook
+           href="#/register"
+           role="button">Register
         </a>
         <a href="/auth/project/google"
-           class="btn btn-social btn-block btn-google"
+           class="btn btn-danger btn-block"
            role="button">
             <span class="fa fa-google-plus">
-            </span>Sign in with Google
+            </span>  Sign in with Google
         </a>
     </div>
 </div>

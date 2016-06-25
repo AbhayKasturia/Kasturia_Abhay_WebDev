@@ -10,14 +10,7 @@ function LoginController($location , UserService) {      /* dependency injection
     var vm= this;
     
     vm.login = function(username,password) {
-
-        // if(usernamevalid) {
-        //     vm.error = "Please enter the username"
-        // }
-        // else if (passwordvalid) {
-        //     vm.error = "Please enter the password"
-        // }
-        // else {
+        
         if(username && password)
         {
             UserService
@@ -30,6 +23,9 @@ function LoginController($location , UserService) {      /* dependency injection
                         $location.url("/user/" + user._id);
                     else
                         vm.error = "User not found";
+                },
+                function (error) {
+                    vm.error = "User not found";
                 });
         }
         else

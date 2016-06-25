@@ -4,12 +4,11 @@
         .module("FindAnswers")
         .controller("QuestionHomeController",QuestionHomeController);
 
-    function QuestionHomeController($location,$routeParams,StackEService,QuestionService) {
+    function QuestionHomeController($location,$sce,$filter,$routeParams,StackEService,QuestionService) {
         var vm = this;
         vm.uid=$routeParams.uid;
-        // vm.wid=$routeParams.wid;
-        // vm.pid=$routeParams.pid;
-        // vm.wgid=$routeParams.wgid;
+        vm.getSafeHTML = getSafeHTML;
+        vm.searching=false;
 
         vm.searchFeaturedQuestions = searchFeaturedQuestions;
         vm.searchQuestions = searchQuestions;
@@ -30,6 +29,7 @@
                     .then(
                         function(questions){
                             vm.questions = questions.data;
+                            vm.searching = true;
                         }
                     )
                 
@@ -58,6 +58,13 @@
                         console.log(response);
                          vm.questions = response.data.items;
                     });
+        }
+
+        function getSafeHTML(text)
+        {
+            var content = $filter('limitTo')(text, 150);
+            content.concat("<p>...a..</p>");
+            return  $sce.trustAsHtml(content);
         }
     }
 })();

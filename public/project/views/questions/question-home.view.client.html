@@ -1,11 +1,6 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <p class="navbar-text pull-left">
-                <!--<a href="#/user/{{model.uid}}/website/{{model.wid}}/page/{{model.pid}}/widget/{{model.wgid}}" class="navbar-link">-->
-                  <!--<span class="glyphicon glyphicon-menu-left"></span>-->
-                <!--</a>-->
-            </p>
             <a class="navbar-brand">
                 Find Answers
             </a>
@@ -13,7 +8,7 @@
     </div>
 </nav>
 
-<div class="container row">
+<div class="col-md-10 col-md-offset-1">
     <div class="input-group">
         <input ng-model="model.ques.searchText"
                type="text"
@@ -28,13 +23,55 @@
     </span>
     </div>
 
-    <div class="list-group"
-         ng-repeat="question in model.questions">
-        <a href="#user/{{model.uid}}/question/{{question.question_id}}" class="list-group-item">
-            <h4 class="list-group-item-heading">{{question.title}}</h4>
-            <p class="list-group-item-text">There are <b><mark>{{question.answer_count}}</mark></b>  available for this question.</p>
-        </a>
-    </div>
+    <!--<div class="container">-->
+
+        <hgroup class="mb20">
+            <h1>Search Results</h1>
+            <h2 class="lead"
+                ng-if="model.searching">Top <strong class="text-danger">10</strong> search results for <strong class="text-danger">{{model.ques.searchText}}.Powered By StackOverflow and FindAnswers.</strong></h2>
+            <h2 class="lead"
+                ng-show="!model.searching">Top <strong class="text-danger">10</strong> featured Questions. <strong class="text-danger">Powered By StackOverflow and FindAnswers</strong></h2>
+        </hgroup>
+
+        <section class="col-xs-12 col-sm-12 col-md-12">
+            <article class="search-result row"
+                     ng-repeat="question in model.questions">
+
+                <div class="col-xs-12 col-sm-12 col-md-10 excerpet">
+                    <h3><a href="#user/{{model.uid}}/question/{{question.question_id}}" title="">Q. {{question.title}}</a></h3>
+
+                        <div ng-bind-html="model.getSafeHTML(question.body)"></div><span>.....</span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <ul class="meta-search">
+                        <li><i class="glyphicon glyphicon-comment"></i> <span>{{question.answer_count}} answers</span></li>
+                        <li><i class="glyphicon glyphicon-calendar"></i> <span>{{question.creation_date}}</span></li>
+                        <li><i class="glyphicon glyphicon-tags"></i> <span>People</span></li>
+                    </ul>
+                </div>
+                <span class="clearfix borda"></span>
+                <hr>
+            </article>
+
+        </section>
+    <!--</div>-->
+
+    <!--<div class="list-group"-->
+         <!--ng-repeat="question in model.questions">-->
+        <!--<a href="#user/{{model.uid}}/question/{{question.question_id}}" class="list-group-item">-->
+            <!--<h4 class="list-group-item-heading">{{question.title}}</h4>-->
+            <!--<p class="list-group-item-text">-->
+                <!--<div class="col-xs-12 col-sm-12 col-md-3 list-group-item">-->
+                    <!--<ul class= "meta-search">-->
+                        <!--<li><i class="fa fa-check fa-lg" ng-if="question.is_answered">answered</i>-->
+                            <!--<i class="fa fa-comment fa-lg">{{question.answer_count}}</i>-->
+                            <!--<i class="fa fa-clock-o fa-lg">{{question.last_activity_date}}</i>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</div>-->
+            <!--</p>-->
+        <!--</a>-->
+    <!--</div>-->
 
     <a href="#/user/{{model.uid}}/question/new"
        class="btn btn-primary custom-btns">
@@ -54,12 +91,12 @@
 <nav class="navbar navbar-default navbar-fixed-bottom">
     <div class="container">
         <div class="navbar-footer">
-            <div class="navbar-text pull-right">
+            <div class="navbar-text">
                 <a href="#/user/{{model.uid}}">
                     <span class="glyphicon glyphicon-user pull-right"></span>
                 </a>
                 <a href="#/user/public/{{model.uid}}">
-                    <span class="fa fa-users pull-right"></span>
+                    <span class="fa fa-users pull-left"></span>
                 </a>
             </div>
         </div>
