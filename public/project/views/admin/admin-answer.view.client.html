@@ -36,8 +36,7 @@
     <div class="list-group"
          ng-repeat="answer in model.answers">
         <a href="#user/{{model.uid}}/admin/question/{{question._id}}" class="list-group-item">
-            answer.question_id
-
+            {{answer.question_title}}
             <p>A.</p><div class="list-group-item-text" ng-bind-html="model.getSafeHTML(answer.body)">
             </div>
         </a>

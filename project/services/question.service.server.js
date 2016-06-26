@@ -7,7 +7,7 @@ module.exports = function(app , models) {
     var questionModel = models.projectQuestionModel;
 
     var answerModel = models.projectAnswerModel;
-    
+
     app.post("/api/project/newanswer", newAnswer);
     app.post("/api/project/newquestion", newQuestion);
     app.get("/api/project/searchquestionbyid/:qid", searchQuestionByID);
@@ -49,7 +49,7 @@ module.exports = function(app , models) {
                 }
             );
     }
-    
+
     function findAllUncheckedQuestions(req,res){
         questionModel
             .findAllUncheckedQuestions()
@@ -89,7 +89,7 @@ module.exports = function(app , models) {
                     }
                 },function(error){
                     res.statusCode(404).send(error);
-            });
+                });
     }
 
     function  searchQuestionByID(req,res){
@@ -109,7 +109,7 @@ module.exports = function(app , models) {
                 }
             );
     }
-    
+
     function newQuestion(req,res){
         var recv_objects = req.body;
         var question = {
@@ -130,7 +130,7 @@ module.exports = function(app , models) {
                 }
             )
     }
-    
+
 
     function addAnswerByQuestionID(qid,new_answer,question,uid,res){
         questionModel
@@ -163,18 +163,35 @@ module.exports = function(app , models) {
             answered_by: uid
         };
 
-        questionModel
-            .findQuestionByStackID(question.question_id)
-            .then(
-                function(res_question){
-                    if(res_question){
-                        addAnswer(res_question,new_answer);
+        if(question.question_id)
+        {
+            questionModel
+                .findQuestionByStackID(question.question_id)
+                .then(
+                    function(res_question){
+                        if(res_question){
+                            addAnswer(res_question,new_answer,res);
+                        }
+                        else{
+                            addAnswerByQuestionID(question.question_id,new_answer,question,uid,res);
+                        }
                     }
-                    else{
-                        addAnswerByQuestionID(question.question_id,new_answer,question,uid);
+                );
+        }
+        else {
+            questionModel
+                .findQuestionByID(question._id)
+                .then(
+                    function(res_question){
+                        if(res_question){
+                            addAnswer(res_question,new_answer,res);
+                        }
+                        else{
+                            addAnswerByQuestionID(question.question_id,new_answer,question,uid,res);
+                        }
                     }
-                }
-            );
+                );
+        }
     }
 
     function addAnswer(question,new_answer,res){

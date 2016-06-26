@@ -15,6 +15,10 @@
         vm.getSafeHTML = getSafeHTML;
         vm.findQuestionByID= findQuestionByID;
         vm.qa=[];
+        var q_answers=[];
+
+        vm.init_questions = init_questions;
+        vm.answers= [];
 
         function init() {
             init_answers();
@@ -47,21 +51,8 @@
                 .then(
                     function(answers){
                         if(answers) {
-                            vm.answers = answers.data;
-                            for (var i in vm.answers){
-                                QuestionService
-                                    .searchQuestionByID((vm.answers[i].question_id))
-                                    .then(
-                                        function(question){
-                                            title = question.body.title;
-                                            vm.answers[i].question_title = title;
-                                        },function(err){
-                                            title = "Question might have been deleted , please delete the answer as well";
-                                            vm.answers[i].question_title = title;
-                                        }
-                                    );
-
-                            }
+                            q_answers = answers.data;
+                            init_questions();
                         }
                         else
                             vm.message = "There are no answers for review now, check back later";
@@ -69,6 +60,28 @@
                         vm.error = "There was some error retrieving answers , check back later";
                     }
                 );
+        }
+
+        function init_questions(){
+            if(q_answers.length >0)
+            {
+                var answer = q_answers.pop();
+                QuestionService
+                    .searchQuestionByID(answer.question_id)
+                    .then(
+                        function(question){
+                            var title = question.data.title;
+                            answer.question_title = title;
+                            vm.answers.push(answer);
+                            init_questions();
+                        },function(err){
+                            var title = "Question might have been deleted , please delete the answer as well";
+                            answer.question_title = title;
+                            vm.answers.push(answer);
+                            init_questions();
+                        }
+                    );
+            }
         }
 
         function getSafeHTML(text)

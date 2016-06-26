@@ -33,14 +33,45 @@
         {{model.message}}
     </div>
 
-    <div class="list-group"
-         ng-repeat="question in model.questions">
-        <a href="#user/{{model.uid}}/admin/question/{{question._id}}" class="list-group-item">
-            <h4 class="list-group-item-heading">{{question.title}}</h4>
-            <div class="list-group-item-text" ng-bind-html="model.getSafeHTML(question.body)">
+    <hgroup class="mb20">
+        <h2 class="lead"
+            ng-show="!model.searching"><strong class="text-danger">{{model.questions.length}}</strong> Questions to be reviewed. </h2>
+        <strong class="text-danger">Posted on FindAnswers</strong>
+    </hgroup>
+
+    <section class="col-xs-12 col-sm-12 col-md-12">
+        <article class="search-result row jga-widget"
+                 ng-repeat="question in model.questions">
+                <div class="col-xs-12 col-sm-12 col-md-10 excerpet">
+                    <h3><a href="#user/{{model.uid}}/admin/question/{{question._id}}" title="">Q. {{question.title}}</a></h3>
+
+                    <div ng-bind-html="model.getSafeHTML(question.body)"></div><span></span>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-2">
+                    <ul class="meta-search">
+                        <li><i class="glyphicon glyphicon-comment"></i> <span>{{question.answers.length}} answers</span></li>
+                        <li><i class="glyphicon glyphicon-calendar"></i> <date>{{question.dateCreated | date:'mediumDate'}}</date></li>
+                        <li><i class="glyphicon glyphicon-tags"></i> <span>People</span></li>
+                    </ul>
+                </div>
+            <div class="jga-widget-tool">
+                <span class="fa fa-check-circle fa-2x"></span>
+                <span class="fa fa-times-circle fa-2x"></span>
             </div>
-        </a>
-    </div>
+            <span class="clearfix borda"></span>
+            <hr>
+        </article>
+
+    </section>
+
+    <!--<div class="list-group"-->
+    <!--ng-repeat="question in model.questions">-->
+    <!--<a href="#user/{{model.uid}}/admin/question/{{question._id}}" class="list-group-item">-->
+    <!--<h4 class="list-group-item-heading">{{question.title}}</h4>-->
+    <!--<div class="list-group-item-text" ng-bind-html="model.getSafeHTML(question.body)">-->
+    <!--</div>-->
+    <!--</a>-->
+    <!--</div>-->
 
 </div>
 

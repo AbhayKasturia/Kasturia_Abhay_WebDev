@@ -25,7 +25,7 @@
                     function(question){
                         if(question)
                         {
-                            $location.url("/user/"+vm.uid+"/question/"+question._id);
+                            $location.url("/user/"+vm.uid+"/question/"+question.data._id);
                         }
                         else{
                             vm.error = "Cannot create question , please try again";

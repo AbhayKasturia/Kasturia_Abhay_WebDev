@@ -1,0 +1,96 @@
+<nav class="navbar navbar-default navbar-fixed-top navbar-home">
+    <div class="container">
+        <div class="navbar-header">
+            <a class="navbar-brand">
+                Find Answers
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="home">
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+        <!-- First slide -->
+        <div class="item active deepskyblue">
+
+            <div class="carousel-caption">
+                <h3>
+                    Welcome to FindAnswers
+                </h3>
+                <h5>
+                    *Powered by StackOverflow and FindAnswers
+                </h5>
+                <button ng-click="model.login()" class="btn btn-primary btn-lg">Login</button>
+            </div>
+        </div>
+
+        <!-- Second slide -->
+        <div class="item skyblue">
+            <div class="carousel-caption">
+                <h3 class="icon-container">
+                    <span class="glyphicon glyphicon-question-sign"></span>
+                </h3>
+                <h4>
+                    Question on your mind ?
+                </h4>
+                <h5>
+                    Search already answered questions.
+                </h5>
+                <p>OR</p>
+                <h5>
+                    Post your own question.
+                </h5>
+                <button ng-click="model.login()" class="btn btn-success btn-lg">Register</button>
+            </div>
+        </div><!-- /.item -->
+
+        <!-- Third slide -->
+        <div class="item darkerskyblue">
+            <div class="carousel-caption">
+                <h3 class="icon-container" data-animation="animated zoomInLeft">
+                    <span class="fa fa-users"></span>
+                </h3>
+                <h4>
+                    Follow other users with similar skills and interests
+                </h4>
+                <h5>
+                    Answer questions asked by other users.
+                </h5>
+                <button ng-click="model.login()" class="btn btn-danger btn-lg">Sign in with Google</button>
+            </div>
+        </div><!-- /.item -->
+
+    </div><!-- /.carousel-inner -->
+
+    <a class="left carousel-control"
+       href=""
+       ng-click="model.slide('prev')"
+       role="button"
+       data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+    </a>
+    <a class="right carousel-control"
+       href=""
+       ng-click="model.slide('next')"
+       role="button"
+       data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+    </a>
+
+</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <img src="../../../images/logo_with_name.png">
+                <p>Find Answers is about building a forum driven by a hunger to find answers to unsolved problems and questions.</p>
+            </div>
+        </div>
+    </div>
+
+</div>

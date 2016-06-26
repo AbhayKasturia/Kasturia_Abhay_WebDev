@@ -4,11 +4,12 @@
         .module("FindAnswers")
         .controller("QuestionInteractController",QuestionInteractController);
 
-    function QuestionInteractController($sce, $location,$routeParams,StackEService,QuestionService,AnswerService) {
+    function QuestionInteractController($sce, $location,$routeParams,StackEService,QuestionService,AnswerService,UserService) {
         var vm = this;
         vm.uid=$routeParams.uid;
         vm.qid=$routeParams.qid;
         vm.answers=[];
+        var answers=[];
 
         vm.searchQuestionbyID = searchQuestionbyID;
         vm.searchAnswersByQuestionID = searchAnswersByQuestionID;
@@ -47,8 +48,10 @@
                 .searchQuestionbyID(qid)
                 .then(
                     function(response){
-                        if(response)
+                        if(response){
                             vm.question = response.data.items[0];
+                            vm.question.asked_by="StackOverflow";
+                        }
                         else
                             searchQuestionInDB(qid);
                     },function(err){
@@ -64,6 +67,13 @@
                     function(question){
                         if(question){
                             vm.question = question.data;
+                            UserService
+                                .findUserByID(vm.question.posted_by)
+                                .then(
+                                    function(user){
+                                        vm.question.asked_by=user.data.username;
+                                    }
+                                )
                         }
                     }
                 );
@@ -83,11 +93,35 @@
                 .searchAnswersByQuestionID(qid)
                 .then(
                     function(answers){
-                        if(answers && answers!="0")
+                        if(answers && answers!="0"){
                             vm.answers=vm.answers.concat(answers.data);
+                            answers = vm.answers;
+                            vm.asnwers=[];
+                            init_asked_by();
+                        }
                     },function(err){
                         vm.message = "Answer not in DB";
                     });
+        }
+
+        function init_asked_by(){
+            if(answers.length >0)
+            {
+                var answer = answers.pop();
+                UserService
+                    .findUserByID(answer.answered_by)
+                    .then(
+                        function(user){
+                            answer.asked_by = user.data.username;
+                            vm.answers.push(answer);
+                            init_asked_by();
+                        },function(err){
+                            answer.asked_by = "StackOverflow";
+                            vm.answers.push(answer);
+                            init_asked_by();
+                        }
+                    );
+            }
         }
 
         function getSafeHTML(text)

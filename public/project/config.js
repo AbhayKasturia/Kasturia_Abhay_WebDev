@@ -6,8 +6,8 @@
     function Config($routeProvider){   /*Well know angular object in ng-modular ,  used for dependency injection*/
             $routeProvider
                 .when("/" , {
-                    templateUrl:"views/user/login.view.client.html",
-                    controller: "LoginController",
+                    templateUrl:"views/home/home-page.view.client.html",
+                    controller: "HomePageController",
                     controllerAs: "model"
                 })
                 .when("/login" , {

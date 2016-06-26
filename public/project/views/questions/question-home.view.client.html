@@ -25,53 +25,52 @@
 
     <!--<div class="container">-->
 
-        <hgroup class="mb20">
-            <h1>Search Results</h1>
-            <h2 class="lead"
-                ng-if="model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> search results for <strong class="text-danger">{{model.ques.searchText}}.</strong></h2>
-            <h2 class="lead"
-                ng-show="!model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> featured Questions. </h2>
-            <strong class="text-danger">Powered By StackOverflow and FindAnswers</strong>
-        </hgroup>
+    <hgroup class="mb20">
+        <h1>Search Results</h1>
+        <h2 class="lead"
+            ng-if="model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> search results for <strong class="text-danger">{{model.ques.searchText}}.</strong></h2>
+        <h2 class="lead"
+            ng-show="!model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> featured Questions. </h2>
+        <strong class="text-danger">Powered By StackOverflow and FindAnswers</strong>
+    </hgroup>
 
     <section class="col-xs-12 col-sm-12 col-md-12">
-            <article class="search-result row"
-                     ng-repeat="question in model.questions">
+        <article class="search-result row"
+                 ng-repeat="question in model.questions">
 
-                <div class="col-xs-12 col-sm-12 col-md-10 excerpet">
-                    <h3><a href="#user/{{model.uid}}/question/{{question.question_id}}" title="">Q. {{question.title}}</a></h3>
+            <div class="col-xs-12 col-sm-12 col-md-10 excerpet">
+                <h3><a href="#user/{{model.uid}}/question/{{question.question_id}}" title="">Q. {{question.title}}</a></h3>
 
-                        <div ng-bind-html="model.getSafeHTML(question.body)"></div><span>.....</span>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-2">
-                    <ul class="meta-search">
-                        <li><i class="glyphicon glyphicon-comment"></i> <span>{{question.answer_count}} answers</span></li>
-                        <li><i class="glyphicon glyphicon-calendar"></i> <date>{{question.creation_date | date:'mediumDate'}}</date></li>
-                        <li><i class="glyphicon glyphicon-tags"></i> <span>People</span></li>
-                    </ul>
-                </div>
-                <span class="clearfix borda"></span>
-                <hr>
-            </article>
-
-        </section>
-
-    <a href="#/user/{{model.uid}}/question/new"
-       class="btn btn-primary custom-btns">
-        Post Your Own Question
-    </a>
-
-    <ul class="pagination pull-left">
-        <li><a ng-click="model.paginate(1)">1</a></li>
-        <li><a ng-click="model.paginate(2)">2</a></li>
-        <li><a ng-click="model.paginate(3)">3</a></li>
-        <li><a ng-click="model.paginate(4)">4</a></li>
-        <li><a ng-click="model.paginate(5)">5</a></li>
-        <li><a ng-click="model.paginate(6)">6</a></li>
-        <li><a ng-click="model.paginate(7)">7</a></li>
-        <li><a ng-click="model.paginate(8)">8</a></li>
-        <li><a ng-click="model.paginate(9)">9</a></li>
-    </ul>
+                <div ng-bind-html="model.getSafeHTML(question.body)"></div><span>.....</span>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-2">
+                <ul class="meta-search">
+                    <li><i class="glyphicon glyphicon-comment"></i> <span>{{question.answer_count}} answers</span></li>
+                    <li><i class="glyphicon glyphicon-calendar"></i> <date>Asked on {{question.creation_date | date:'mediumDate'}}</date></li>
+                    <!--<li><i class="glyphicon glyphicon-tags"></i> <span>People</span></li>-->
+                </ul>
+            </div>
+            <span class="clearfix borda"></span>
+            <hr>
+        </article>
+        <a href="#/user/{{model.uid}}/question/new"
+           class="btn btn-primary custom-btns btn-block">
+            Post Your Own Question
+        </a>
+        <div class="text-center">
+            <ul class="pagination pagination-centered pagination-responsive">
+                <li><a ng-click="model.paginate(1)">1</a></li>
+                <li><a ng-click="model.paginate(2)">2</a></li>
+                <li><a ng-click="model.paginate(3)">3</a></li>
+                <li><a ng-click="model.paginate(4)">4</a></li>
+                <li><a ng-click="model.paginate(5)">5</a></li>
+                <li><a ng-click="model.paginate(6)">6</a></li>
+                <li><a ng-click="model.paginate(7)">7</a></li>
+                <li><a ng-click="model.paginate(8)">8</a></li>
+                <li><a ng-click="model.paginate(9)">9</a></li>
+            </ul>
+        </div>
+    </section>
 
 </div>
 
