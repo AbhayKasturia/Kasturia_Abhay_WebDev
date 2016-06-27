@@ -6,7 +6,7 @@
         .module("FindAnswers")
         .controller("PublicProfileController",PublicProfileController);
 
-    function PublicProfileController($location , $routeParams , UserService , $rootScope) {      /* route paramaters can be retrieved using this */
+    function PublicProfileController($location , $routeParams , UserService , $rootScope,QuestionService) {      /* route paramaters can be retrieved using this */
         var vm = this;
         vm.uid = $routeParams.uid;
         var userId = $rootScope.currentUser._id;
@@ -57,6 +57,13 @@
                                     vm.follows = false;
                             }
                             vm.admin = currentuser.is_admin;
+                            QuestionService
+                                .searchQuestionByUserID(vm.uid)
+                                .then(
+                                    function(questions){
+                                        vm.user.questions = questions.data;
+                                    }
+                                )
                         });
                 });
         }

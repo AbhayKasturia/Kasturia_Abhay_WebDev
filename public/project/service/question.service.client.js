@@ -18,10 +18,17 @@
             searchQuestionsByText: searchQuestionsByText,
             findAllUncheckedQuestions: findAllUncheckedQuestions,
             updateQuestion: updateQuestion,
-            deleteQuestion: deleteQuestion
+            deleteQuestion: deleteQuestion,
+            searchQuestionByUserID:searchQuestionByUserID
         };
 
         return api;
+
+        function searchQuestionByUserID(uid){
+            var url = "/api/project/question/user/"+ id;
+
+            return $http.get(url);
+        }
 
         function deleteQuestion(id) {
             var url = "/api/project/question/"+ id;

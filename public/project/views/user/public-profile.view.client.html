@@ -20,8 +20,8 @@
         <div class="col-sm-12">
           <div class="col-xs-12 col-sm-8">
             <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
-            <p><strong>About: </strong> Web Designer / UI. </p>
-            <p><strong>Skills: </strong>html5,java,js</p>
+            <p><strong>About: </strong>{{model.user.about}}</p>
+            <p><strong>Skills: </strong>{{model.user.skill}}</p>
           </div>
         </div>
       <div class="col-xs-12 divider text-center">
@@ -58,6 +58,23 @@
                         ng-click="model.makeUserAdmin()">
                   Make Admin
                 </button>
+              </div>
+          </div>
+          <div class="col-xs-12 col-sm-4 emphasis">
+              <h2><strong>{{model.user.questions.length}}</strong></h2>
+              <p><small>Questions Asked</small></p>
+              <button class="btn btn-info btn-block"><span class="fa fa-user"></span> See Followings </button>
+              <div ng-if="model.admin && !model.ownId">
+                  <button class="btn btn-danger btn-block"
+                          ng-click="model.deleteUser()">
+                      Delete User
+                  </button>
+              </div>
+              <div ng-if="model.admin && !model.ownId">
+                  <button class="btn btn-success btn-block"
+                          ng-click="model.makeUserAdmin()">
+                      Make Admin
+                  </button>
               </div>
           </div>
 

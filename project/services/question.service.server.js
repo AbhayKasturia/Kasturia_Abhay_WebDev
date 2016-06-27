@@ -15,6 +15,22 @@ module.exports = function(app , models) {
     app.get("/api/uncheckedquestions",findAllUncheckedQuestions);
     app.post("/api/project/updatequestion",updateQuestion);
     app.delete("/api/project/question/:qid",deleteQuestion);
+    app.get("/api/project/question/user/:uid",searchQuestionByUserID);
+    
+    function searchQuestionByUserID(req,res){
+        var uid = req.params.qid;
+        
+        questionModel
+            .searchQuestionByUserID(uid)
+            .then(
+                function(questions){
+                    res.json(questions);
+                },
+                function(error){
+                    res.statusCode(404).send(err);
+                }
+            );
+    }
 
     function deleteQuestion(req, res) {
         var id = req.params.qid;
