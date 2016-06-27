@@ -4,7 +4,7 @@
         .module("FindAnswers")
         .controller("QuestionHomeController",QuestionHomeController);
 
-    function QuestionHomeController($location,$sce,$filter,$routeParams,StackEService,QuestionService) {
+    function QuestionHomeController($location,$sce,$filter,$routeParams,StackEService,QuestionService,$window) {
         var vm = this;
         vm.uid=$routeParams.uid;
         vm.getSafeHTML = getSafeHTML;
@@ -20,12 +20,17 @@
                 searchText:null
             };
             vm.ques.searchText = "";
+            vm.ques.searchText = $window.sessionStorage.getItem("quesSearch");
+            if(vm.ques.searchText!=""){
+                searchQuestions(vm.ques.searchText, 1);
+            }
             searchFeaturedQuestions(1);
         }
 
         init();
 
         function searchQuestions(searchText , pageno) {
+            $window.sessionStorage.setItem("quesSearch",searchText);
             
             if(searchText === "")
                 searchFeaturedQuestions(pageno);

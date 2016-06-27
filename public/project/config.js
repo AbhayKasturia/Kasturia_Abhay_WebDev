@@ -63,17 +63,26 @@
                 .when("/user/:uid/question" , { 
                     templateUrl:"views/questions/question-home.view.client.html",
                     controller: "QuestionHomeController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
                 })
                 .when("/user/:uid/admin/question" , {
                     templateUrl:"views/admin/admin-home.view.client.html",
                     controller: "AdminHomeController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
                 })
                 .when("/user/:uid/admin/answer" , {
                     templateUrl:"views/admin/admin-answer.view.client.html",
                     controller: "AdminAnswerController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
                 })
                 .when("/user/:uid/admin/user" , {
                     templateUrl:"views/admin/admin-user.view.client.html",
@@ -86,17 +95,26 @@
                 .when("/user/:uid/question/new", {
                     templateUrl: "views/questions/question-new.view.client.html",
                     controller: "QuestionNewController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
                 })
                 .when("/user/:uid/admin/question/:qid" , {
                     templateUrl:"views/admin/admin-question.view.client.html",
                     controller: "AdminQuestionController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
                 })
                 .when("/user/:uid/question/:qid", {
                     templateUrl: "views/questions/question-interact.view.client.html",
                     controller: "QuestionInteractController",
-                    controllerAs: "model"
+                    controllerAs: "model",
+                    resolve: {
+                        loggedIn: checkLoggedIn
+                    }
                 })
                 .otherwise({
                     redirectTo: "/login"

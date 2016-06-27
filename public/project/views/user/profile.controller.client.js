@@ -31,6 +31,7 @@
                 .logout()
                 .then(
                     function(response){
+                        $window.sessionStorage.clear();
                         $location.url("/login");
                     },
                     function(){
