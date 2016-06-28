@@ -21,6 +21,8 @@
             };
             vm.ques.searchText = "";
             vm.ques.searchText = $window.sessionStorage.getItem("quesSearch");
+            if ($window.sessionStorage.getItem("quesSearchByUser"))
+                
             if(vm.ques.searchText!=""){
                 searchQuestions(vm.ques.searchText, 1);
             }

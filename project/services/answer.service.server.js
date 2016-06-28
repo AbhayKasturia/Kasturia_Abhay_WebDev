@@ -12,6 +12,22 @@ module.exports = function(app , models) {
     app.get("/api/uncheckedanswers",findAllUncheckedAnswers);
     app.post("/api/project/updateanswer",updateAnswer);
     app.delete("/api/project/answer/:qid",deleteAnswer);
+    app.get("/api/project/answer/user/:uid",searchAnswerByUserID);
+    
+    function searchAnswerByUserID(req , res){
+        var uid = req.params.uid;
+
+        answerModel
+            .searchAnswerByUserID(uid)
+            .then(
+                function(answers){
+                    res.json(answers);
+                },
+                function(error){
+                    res.statusCode(404).send(err);
+                }
+            );
+    }
 
     function deleteAnswer(req, res) {
         var id = req.params.aid;

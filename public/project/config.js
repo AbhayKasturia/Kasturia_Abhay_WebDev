@@ -120,32 +120,62 @@
                     redirectTo: "/login"
                 });
 
-        function checkLoggedIn(UserService,$location,$q,$rootScope){
-            
+        function checkLoggedIn(UserService,$location,$q,$rootScope,$window){
             var deferred = $q.defer();
-            
             UserService
                 .loggedIn()
                 .then(
                     function(response){
-                        var user=response.data;
-                        console.log(user);
-                        if(user == '0'){
-                            $rootScope.currentUser=null;
+                        var user = response.data;
+                        // console.log(user);
+                        if(user ==  '0'){
+                            console.log(user._id);
+                            $rootScope.currentUser = null;
+                            $window.sessionStorage.setItem("currentUser",'0');
+                            $window.sessionStorage.setItem("currentUsername",'0');
                             deferred.reject();
                             $location.url("/login");
-                        }
-                        else {
-                            $rootScope.currentUser=user;
+                        } else {
+                            console.log(user._id);
+                            $rootScope.currentUser = user;
+                            $window.sessionStorage.setItem("currentUser",user._id);
+                            $window.sessionStorage.setItem("currentUsername",user.username);
                             deferred.resolve();
                         }
                     },
-                    function(res){
+                    function(err){
                         $location.url("/login");
                     }
                 );
-            
             return deferred.promise;
         }
+
+        // function checkLoggedIn(UserService,$location,$q,$rootScope){
+        //
+        //     var deferred = $q.defer();
+        //
+        //     UserService
+        //         .loggedIn()
+        //         .then(
+        //             function(response){
+        //                 var user=response.data;
+        //                 console.log(user);
+        //                 if(user == '0'){
+        //                     $rootScope.currentUser=null;
+        //                     deferred.reject();
+        //                     $location.url("/login");
+        //                 }
+        //                 else {
+        //                     $rootScope.currentUser=user;
+        //                     deferred.resolve();
+        //                 }
+        //             },
+        //             function(res){
+        //                 $location.url("/login");
+        //             }
+        //         );
+        //
+        //     return deferred.promise;
+        // }
     }   
 })();

@@ -15,10 +15,17 @@
             searchAnswersByQuestionID: searchAnswersByQuestionID,
             findAllUncheckedAnswers: findAllUncheckedAnswers,
             updateAnswer: updateAnswer,
-            deleteAnswer: deleteAnswer
+            deleteAnswer: deleteAnswer,
+            searchAnswerByUserID:searchAnswerByUserID
         };
 
         return api;
+
+        function searchAnswerByUserID(uid) {
+            var url = "/api/project/answer/user/"+ uid;
+            console.log(url);
+            return $http.get(url);
+        }
 
         function deleteAnswer(id) {
             var url = "/api/project/answer/"+ id;

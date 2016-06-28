@@ -18,7 +18,7 @@ module.exports = function(app , models) {
     app.get("/api/project/question/user/:uid",searchQuestionByUserID);
     
     function searchQuestionByUserID(req,res){
-        var uid = req.params.qid;
+        var uid = req.params.uid;
         
         questionModel
             .searchQuestionByUserID(uid)

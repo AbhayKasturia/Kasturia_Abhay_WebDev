@@ -6,21 +6,23 @@
         .module("FindAnswers")
         .controller("PublicProfileController",PublicProfileController);
 
-    function PublicProfileController($location , $routeParams , UserService , $rootScope,QuestionService) {      /* route paramaters can be retrieved using this */
+    function PublicProfileController($location , $routeParams , UserService , $rootScope , QuestionService , AnswerService , $window) {      /* route paramaters can be retrieved using this */
         var vm = this;
         vm.uid = $routeParams.uid;
-        var userId = $rootScope.currentUser._id;
+        var userId = $window.sessionStorage.getItem("currentUser");
         vm.ownId = false;
         vm.following = false;
         vm.follows = false;
         vm.follow = follow;
         vm.admin = false;
         var currentuser;
+
         vm.follow=follow;
         vm.unfollow=unfollow;
         vm.deleteUser=deleteUser;
         vm.makeUserAdmin=makeUserAdmin;
-
+        vm.seeQuestions=seeQuestions;
+        vm.goBack=goBack;
 
         function init() {
             vm.follows = false;
@@ -44,6 +46,12 @@
                             vm.following = false;
                     }
 
+                    var date = new Date();
+
+                    var date1 = new Date(vm.user.dateCreated);
+
+                    vm.date_diff = parseInt((date.getTime()-date1.getTime())/(24*3600*1000));
+
                     UserService
                         .findUserByID(userId)
                         .then(function (response) {
@@ -62,13 +70,33 @@
                                 .then(
                                     function(questions){
                                         vm.user.questions = questions.data;
+                                        AnswerService
+                                            .searchAnswerByUserID(vm.uid)
+                                            .then(
+                                                function(answers){
+                                                    vm.user.answers = answers.data;
+                                                },function(err){
+                                                    vm.error = "Unable to fetch answers";
+                                                }
+                                            );
+                                    },function(err){
+                                        vm.error = "Unable to fetch questions and answers";
                                     }
-                                )
+                                );
                         });
                 });
         }
 
         init();
+
+        function goBack(){
+            $window.sessionStorage.setItem("quesSearchByUser",vm.uid);
+        }
+
+        function seeQuestions(){
+            $window.sessionStorage.setItem("quesSearchByUser",vm.uid);
+            $location.url("/user/"+userId+"/question");
+        }
 
         function follow(){
             vm.user.followed_by.push(userId);

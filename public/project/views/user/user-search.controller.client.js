@@ -6,11 +6,12 @@
         .module("FindAnswers")
         .controller("UserSearchController",UserSearchController);
 
-    function UserSearchController($location,$routeParams,UserService,$rootScope) {
+    function UserSearchController($location,$routeParams,UserService,$rootScope,$window) {
 
         var vm = this;
-        var userId = $rootScope.currentUser._id;
+        var userId = $window.sessionStorage.getItem("currentUser");
         vm.searchUsers = searchUsers;
+        vm.uid = userId;
 
         function init(){
             searchUsers("");

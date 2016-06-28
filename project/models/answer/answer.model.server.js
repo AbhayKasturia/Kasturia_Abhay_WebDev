@@ -16,10 +16,15 @@ module.exports = function(){
         findAnswerByQuestionID: findAnswerByQuestionID,
         findAnswersByUser: findAnswersByUser,
         findAnswerByID:findAnswerByID,
-        findAllUncheckedAnswers: findAllUncheckedAnswers
+        findAllUncheckedAnswers: findAllUncheckedAnswers,
+        searchAnswerByUserID: searchAnswerByUserID
     };
 
     return api;
+
+    function searchAnswerByUserID(uid){
+        return Answer.find({"answered_by": uid}).sort('-dateCreated');
+    }
 
     function findAllUncheckedAnswers(){
         return Answer.find({"is_checked": false}).sort('-dateCreated');

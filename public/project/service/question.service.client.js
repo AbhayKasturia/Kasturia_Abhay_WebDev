@@ -25,8 +25,8 @@
         return api;
 
         function searchQuestionByUserID(uid){
-            var url = "/api/project/question/user/"+ id;
-
+            var url = "/api/project/question/user/"+ uid;
+            console.log(url);
             return $http.get(url);
         }
 
