@@ -21,16 +21,17 @@
         <li role="presentation"><a href="#/user/{{model.uid}}/admin/user">Answers</a></li>
         <li role="presentation" class="active"><a>Users</a></li>
     </ul>
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1">
+    <div class="container">
         <div ng-if="model.error"
-             class="alert alert-danger margin-5 margin-5 margin-5">
+             class="alert alert-danger">
             {{model.error}}
         </div>
-        <div class="input-group">
-            <input ng-model="model.searchText"
-                   type="text"
-                   class="form-control"
-                   placeholder="Find Other Users..">
+    </div>
+    <div class="input-group">
+        <input ng-model="model.searchText"
+               type="text"
+               class="form-control"
+               placeholder="Find Other Users..">
     <span class="input-group-btn">
         <a ng-click="model.searchUsers(model.searchText)"
            class="btn btn-default"
@@ -38,22 +39,21 @@
             <span class="glyphicon glyphicon-search"></span>
         </a>
     </span>
-        </div>
     </div>
-    <div class="col-lg-10 col-lg-offset-1 col-md-10 col-md-offset-1"
-         ng-repeat="user in model.users">
-        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
-            <h3 class="media-heading"><strong><a href="#/user/public/{{user._id}}">{{user.firstName}} {{user.lastName}}</a></strong></h3>
-            <p>Username: <a href="#/user/public/{{user._id}}">{{user.username}}</a></p>
-        </div>
-        <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
-            <p><strong>About: </strong>{{user.about}}</p>
-            <p><strong>Skills: </strong>{{user.skill}}</p>
-        </div>
-        <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
-            <hr>
-        </div>
+<div class="container"
+     ng-repeat="user in model.users">
+    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+        <h3 class="media-heading"><strong><a href="#/user/public/{{user._id}}">{{user.firstName}} {{user.lastName}}</a></strong></h3>
+        <p>Username: <a href="#/user/public/{{user._id}}">{{user.username}}</a></p>
     </div>
+    <div class="col-lg-6 col-md-6 col-xs-12 col-sm-12">
+        <p><strong>About: </strong>{{user.about}}</p>
+        <p><strong>Skills: </strong>{{user.skill}}</p>
+    </div>
+    <div class="col-lg-12 col-md-12 col-xs-12 col-sm-12">
+        <hr>
+    </div>
+</div>
 
 </div>
 

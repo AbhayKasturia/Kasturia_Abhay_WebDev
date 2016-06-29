@@ -280,3 +280,8 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
     background-color: #ffa64d;
     margin-top: 13px;
 }
+
+.margin-horizontal-30{
+    margin-left: 30px;
+    margin-right: 30px;
+}
