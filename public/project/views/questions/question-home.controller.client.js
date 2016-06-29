@@ -10,6 +10,7 @@
         vm.getSafeHTML = getSafeHTML;
         vm.searching=false;
         vm.paginate=paginate;
+        vm.goBack=goBack;
 
         vm.searchFeaturedQuestions = searchFeaturedQuestions;
         vm.searchQuestions = searchQuestions;
@@ -19,17 +20,48 @@
             vm.ques={
                 searchText:null
             };
+            vm.userid_q_search = false;
             vm.ques.searchText = "";
             vm.ques.searchText = $window.sessionStorage.getItem("quesSearch");
             if ($window.sessionStorage.getItem("quesSearchByUser"))
-                
-            if(vm.ques.searchText!=""){
+            {
+                vm.username = $window.sessionStorage.getItem("quesSearchByUser_Username");
+                searchQuestionsByUser($window.sessionStorage.getItem("quesSearchByUser"));
+            }
+            else if(vm.ques.searchText!=""){
                 searchQuestions(vm.ques.searchText, 1);
             }
-            searchFeaturedQuestions(1);
+            else {
+                searchFeaturedQuestions(1);
+            }
         }
 
         init();
+
+        function goBack(){
+            $window.sessionStorage.removeItem("quesSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.history.back();
+        }
+
+        function searchQuestionsByUser(uid){
+            QuestionService
+                .searchQuestionByUserID(uid)
+                .then(
+                    function(questions){
+                        vm.all_questions = questions.data;
+                        for (var i in vm.all_questions){
+                            vm.all_questions[i].answer_count=vm.all_questions[i].answers.length;
+                            vm.all_questions[i].creation_date=vm.all_questions[i].dateCreated;
+                            vm.all_questions[i].question_id=vm.all_questions[i]._id;
+                        }
+                        vm.userid_q_search = true;
+                        vm.questions=vm.all_questions;
+                    },function(err){
+                        vm.error = "Unable to fetch questions and answers";
+                    }
+                );
+        }
 
         function searchQuestions(searchText , pageno) {
             $window.sessionStorage.setItem("quesSearch",searchText);

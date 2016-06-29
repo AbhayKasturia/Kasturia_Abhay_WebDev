@@ -49,6 +49,12 @@ li.list-group-item {
     opacity: 0.7;
 }
 
+.jga-widget-tool .fa-pencil {
+    position: relative;
+    color: black;
+    opacity: 0.7;
+}
+
 a:hover {
     text-decoration: none;
 }
@@ -102,6 +108,10 @@ span.err {
 
 .list-group-item-heading {
     background-color: cornsilk;
+}
+
+.no-highlight {
+    background-color: white;
 }
 
 .user-search{
@@ -170,8 +180,7 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 .search-result span.border { display: block; width: 97%; margin: 0 15px; border-bottom: 1px dotted #ccc; }
 .restrict-text {width: 100px;}
 
-.main-container {
-}
+
 .skyblue {
     background-color: #22c8ff;
 }
@@ -270,4 +279,8 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 .btn-orange{
     background-color: #ffa64d;
     margin-top: 13px;
+}
+
+.alert-danger{
+    margin: 15px;
 }

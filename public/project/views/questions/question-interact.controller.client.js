@@ -8,8 +8,6 @@
         var vm = this;
         vm.uid=$routeParams.uid;
         vm.qid=$routeParams.qid;
-        vm.answers=[];
-        var answers=[];
 
         vm.searchQuestionbyID = searchQuestionbyID;
         vm.searchAnswersByQuestionID = searchAnswersByQuestionID;
@@ -17,14 +15,45 @@
         vm.cancelAnswer = cancelAnswer;
         vm.getSafeHTML = getSafeHTML;
         vm.searchQuestionInDB = searchQuestionInDB;
+        vm.updateAnswer = updateAnswer;
+        vm.updateQuestion = updateQuestion;
 
         function init() {
+            vm.answers=[];
+            vm.temp_answers=[];
+            cancelAnswer();
             searchQuestionbyID(vm.qid);
             searchAnswersByQuestionID(vm.qid);
             searchAnswersByQuestionIDinDB(vm.qid);
         }
 
         init();
+
+        function updateAnswer(answer){
+            delete answer.asked_by;
+            AnswerService
+                .updateAnswer(answer._id,answer)
+                .then(
+                function(stats){
+                    init();
+                },function(err){
+                    vm.error="Could not update , please try again later!";
+                }
+            );
+        }
+
+        function updateQuestion(question){
+            delete question.asked_by;
+            QuestionService
+                .updateQuestion(question._id,question)
+                .then(
+                    function(stats){
+                        init();
+                    },function(err){
+                        vm.error="Could not update , please try again later!";
+                    }
+                );
+        }
 
         function cancelAnswer(){
             vm.user_answer = "";
@@ -95,30 +124,30 @@
                     function(answers){
                         if(answers && answers!="0"){
                             vm.answers=vm.answers.concat(answers.data);
-                            answers = vm.answers;
+                            vm.temp_answers = vm.answers;
                             vm.asnwers=[];
-                            init_asked_by();
+                            init_asked_by(vm.temp_answers.length);
                         }
                     },function(err){
                         vm.message = "Answer not in DB";
                     });
         }
 
-        function init_asked_by(){
-            if(answers.length >0)
+        function init_asked_by(n){
+            if(n >0)
             {
-                var answer = answers.pop();
+                var answer = vm.temp_answers[n-1];
                 UserService
                     .findUserByID(answer.answered_by)
                     .then(
                         function(user){
                             answer.asked_by = user.data.username;
                             vm.answers.push(answer);
-                            init_asked_by();
+                            init_asked_by(n-1);
                         },function(err){
                             answer.asked_by = "StackOverflow";
                             vm.answers.push(answer);
-                            init_asked_by();
+                            init_asked_by(n-1);
                         }
                     );
             }

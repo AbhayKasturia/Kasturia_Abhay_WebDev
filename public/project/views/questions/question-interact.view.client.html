@@ -21,18 +21,82 @@
             <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(model.question.body)"></div>
             <a ng-if="model.question.asked_by!='StackOverflow'" href="#/user/public/"+{{model.question.posted_by}}>Asked By: {{model.question.asked_by}}</a>
             <a ng-if="model.question.asked_by==='StackOverflow'">Powered By: Stack Overflow</a>
+            <button ng-if="model.question.posted_by === model.uid"
+                    class="btn btn-primary btn-block"
+                    data-toggle="modal" data-target="#myModal1">
+                <i class ="fa fa-pencil">Edit</i>
+            </button>
+            <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel1">Edit Question</h4>
+                        </div>
+                        <a class="list-group-item">
+                            <h4 class="list-group-item-heading">Q.{{model.question.title}}</h4>
+                            <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(model.question.body)"></div>
+                        </a>
+                        <div class="modal-body">
+                            <div text-angular
+                                 ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                                             ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                                             ['indent','outdent'],['html']]"
+                                 ng-model="model.question.body"
+                                 class="text-angular-view">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="model.updateQuestion(model.question)" data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </a>
     </div>
     <div class="list-group alert alert-info"  ng-repeat="answer in model.answers">
         <a class="list-group-item">
-            <div ng-if="model.question.asked_by!='StackOverflow'"
-                 class ="list-group-item-heading"
-                 href="#/user/public/"+{{model.answer.answered_by}}>
-                    Answered by {{answer.asked_by}}
+            <h4>Answer:</h4>
+            <div class ="list-group-item-heading no-highlight" ng-bind-html="model.getSafeHTML(answer.body)"></div>
+            <a ng-if="model.question.asked_by!='StackOverflow'"
+               href="#/user/public/"+{{model.answer.answered_by}}>
+                Answered by {{answer.asked_by}}
+            </a>
+            <a ng-if="model.question.asked_by==='StackOverflow'">Powered By: Stack Overflow</a>
+            <button ng-if="answer.answered_by === model.uid"
+                    class="btn btn-primary btn-block"
+                    data-toggle="modal" data-target="#myModal">
+                <i class ="fa fa-pencil">Edit</i>
+            </button>
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">Edit Answer</h4>
+                        </div>
+                        <a class="list-group-item">
+                            <h4 class="list-group-item-heading">Q.{{model.question.title}}</h4>
+                            <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(model.question.body)"></div>
+                        </a>
+                        <div class="modal-body">
+                            <div text-angular
+                                 ta-toolbar="[['h1','h2','h3'],['bold','italics','underline','strikeThrough'],
+                                             ['ul','ol'],['justifyLeft','justifyCenter','justifyRight','justifyFull'],
+                                             ['indent','outdent'],['html']]"
+                                 ng-model="answer.body"
+                                 name="user_answer"
+                                 class="text-angular-view">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" ng-click="model.updateAnswer(answer)" data-dismiss="modal">Save changes</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div ng-if="model.question.asked_by==='StackOverflow'"
-                 class ="list-group-item-heading">Powered By: Stack Overflow</div>
-            <div class ="list-group-item-text" ng-bind-html="model.getSafeHTML(answer.body)"></div>
         </a>
     </div>
 

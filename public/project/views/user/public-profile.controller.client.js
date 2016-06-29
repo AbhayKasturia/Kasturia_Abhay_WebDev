@@ -90,11 +90,14 @@
         init();
 
         function goBack(){
-            $window.sessionStorage.setItem("quesSearchByUser",vm.uid);
+            $window.sessionStorage.removeItem("quesSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.history.back();
         }
 
         function seeQuestions(){
             $window.sessionStorage.setItem("quesSearchByUser",vm.uid);
+            $window.sessionStorage.setItem("quesSearchByUser_Username",vm.user.username);
             $location.url("/user/"+userId+"/question");
         }
 

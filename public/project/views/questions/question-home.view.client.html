@@ -1,6 +1,12 @@
 <nav class="navbar navbar-default navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
+            <p ng-show = "model.userid_q_search" class="navbar-text pull-left">
+                <a ng-click="model.goBack()"
+                   class="navbar-link pull-right">
+                    <span class="glyphicon glyphicon-menu-left"></span>
+                </a>
+            </p>
             <a class="navbar-brand">
                 Find Answers
             </a>
@@ -31,6 +37,8 @@
             ng-if="model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> search results for <strong class="text-danger">{{model.ques.searchText}}.</strong></h2>
         <h2 class="lead"
             ng-show="!model.searching">Top <strong class="text-danger">{{model.pageno * 10}}</strong> featured Questions. </h2>
+        <h2 class="lead"
+            ng-show="model.userid_q_search">Questions asked by <strong class="text-danger">{{model.username}}</strong></h2>
         <strong class="text-danger">Powered By StackOverflow and FindAnswers</strong>
     </hgroup>
 

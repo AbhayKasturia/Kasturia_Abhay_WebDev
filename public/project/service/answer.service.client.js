@@ -33,7 +33,7 @@
             return $http.delete(url);
         }
 
-        function updateAnswer(qid,newanswer){
+        function updateAnswer(aid,newanswer){
             var url = "/api/project/updateanswer";
 
             return $http.post(url, newanswer);
