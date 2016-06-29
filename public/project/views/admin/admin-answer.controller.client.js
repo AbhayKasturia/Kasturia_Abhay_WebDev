@@ -14,13 +14,17 @@
         vm.uid = $routeParams.uid;
         vm.getSafeHTML = getSafeHTML;
         vm.findQuestionByID= findQuestionByID;
-        vm.qa=[];
-        var q_answers=[];
+
+        vm.checked = checked;
+        vm.deleteAnswer = deleteAnswer ;
 
         vm.init_questions = init_questions;
-        vm.answers= [];
+
 
         function init() {
+            vm.qa=[];
+            var q_answers=[];
+            vm.answers= [];
             init_answers();
         }
 
@@ -82,6 +86,35 @@
                         }
                     );
             }
+        }
+
+        function checked(answer){
+            answer.is_checked= true;
+            delete answer.question_title;
+
+            AnswerService
+                .updateAnswer(answer._id,answer)
+                .then(
+                    function(answer){
+                        init();
+                    },function(err){
+                        vm.error="There was error marking this answer  , please try again later";
+                    }
+                );
+        }
+
+        function deleteAnswer(answer){
+            var aid = answer._id;
+
+            AnswerService
+                .deleteAnswer(aid)
+                .then(
+                    function(response){
+                        init();
+                    },function(err){
+                        vm.error="There was error deleting this answer  , please try again later";
+                    }
+                );
         }
 
         function getSafeHTML(text)

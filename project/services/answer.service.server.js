@@ -11,7 +11,7 @@ module.exports = function(app , models) {
     app.get("/api/project/findAnswerByQuestion/:qid", findAnswerByQuestion);
     app.get("/api/uncheckedanswers",findAllUncheckedAnswers);
     app.post("/api/project/updateanswer",updateAnswer);
-    app.delete("/api/project/answer/:qid",deleteAnswer);
+    app.delete("/api/project/answer/:aid",deleteAnswer);
     app.get("/api/project/answer/user/:uid",searchAnswerByUserID);
     
     function searchAnswerByUserID(req , res){
@@ -77,10 +77,6 @@ module.exports = function(app , models) {
                     res.statusCode(400).send(error);
                 }
             );
-    }
-
-    function findMongoQID(qid){
-
     }
 
     function findAnswerByQuestion(req,res){

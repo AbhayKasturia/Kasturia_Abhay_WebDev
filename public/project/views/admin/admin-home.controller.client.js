@@ -13,6 +13,8 @@
         var vm = this;
         vm.uid = $routeParams.uid;
         vm.getSafeHTML = getSafeHTML;
+        vm.checked = checked;
+        vm.deleteQuestion = deleteQuestion;
 
         function init() {
             init_questions();
@@ -39,6 +41,35 @@
         function getSafeHTML(text)
         {
             return $sce.trustAsHtml(text);
+        }
+
+
+        function checked(question){
+            question.is_checked= true;
+
+            QuestionService
+                .updateQuestion(question._id,question)
+                .then(
+                    function(question){
+                        init();
+                    },function(err){
+                        vm.error="There was error marking this question  , please try again later";
+                    }
+                );
+        }
+
+        function deleteQuestion(question){
+            var qid = question._id;
+
+            QuestionService
+                .deleteQuestion(qid)
+                .then(
+                    function(response){
+                        init();
+                    },function(err){
+                        vm.error="There was error deleting this question  , please try again later";
+                    }
+                );
         }
 
 

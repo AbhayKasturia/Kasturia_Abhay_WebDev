@@ -19,6 +19,7 @@
         init();
 
         function searchUsers(searchText) {
+            vm.error=null;
             UserService
                 .searchUsersByUsername(searchText)
                 .then(
