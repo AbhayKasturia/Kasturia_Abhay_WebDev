@@ -12,12 +12,7 @@
         var userId = $window.sessionStorage.getItem("currentUser");
         vm.searchUsers = searchUsers;
         vm.uid = userId;
-
-        function init(){
-            searchUsers("");
-        }
-        init();
-
+        
         function searchUsers(searchText) {
             vm.error=null;
             UserService

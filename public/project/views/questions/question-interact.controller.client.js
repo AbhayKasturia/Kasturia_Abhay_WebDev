@@ -65,7 +65,19 @@
             QuestionService
                 .newAnswer(vm.question,vm.user_answer,vm.uid)
                 .then(function(response){
-                        init();
+                        if(vm.question._id)
+                            init();
+                        else
+                            QuestionService
+                                .searchQuestionByStackID(vm.question.question_id)
+                                .then(
+                                    function(question){
+                                        vm.qid=question.data._id;
+                                        init();
+                                    },function(err){
+                                        vm.error = "Error creating Answer";
+                                    }
+                                )
                     },function(err){
                         vm.error = "Error creating Answer";
                     }

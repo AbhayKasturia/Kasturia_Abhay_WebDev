@@ -59,11 +59,11 @@
         <a class="list-group-item">
             <h4>Answer:</h4>
             <div class ="list-group-item-heading no-highlight" ng-bind-html="model.getSafeHTML(answer.body)"></div>
-            <a ng-if="model.question.asked_by!='StackOverflow'"
+            <a ng-if="answer.asked_by!='StackOverflow' && answer.asked_by"
                href="#/user/public/"+{{model.answer.answered_by}}>
                 Answered by {{answer.asked_by}}
             </a>
-            <a ng-if="model.question.asked_by==='StackOverflow'">Powered By: Stack Overflow</a>
+            <a ng-if="!answer.asked_by">Powered By: Stack Overflow</a>
             <button ng-if="answer.answered_by === model.uid"
                     class="btn btn-primary btn-block"
                     data-toggle="modal" data-target="#myModal">

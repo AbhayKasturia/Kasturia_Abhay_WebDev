@@ -16,6 +16,22 @@ module.exports = function(app , models) {
     app.post("/api/project/updatequestion",updateQuestion);
     app.delete("/api/project/question/:qid",deleteQuestion);
     app.get("/api/project/question/user/:uid",searchQuestionByUserID);
+    app.get("/api/project/question/user/stack/:qid",searchQuestionByStackID);
+
+    function searchQuestionByStackID(req,res){
+        var qid = req.params.qid;
+
+        questionModel
+            .findQuestionByStackID(qid)
+            .then(
+                function(question){
+                    res.json(question);
+                },
+                function(error){
+                    res.statusCode(404).send(err);
+                }
+            );
+    }
     
     function searchQuestionByUserID(req,res){
         var uid = req.params.uid;

@@ -52,7 +52,7 @@ module.exports = function(app, models) {
             );
 
         console.log(req.body);
-        res.redirect("/assignment/index.html#/user/"+req.body.uid+"/website/"+req.body.wid+"/page/"+req.body.pid+"/widget/"+widgetId);
+        res.redirect("/assignment/index_2.html#/user/"+req.body.uid+"/website/"+req.body.wid+"/page/"+req.body.pid+"/widget/"+widgetId);
     }
 
     function findWidgetByID(req,res){
