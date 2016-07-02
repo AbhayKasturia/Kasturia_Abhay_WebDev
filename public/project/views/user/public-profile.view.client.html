@@ -71,7 +71,9 @@
                 <div class="col-xs-12 col-sm-4 emphasis">
                     <h2><strong>{{model.user.answers.length}}</strong></h2>
                     <p><small>Questions Answered</small></p>
-                    <button class="btn btn-success btn-block"><span class="fa  fa-comments"></span> See Answers </button>
+                    <button class="btn btn-success btn-block"
+                            ng-click="model.seeAnswers()">
+                        <span class="fa  fa-comments"></span> See Answers </button>
                 </div>
                 <div class="col-xs-12 col-sm-4 emphasis">
                     <div ng-if="model.admin && !model.ownId">

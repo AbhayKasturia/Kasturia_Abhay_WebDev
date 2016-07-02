@@ -25,6 +25,7 @@
         vm.goBack=goBack;
         vm.userSearch=userSearch;
         vm.seeFollowing=seeFollowing;
+        vm.seeAnswers=seeAnswers;
 
         function init() {
             vm.follows = false;
@@ -97,6 +98,8 @@
             $window.sessionStorage.removeItem("quesSearchByUser_Username");
             $window.sessionStorage.removeItem("quesSearch");
             $window.sessionStorage.removeItem("userSearch");
+            $window.sessionStorage.removeItem("answerSearchByUser");
+            $window.sessionStorage.removeItem("answerSearchByUser_Username");
             if(vm.admin)
                 $location.url("/user/"+userId+"/admin/user");
             else
@@ -108,6 +111,9 @@
             $window.sessionStorage.removeItem("quesSearchByUser_Username");
             $window.sessionStorage.removeItem("quesSearch");
             $window.sessionStorage.removeItem("userSearch");
+            $window.sessionStorage.removeItem("userSearchByUser");
+            $window.sessionStorage.removeItem("answerSearchByUser");
+            $window.sessionStorage.removeItem("answerSearchByUser_Username");
             if(vm.admin)
                 $location.url("/user/"+userId+"/admin/user");
             else
@@ -117,14 +123,30 @@
         function goBack(){
             $window.sessionStorage.removeItem("quesSearchByUser");
             $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.sessionStorage.removeItem("answerSearchByUser");
+            $window.sessionStorage.removeItem("answerSearchByUser_Username");
             $window.history.back();
         }
 
         function seeQuestions(){
             $window.sessionStorage.removeItem("quesSearch");
             $window.sessionStorage.removeItem("userSearch");
+            $window.sessionStorage.removeItem("userSearchByUser");
+            $window.sessionStorage.removeItem("answerSearchByUser");
+            $window.sessionStorage.removeItem("answerSearchByUser_Username");
             $window.sessionStorage.setItem("quesSearchByUser",vm.uid);
             $window.sessionStorage.setItem("quesSearchByUser_Username",vm.user.username);
+            $location.url("/user/"+userId+"/question");
+        }
+
+        function seeAnswers(){
+            $window.sessionStorage.removeItem("quesSearch");
+            $window.sessionStorage.removeItem("userSearch");
+            $window.sessionStorage.removeItem("userSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.sessionStorage.setItem("answerSearchByUser",vm.uid);
+            $window.sessionStorage.setItem("answerSearchByUser_Username",vm.user.username);
             $location.url("/user/"+userId+"/question");
         }
 
