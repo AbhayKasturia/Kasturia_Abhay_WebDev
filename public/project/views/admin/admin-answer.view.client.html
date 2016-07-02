@@ -33,11 +33,12 @@
         {{model.message}}
     </div>
 
+    <hgroup class="mb20">
+        <h2 class="lead"><strong class="text-danger">{{model.answers.length}}</strong> Answers to be reviewed. </h2>
+        <strong class="text-danger">Posted on FindAnswers</strong>
+    </hgroup>
+
     <section class="col-xs-12 col-sm-12 col-md-12">
-        <hgroup class="mb20">
-            <h2 class="lead"><strong class="text-danger">{{model.answers.length}}</strong> Answers to be reviewed. </h2>
-            <strong class="text-danger">Posted on FindAnswers</strong>
-        </hgroup>
         <article class="search-result row jga-widget"
                  ng-repeat="answer in model.answers">
             <div class="col-xs-12 col-sm-12 col-md-8 excerpet">

@@ -133,6 +133,7 @@
                             $rootScope.currentUser = null;
                             $window.sessionStorage.setItem("currentUser",'0');
                             $window.sessionStorage.setItem("currentUsername",'0');
+                            $window.sessionStorage.clear();
                             deferred.reject();
                             $location.url("/login");
                         } else {

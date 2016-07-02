@@ -11,6 +11,8 @@
         vm.searching=false;
         vm.paginate=paginate;
         vm.goBack=goBack;
+        vm.goProfile=goProfile;
+        vm.goPublicProfile=goPublicProfile;
 
         vm.searchFeaturedQuestions = searchFeaturedQuestions;
         vm.searchQuestions = searchQuestions;
@@ -18,17 +20,17 @@
         function init() {
             vm.pageno=1;
             vm.ques={
-                searchText:null
+                searchText:""
             };
             vm.userid_q_search = false;
-            vm.ques.searchText = "";
-            vm.ques.searchText = $window.sessionStorage.getItem("quesSearch");
+
             if ($window.sessionStorage.getItem("quesSearchByUser"))
             {
                 vm.username = $window.sessionStorage.getItem("quesSearchByUser_Username");
                 searchQuestionsByUser($window.sessionStorage.getItem("quesSearchByUser"));
             }
-            else if(vm.ques.searchText!=""){
+            else if($window.sessionStorage.getItem("quesSearch")){
+                vm.ques.searchText = $window.sessionStorage.getItem("quesSearch");
                 searchQuestions(vm.ques.searchText, 1);
             }
             else {
@@ -41,7 +43,22 @@
         function goBack(){
             $window.sessionStorage.removeItem("quesSearchByUser");
             $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.sessionStorage.removeItem("quesSearch");
             $window.history.back();
+        }
+
+        function goProfile(){
+            $window.sessionStorage.removeItem("quesSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.sessionStorage.removeItem("quesSearch");
+            $location.url("/user/{{vm.uid}}");
+        }
+
+        function goPublicProfile(){
+            $window.sessionStorage.removeItem("quesSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.sessionStorage.removeItem("quesSearch");
+            $location.url("/user/public/{{vm.uid}}");
         }
 
         function searchQuestionsByUser(uid){

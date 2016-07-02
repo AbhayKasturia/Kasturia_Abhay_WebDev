@@ -23,6 +23,7 @@
         vm.makeUserAdmin=makeUserAdmin;
         vm.seeQuestions=seeQuestions;
         vm.goBack=goBack;
+        vm.userSearch=userSearch;
 
         function init() {
             vm.follows = false;
@@ -88,6 +89,14 @@
         }
 
         init();
+        
+        function userSearch(){
+            $window.sessionStorage.removeItem("quesSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.sessionStorage.removeItem("quesSearch");
+            $window.sessionStorage.removeItem("userSearch");
+            $location.url("/user/search");
+        }
 
         function goBack(){
             $window.sessionStorage.removeItem("quesSearchByUser");
@@ -96,6 +105,8 @@
         }
 
         function seeQuestions(){
+            $window.sessionStorage.removeItem("quesSearch");
+            $window.sessionStorage.removeItem("userSearch");
             $window.sessionStorage.setItem("quesSearchByUser",vm.uid);
             $window.sessionStorage.setItem("quesSearchByUser_Username",vm.user.username);
             $location.url("/user/"+userId+"/question");

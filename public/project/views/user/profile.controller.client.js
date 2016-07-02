@@ -6,7 +6,7 @@
         .module("FindAnswers")
         .controller("ProfileController",ProfileController);
 
-    function ProfileController($location , $routeParams , UserService , $rootScope) {      /* route paramaters can be retrieved using this */
+    function ProfileController($location , $routeParams , UserService , $rootScope , $window) {      /* route paramaters can be retrieved using this */
         var vm = this;
         vm.uid = $routeParams.uid;
 
@@ -18,6 +18,25 @@
         vm.deleteUser = deleteUser;
         vm.logout = logout;
         vm.redirect=redirect;
+
+        function init() {
+
+            $window.sessionStorage.removeItem("quesSearch");
+            $window.sessionStorage.removeItem("userSearch");
+            $window.sessionStorage.removeItem("quesSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser_Username");
+
+            UserService
+                .findUserByID(id)
+                .then(function (response) {
+                    vm.user = response.data;
+                    if(vm.user && vm.user.is_admin){
+                        vm.message = "Admin Profile Page";
+                    }
+                });
+        }
+
+        init();
         
         function redirect(){
             if(vm.user.is_admin)
@@ -34,24 +53,11 @@
                         $window.sessionStorage.clear();
                         $location.url("/login");
                     },
-                    function(){
+                    function(err){
                         $location.url("/login");
                     }
                 )
         }
-
-        function init() {
-            UserService
-                .findUserByID(id)
-                .then(function (response) {
-                    vm.user = response.data;
-                    if(vm.user && vm.user.is_admin){
-                        vm.message = "Admin Profile Page";
-                    }
-                });
-        }
-
-        init();
 
         function updateUser(newUser) {
             UserService.updateUser(id, newUser)

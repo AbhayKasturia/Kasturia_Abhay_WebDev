@@ -12,6 +12,12 @@ body {
     padding-right: 15px;
 }
 
+.pad-lft
+{
+    padding-left: 15px;
+}
+
+
 .navbar-text.pull-right {
     padding-right: 15px;
 }
@@ -284,4 +290,12 @@ hgroup h2.lead { font: normal normal 1.125em "Roboto",Arial,Verdana,sans-serif; 
 .margin-horizontal-30{
     margin-left: 30px;
     margin-right: 30px;
+}
+
+.navbar-text .glyphicon .pull-right{
+    padding-right: 15px;
+}
+
+.navbar-text .fa .fa-users .pull-left{
+    padding-left: 15px;
 }
