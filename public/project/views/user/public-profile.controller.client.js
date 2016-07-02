@@ -24,6 +24,7 @@
         vm.seeQuestions=seeQuestions;
         vm.goBack=goBack;
         vm.userSearch=userSearch;
+        vm.seeFollowing=seeFollowing;
 
         function init() {
             vm.follows = false;
@@ -89,13 +90,28 @@
         }
 
         init();
+
+        function seeFollowing(){
+            $window.sessionStorage.setItem("userSearchByUser",vm.uid);
+            $window.sessionStorage.removeItem("quesSearchByUser");
+            $window.sessionStorage.removeItem("quesSearchByUser_Username");
+            $window.sessionStorage.removeItem("quesSearch");
+            $window.sessionStorage.removeItem("userSearch");
+            if(vm.admin)
+                $location.url("/user/"+userId+"/admin/user");
+            else
+                $location.url("/user/search");
+        }
         
         function userSearch(){
             $window.sessionStorage.removeItem("quesSearchByUser");
             $window.sessionStorage.removeItem("quesSearchByUser_Username");
             $window.sessionStorage.removeItem("quesSearch");
             $window.sessionStorage.removeItem("userSearch");
-            $location.url("/user/search");
+            if(vm.admin)
+                $location.url("/user/"+userId+"/admin/user");
+            else
+                $location.url("/user/search");
         }
 
         function goBack(){
